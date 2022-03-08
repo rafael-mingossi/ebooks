@@ -27,7 +27,7 @@ export default function Home() {
 
       <div>
         {data?.books?.map((res) => (
-          <div>
+          <div key={res.title}>
             <p>{res.title}</p>
           </div>
         ))}
