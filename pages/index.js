@@ -1,9 +1,22 @@
 import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import { data } from "../data/data";
+import { gql, useQuery } from "@apollo/client";
+
+const AllBooksQuery = gql`
+  query {
+    books {
+      title
+    }
+  }
+`;
 
 export default function Home() {
+  const { data, error, loading } = useQuery(AllBooksQuery);
+
+  if (loading) return <p>Loading....</p>;
+  if (error) return <p>Error, {error.message}</p>;
+
+  console.log(data);
   return (
     <div className={styles.container}>
       <Head>
@@ -13,14 +26,35 @@ export default function Home() {
       </Head>
 
       <div>
-        {data.map((res) => (
-          <div key={res.id} style={{ background: "yellow", width: "200px" }}>
-            <p>{res.userId}</p>
-            <p>{res.firstName}</p>
-            <p>{res.email}</p>
+        {data?.books?.map((res) => (
+          <div>
+            <p>{res.title}</p>
           </div>
         ))}
       </div>
+
+      {/* <div>
+        {data?.books?.map((res) => (
+          <div
+            key={res.email}
+            style={{ background: "yellow", width: "fit-content" }}
+          >
+            <p>{res.title}</p>
+            <img src={res.image} width="150px" height="200px" />
+          </div>
+        ))}
+      </div> */}
     </div>
   );
 }
+
+// export async function getServerSideProps() {
+//   // Fetch data from external API
+//   const res = await fetch(`https://api.itbook.store/1.0/new`);
+//   const data = await res.json();
+
+//   // console.dir(data, { depth: null });
+
+//   // Pass data to the page via props
+//   return { props: { data } };
+// }
