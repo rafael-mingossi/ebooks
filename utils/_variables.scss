@@ -1,0 +1,45 @@
+//Colors
+$darkGreen: #1f343f;
+$middleGreen: #697680;
+$lightGreen: #529c95;
+
+// Breakpoints
+$bp-xsm: 425px;
+$bp-sm: 768px;
+$bp-md: 1024px;
+$bp-lg: 1280px;
+$bp-xl: 1400px;
+
+// Responsiveness
+@mixin xsm {
+  @media (max-width: #{$bp-xsm}) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media (max-width: #{bp-sm}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (max-width: #{$bp-md}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (max-width: #{$bp-lg}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (max-width: #{$bp-xl}) {
+    @content;
+  }
+}
+
+// Layout
+$h-fullscreen: calc(100vh - 8em);
