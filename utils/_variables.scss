@@ -2,6 +2,28 @@
 $darkGreen: #1f343f;
 $middleGreen: #697680;
 $lightGreen: #529c95;
+$bgColorLading: #f7f7f7;
+
+//Mixin
+@mixin txtAlign {
+  text-align: center;
+}
+
+@mixin h2Style {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  background-image: linear-gradient(to right, #142935de, #54c5bac2);
+  display: inline-block;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 4rem;
+}
+
+@mixin h3Style {
+  font-size: 2rem;
+  text-transform: uppercase;
+}
 
 // Breakpoints
 $bp-xsm: 425px;

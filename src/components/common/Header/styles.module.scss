@@ -1,0 +1,78 @@
+@import 'utils/variables';
+
+.headerWrapper {
+  height: 100vh;
+  background-image: linear-gradient(to right bottom, #142935de, #54c5bac2),
+    url('/header.jpg');
+  background-size: cover;
+  background-position: top;
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+  .headerH1Wrapper {
+    text-transform: uppercase;
+    color: white;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: fit-content;
+    backface-visibility: hidden; //this fix the letter shake in the end of the animation
+
+    .allLib {
+      display: block;
+      font-size: 9rem;
+      font-weight: 500;
+      letter-spacing: 1.5rem;
+      animation: moveInLeft 3s;
+
+      @keyframes moveInLeft {
+        0% {
+          opacity: 0;
+          transform: translateX(-10rem);
+        }
+        80% {
+          transform: translateX(2rem);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @include sm {
+        font-size: 3rem;
+        letter-spacing: 0.5rem;
+        background-color: #fff;
+      }
+    }
+
+    .cloud {
+      display: block;
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 0.5rem;
+      animation: moveInRight 3s;
+      margin-top: 1.5rem;
+
+      @keyframes moveInRight {
+        0% {
+          opacity: 0;
+          transform: translateX(10rem);
+        }
+        80% {
+          transform: translateX(-2rem);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @include sm {
+        font-size: 1rem;
+        letter-spacing: 0;
+        background-color: #fff;
+      }
+    }
+  }
+}

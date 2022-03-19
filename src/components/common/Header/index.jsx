@@ -1,6 +1,4 @@
-import styles from "./layout.module.scss";
-
-import React from "react";
+import styles from './styles.module.scss';
 
 const Header = () => {
   return (
@@ -8,7 +6,6 @@ const Header = () => {
       <div className={styles.headerH1Wrapper}>
         <span className={styles.allLib}>All Library</span>
         <span className={styles.cloud}>Cloud-based Learning Platform</span>
-        <button className={styles.btnDisc}>Discover More</button>
       </div>
     </div>
   );
