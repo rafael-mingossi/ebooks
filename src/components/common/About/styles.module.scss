@@ -17,7 +17,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     font-size: 2rem;
-    padding: 1rem 3rem 1rem 3rem;
+    padding: 1rem 3rem 1rem 5rem;
     column-gap: 2rem;
 
     .h3Heading {
@@ -102,7 +102,7 @@
         }
 
         &:hover {
-          transform: scale(1.2);
+          transform: scale(1.2) translateY(-0.5rem);
           z-index: 2;
           box-shadow: 0 2.5rem 4rem rgba(0, 0, 0, 0.616);
         }

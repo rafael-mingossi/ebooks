@@ -1,10 +1,11 @@
 import styles from './styles.module.scss';
+import Feature from '../Feature';
 
 const About = () => {
   return (
     <div className={styles.aboutWrapper}>
       <div className={styles.txtWrapper}>
-        <h2 className={styles.h2Heading}>get to know more about all-libray</h2>
+        <h2 className={styles.h2Heading}>get to know about all-libray</h2>
       </div>
       <div className={styles.gridWrapper}>
         <div>
@@ -20,7 +21,7 @@ const About = () => {
             The new concept of online reading in one place
           </h3>
           <p className={styles.paragraphs}>
-            All-Library was build with the purpose of making the online readings
+            All-Library was built with the purpose of making the online readings
             and research easier to students and book lovers, thousands of titles
             gathered in one place having a great search engine to facilitate the
             searchs!
@@ -49,6 +50,7 @@ const About = () => {
           />
         </div>
       </div>
+      <Feature />
     </div>
   );
 };

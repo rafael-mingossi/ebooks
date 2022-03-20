@@ -5,6 +5,14 @@ $lightGreen: #529c95;
 $bgColorLading: #f7f7f7;
 
 //Mixin
+
+@mixin flex-x-y-d($vertical, $horizontal, $direction) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $vertical;
+  align-items: $horizontal;
+}
+
 @mixin txtAlign {
   text-align: center;
 }
@@ -17,7 +25,7 @@ $bgColorLading: #f7f7f7;
   display: inline-block;
   background-clip: text;
   color: transparent;
-  margin-bottom: 4rem;
+  margin-bottom: 5rem;
 }
 
 @mixin h3Style {

@@ -1,0 +1,79 @@
+@import 'utils/variables';
+
+.featureWrapper {
+  height: 100vh;
+  margin-top: 18rem;
+  width: 100%;
+  padding: 5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10rem;
+  background-image: linear-gradient(to right, #142935de, #54c5bac2),
+    url('/about-bg.webp');
+  background-size: cover;
+  background-position: center;
+  clip-path: polygon(0 25%, 100% 0, 100% 75vh, 0 100%);
+  align-items: center;
+
+  .singleBoxWrapper {
+    @include flex-x-y-d(center, center, column);
+    background-color: $bgColorLading;
+    padding: 3rem;
+    border: 1px solid $darkGreen;
+    height: 30rem;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.575);
+    transition: all 0.9s;
+    perspective: 150rem;
+    -moz-perspective: 150rem;
+    position: relative;
+    transform-style: preserve-3d;
+
+    &:hover {
+      transform: rotateY(180deg);
+    }
+
+    .front {
+      font-size: 1.6rem;
+      position: absolute;
+      backface-visibility: hidden;
+      text-align: center;
+
+      .frontImgWrapper {
+        width: fit-content;
+        background-color: #fff;
+        @include flex-x-y-d(center, center, column);
+        border-radius: 200rem;
+        padding: 2rem;
+        box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.575);
+
+        .frontImg {
+          width: 11rem;
+          height: auto;
+        }
+      }
+    }
+
+    .back {
+      transform: rotateY(180deg);
+      backface-visibility: hidden;
+      position: absolute;
+
+      text-align: center;
+      padding: 3rem;
+
+      .featImg {
+        width: 6rem;
+        height: auto;
+      }
+
+      .header {
+        @include h3Style;
+      }
+
+      .description {
+        font-size: 1.7rem;
+        text-align: center;
+      }
+    }
+  }
+}
