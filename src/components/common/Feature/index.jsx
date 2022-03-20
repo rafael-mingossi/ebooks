@@ -46,7 +46,7 @@ const Feature = () => {
           <img src='/book.svg' alt='Book icon' className={styles.featImg} />
           <h3 className={styles.header}>Read online</h3>
           <p className={styles.description}>
-            Read your collection online if you don't want to download the books!
+            Read your collection online if you don`t want to download the books!
             <br />
             <br />
             Use the search bar engine to get the best out of your search!
@@ -71,7 +71,7 @@ const Feature = () => {
             Simple and practical, have your favourite titles in PDF format!
             <br />
             <br />
-            Don't want to read online, no worries! Get the PDF of the e-book and
+            Don`t want to read online, no worries! Get the PDF of the e-book and
             read later!
           </p>
         </div>
