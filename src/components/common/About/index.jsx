@@ -1,11 +1,12 @@
 import styles from './styles.module.scss';
 import Feature from '../Feature';
+import Login from '../Login';
 
 const About = () => {
   return (
     <div className={styles.aboutWrapper}>
       <div className={styles.txtWrapper}>
-        <h2 className={styles.h2Heading}>get to know about all-libray</h2>
+        <h2 className={styles.h2Heading}>get to know about all-library</h2>
       </div>
       <div className={styles.gridWrapper}>
         <div>
@@ -51,6 +52,7 @@ const About = () => {
         </div>
       </div>
       <Feature />
+      <Login />
     </div>
   );
 };

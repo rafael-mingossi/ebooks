@@ -1,0 +1,45 @@
+@import 'utils/variables';
+
+.loginWrapper {
+  margin: 13rem 2rem 5rem 2rem;
+
+  background-image: linear-gradient(
+      105deg,
+      rgba($middleGreen, 0.884) 0%,
+      rgba($middleGreen, 0.884) 50%,
+      rgba(255, 255, 255, 0.788) 50%
+    ),
+    url('/loginbg.jpeg');
+  border-radius: 3px;
+  background-size: contain;
+  background-position-x: right;
+  background-repeat: no-repeat;
+  height: 50rem;
+  box-shadow: 0 2.5rem 4rem rgba(0, 0, 0, 0.247);
+
+  .fieldsWrapper {
+    text-align: center;
+    width: 50%;
+    display: flex;
+    height: 100%;
+    color: white;
+    font-size: 2rem;
+    @include flex-x-y-d(center, center, column);
+
+    p {
+      margin-top: 6rem;
+    }
+
+    .inputs {
+      margin: 0.3em 0;
+      padding: 0.5rem;
+      border-radius: 100rem;
+      outline: none;
+      border: 0;
+      width: 30rem;
+      padding: 1.5rem;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+  }
+}

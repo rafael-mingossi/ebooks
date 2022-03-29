@@ -1,16 +1,16 @@
 .textbox {
-  margin: 1rem;
+  margin: 2rem 1rem 1rem -13rem;
 
   a {
     text-transform: uppercase;
     text-decoration: none;
-    padding: 1.5rem 4rem;
+    padding: 1rem 4rem;
     display: inline-block;
     border-radius: 10rem;
     transition: all 0.2s;
     position: absolute;
-    animation: moveInBottom 5s ease-out;
-    animation-fill-mode: backwards;
+    //animation: moveInBottom 5s ease-out;
+    //animation-fill-mode: backwards;
     font-size: 2rem;
 
     &:hover {
