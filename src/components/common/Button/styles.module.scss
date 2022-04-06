@@ -1,17 +1,17 @@
 .textbox {
-  margin: 2rem 1rem 1rem -13rem;
+  margin-bottom: 1rem;
+  position: relative;
 
-  a {
+  div {
     text-transform: uppercase;
     text-decoration: none;
     padding: 1rem 4rem;
     display: inline-block;
     border-radius: 10rem;
     transition: all 0.2s;
-    position: absolute;
-    //animation: moveInBottom 5s ease-out;
-    //animation-fill-mode: backwards;
     font-size: 2rem;
+    cursor: pointer;
+    font-weight: bold;
 
     &:hover {
       transform: translateY(-0.3rem);
@@ -32,7 +32,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      z-index: -1;
+      z-index: -10;
       transition: all 0.4s;
     }
 

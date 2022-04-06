@@ -1,11 +1,9 @@
 import styles from './styles.module.scss';
 
-const Button = ({ label, onclick }) => {
+const Button = ({ label, onClick }) => {
   return (
-    <div className={styles.textbox} onClick={onclick}>
-      <a href='#' className={styles.btnWhite}>
-        {label}
-      </a>
+    <div className={styles.textbox} onClick={onClick}>
+      <div className={styles.btnWhite}>{label}</div>
     </div>
   );
 };

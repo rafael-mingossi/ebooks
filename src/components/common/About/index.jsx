@@ -1,6 +1,7 @@
 import styles from './styles.module.scss';
 import Feature from '../Feature';
 import Login from '../Login';
+import Register from '../../RegisterPage';
 
 const About = () => {
   return (
@@ -53,6 +54,7 @@ const About = () => {
       </div>
       <Feature />
       <Login />
+      <Register />
     </div>
   );
 };
