@@ -1,6 +1,15 @@
 import styles from './styles.module.scss';
 
-const Input = ({ type, placeholder, className, id, required, label }) => {
+const Input = ({
+  placeholder,
+  type,
+  className,
+  required,
+  onChange,
+  value,
+  id,
+  label,
+}) => {
   return (
     <div className={styles.inputWrapper}>
       <input
@@ -8,6 +17,8 @@ const Input = ({ type, placeholder, className, id, required, label }) => {
         type={type}
         className={`${!!className ? className : styles.inputs} `}
         required={required}
+        onChange={onChange}
+        value={value}
         id={id}
       />
       <label
