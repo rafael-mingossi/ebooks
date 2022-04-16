@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   });
 
   return (
-    <SessionProvider session={pageProps.session}>
+    <SessionProvider session={session}>
       <ViewContext.Provider value={[viewContext, setViewContext]}>
         <ApolloProvider client={apolloClient}>
           <Component {...pageProps} />

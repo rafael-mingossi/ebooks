@@ -1,10 +1,8 @@
+import { NextApiHandler } from 'next';
 import NextAuth from 'next-auth';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import prisma from '../../../lib/prisma';
 import GoogleProvider from 'next-auth/providers/google';
-
-// const authHandler = (req, res) => NextAuth(req, res, options);
-// export default authHandler;
 
 export default NextAuth({
   providers: [
@@ -47,5 +45,4 @@ export default NextAuth({
       database: process.env.DATABASE_URL,
     }),
   ],
-  //adapter: PrismaAdapter(prisma),
 });

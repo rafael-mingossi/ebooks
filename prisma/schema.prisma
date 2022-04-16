@@ -19,7 +19,7 @@ model User{
   emailVerified DateTime? @map("email_verified")
   image String?
   role Role @default(USER)
-  firstName String
+  name String
   lastName String
   phoneNo Int
   favouriteBooks Book[]

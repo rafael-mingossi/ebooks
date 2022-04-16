@@ -16,8 +16,8 @@ const AllBooksQuery = gql`
 
 export default function Home() {
   const router = useRouter();
-  const session = getSession();
-  console.log('sess ->>', session);
+  //const session = getSession();
+  //console.log('sess ->>', session);
 
   //const { data, error, loading } = useQuery(AllBooksQuery);
 
