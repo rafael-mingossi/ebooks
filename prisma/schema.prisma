@@ -19,9 +19,9 @@ model User{
   emailVerified DateTime? @map("email_verified")
   image String?
   role Role @default(USER)
-  name String
-  lastName String
-  phoneNo Int
+  name String?
+  lastName String?
+  phoneNo Int?
   favouriteBooks Book[]
   accounts Account[]
   sessions Session[]
