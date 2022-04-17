@@ -13,7 +13,6 @@ export default NextAuth({
         'https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code',
       profile(profile) {
         return {
-          // to be able identify the account when added to a database
           id: profile.sub,
           name: profile.name,
           email: profile.email,
