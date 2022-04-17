@@ -13,7 +13,6 @@ export default NextAuth({
         'https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code',
       profile(profile) {
         return {
-          // Return all the profile information you need.
           // The only truly required field is `id`
           // to be able identify the account when added to a database
           id: profile.sub,
