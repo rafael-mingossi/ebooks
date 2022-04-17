@@ -23,6 +23,7 @@ model User{
   name String?
   lastName String?
   phoneNo Int?
+  password String?
   favouriteBooks Book[]
   accounts Account[]
   sessions Session[]
