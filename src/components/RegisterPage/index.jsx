@@ -43,12 +43,13 @@ const Register = () => {
 
   const submitData = () => {
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:3000/api/users/register');
+    //xhr.open('POST', 'http://localhost:3000/api/users/register');
+    xhr.open('POST', 'https://ebooks-one.vercel.app/account/register');
 
     xhr.setRequestHeader('Accept', 'application/json');
     xhr.setRequestHeader('Content-Type', 'application/json');
 
-    xhr.onload = () => console.log(xhr.responseText);
+    xhr.onload = () => alert(xhr.responseText.toString());
 
     const bodyData = {
       firstName: firstName,
