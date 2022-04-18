@@ -54,7 +54,7 @@ const About = () => {
       </div>
       <Feature />
       <Login />
-      <Register />
+      {/* <Register /> */}
     </div>
   );
 };

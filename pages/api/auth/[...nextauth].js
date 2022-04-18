@@ -44,18 +44,19 @@ export default NextAuth({
     // }),
     CredentialsProvider({
       async authorize(req) {
+        //console.log('req->>', req);
         const admin = await prisma.user.findUnique({
           where: {
-            username: req.email,
+            email: req.email,
           },
         });
+        //console.log('admin -> ', admin);
+
         if (admin) {
-          if (
-            req.username === admin.username &&
-            req.password === admin.password
-          ) {
+          if (req.email === admin.email && req.password === admin.password) {
             return admin;
           } else {
+            alert('Wrong credentials');
             return null;
           }
         }
@@ -64,12 +65,14 @@ export default NextAuth({
   ],
   callbacks: {
     async jwt({ token, user }) {
+      //console.log(token);
       if (user) {
-        token.name = user.username;
+        token.name = user.email;
       }
       return token;
     },
     async session({ session, token }) {
+      console.log(session);
       session.user = {
         username: token.name,
       };

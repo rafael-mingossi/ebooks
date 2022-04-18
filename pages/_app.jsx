@@ -16,13 +16,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   });
 
   return (
-    <SessionProvider session={session}>
-      <ViewContext.Provider value={[viewContext, setViewContext]}>
-        <ApolloProvider client={apolloClient}>
-          <Component {...pageProps} />
-        </ApolloProvider>
-      </ViewContext.Provider>
-    </SessionProvider>
+    <ViewContext.Provider value={[viewContext, setViewContext]}>
+      <ApolloProvider client={apolloClient}>
+        <Component {...pageProps} />
+      </ApolloProvider>
+    </ViewContext.Provider>
   );
 }
 

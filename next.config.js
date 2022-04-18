@@ -1,6 +1,12 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
   reactStrictMode: true,
-}
-
-module.exports = nextConfig
+  serverRuntimeConfig: {
+    secret: 'SECRET TOKEN',
+  },
+  publicRuntimeConfig: {
+    apiUrl:
+      process.env.NODE_ENV === 'development'
+        ? 'http://localhost:3000/api' // development api
+        : 'http://localhost:3000/api', // production api
+  },
+};

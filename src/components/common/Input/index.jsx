@@ -9,6 +9,7 @@ const Input = ({
   value,
   id,
   label,
+  name,
 }) => {
   return (
     <div className={styles.inputWrapper}>
@@ -20,6 +21,7 @@ const Input = ({
         onChange={onChange}
         value={value}
         id={id}
+        name={name}
       />
       <label
         htmlFor={id}

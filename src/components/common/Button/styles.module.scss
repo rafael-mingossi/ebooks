@@ -1,8 +1,10 @@
 .textbox {
   margin-bottom: 1rem;
   position: relative;
+  width: fit-content;
+  place-self: center;
 
-  div {
+  button {
     text-transform: uppercase;
     text-decoration: none;
     padding: 1rem 4rem;
@@ -12,6 +14,7 @@
     font-size: 2rem;
     cursor: pointer;
     font-weight: bold;
+    border: 0;
 
     &:hover {
       transform: translateY(-0.3rem);

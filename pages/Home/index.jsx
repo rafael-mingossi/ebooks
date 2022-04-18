@@ -1,37 +1,15 @@
 import { useSession, signIn, signOut, getSession } from 'next-auth/react';
 import prisma from '../../lib/prisma';
 
-export async function getServerSideProps(context) {
-  return {
-    props: {
-      session: await getSession(context),
-    },
-  };
-}
-
 export default function Home() {
-  const { data: session, status } = useSession();
-  //console.log('see ->>', session);
-
-  if (session) {
-    return (
-      <div>
-        <h1>
-          Logged In As{` ${session.user.username}`}
-          <button onClick={signOut}>Sign Out</button>
-        </h1>
-      </div>
-    );
-  } else if (!session) {
-    return (
-      <div>
-        <h1>
-          Not Logged In
-          <button onClick={signIn}>Sign In</button>
-        </h1>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h1>
+        Logged In As
+        <button>Sign Out</button>
+      </h1>
+    </div>
+  );
 }
 
 // export async function getServerSideProps({ req }) {

@@ -2,6 +2,7 @@ import styles from './styles.module.scss';
 import Input from '../../common/Input';
 import Button from '../Button';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import { useContext } from 'react';
 import { ViewContext } from '../../../../pages/_app';
@@ -36,16 +37,8 @@ const Login = () => {
         <Button label={'Login'} onClick={() => router.push('/Home')} />
         <p>
           Don`t have an account?{' '}
-          <div
-            className={styles.linkRegister}
-            onClick={() =>
-              setViewContext({
-                ...viewContext,
-                isRegisterOpen: true,
-              })
-            }
-          >
-            Click here to register!
+          <div className={styles.linkRegister}>
+            <Link href='/account/register'>Click here to register!</Link>
           </div>
         </p>
       </div>
