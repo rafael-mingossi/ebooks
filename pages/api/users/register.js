@@ -3,20 +3,23 @@ const bcrypt = require('bcryptjs');
 import prisma from '../../../lib/prisma';
 
 export default async function register(req, res) {
-  const { firstName, lastName, phoneNo, email, image, password } = req.body;
+  const body = JSON.parse(req.body);
+  const { firstName, lastName, phoneNo, email, image, password } = body;
+
+  console.log(body);
 
   try {
     //const user = req.body;
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(password, salt);
 
-    // console.log('paa -->', hash);
+    console.log('paa -->', hash);
 
     const users = await prisma.user.create({
       data: {
         firstName: firstName,
         lastName: lastName,
-        phoneNo: phoneNo,
+        phoneNo: parseInt(phoneNo),
         email: email,
         image: image,
         password: hash,

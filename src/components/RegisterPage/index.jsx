@@ -1,6 +1,7 @@
 import styles from './styles.module.scss';
 import Input from '../common/Input';
 import Button from '../common/Button';
+import { Spinner } from '../common/Spinner';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
@@ -17,52 +18,34 @@ const Register = () => {
   const [phoneNo, setPhoneNo] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [loading, setLoading] = useState(false);
 
   // get functions to build form with useForm() hook
   const { register, handleSubmit } = useForm();
 
-  // const submitData = () => {
-  //   const bodyData = {
-  //     firstName: firstName,
-  //     lastName: lastName,
-  //     email: email,
-  //     password: password,
-  //   };
-  //   console.log('bdyData ->> ', bodyData);
-
-  //   fetch('http://localhost:3000/api/users/register', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(bodyData),
-  //   })
-  //     .then((res) => console.log(res))
-  //     .catch((error) => console.error(error));
-  // };
-
   const submitData = () => {
-    let xhr = new XMLHttpRequest();
-    //xhr.open('POST', 'http://localhost:3000/api/users/register');
-    xhr.open('POST', 'https://ebooks-one.vercel.app/account/register');
-
-    xhr.setRequestHeader('Accept', 'application/json');
-    xhr.setRequestHeader('Content-Type', 'application/json');
-
-    xhr.onload = () => alert(xhr.responseText.toString());
-
     const bodyData = {
-      firstName: firstName,
-      lastName: lastName,
-      //phoneNo: phoneNo,
-      email: email,
-      password: password,
+      firstName,
+      lastName,
+      email,
+      password,
+      phoneNo,
     };
+    console.log('bdyData ->> ', JSON.stringify(bodyData));
 
-    let data = JSON.stringify(bodyData);
+    const data = JSON.stringify(bodyData);
 
-    xhr.send(data);
+    fetch('/api/users/register', {
+      method: 'POST',
+      body: data,
+    })
+      .then((res) => console.log(res))
+      .catch((error) => console.error(error));
   };
+
+  // if (loading) {
+  //   return <Spinner />;
+  // }
 
   return (
     <div
@@ -70,6 +53,7 @@ const Register = () => {
         !isRegisterOpen ? styles.openDrawer : ''
       }`}
     >
+      {loading && <Spinner />}
       <Link href='/'>
         <img src='/close.svg' alt='icon close' className={styles.close} />
       </Link>

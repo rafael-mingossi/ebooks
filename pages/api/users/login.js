@@ -7,7 +7,8 @@ import prisma from '../../../lib/prisma';
 const { serverRuntimeConfig } = getConfig();
 
 export default async function login(req, res) {
-  const { email, password } = req.body;
+  const body = JSON.parse(req.body);
+  const { email, password } = body;
 
   const userLogin = await prisma.user.findUnique({
     where: {

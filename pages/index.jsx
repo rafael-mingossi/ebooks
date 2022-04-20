@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { gql, useQuery } from '@apollo/client';
 import Header from '../src/components/common/Header';
 import About from '../src/components/common/About';
+import Login from '../src/components/common/Login';
 import { useRouter } from 'next/router';
 import { useSession, signIn, signOut, getSession } from 'next-auth/react';
 import prisma from '../lib/prisma';
@@ -42,6 +43,7 @@ export default function Home() {
 
       <Header />
       <About />
+      <Login />
       {/* <div>
         {data?.books?.map((res) => (
           <div key={res.title}>
