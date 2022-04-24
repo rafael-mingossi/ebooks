@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-// import jwt from 'jsonwebtoken'
 const bcrypt = require('bcryptjs');
 import getConfig from 'next/config';
 import prisma from '../../../lib/prisma';
@@ -7,6 +6,7 @@ import prisma from '../../../lib/prisma';
 const { serverRuntimeConfig } = getConfig();
 
 export default async function login(req, res) {
+  //to work on postman remove this first parse
   const body = JSON.parse(req.body);
   const { email, password } = body;
 
@@ -15,8 +15,6 @@ export default async function login(req, res) {
       email: email,
     },
   });
-
-  //console.log('userLogin -->', userLogin);
 
   if (userLogin) {
     if (email === userLogin.email || password === userLogin.password) {
@@ -41,11 +39,11 @@ export default async function login(req, res) {
     } else {
       console.log('validation crashed');
 
-      res.status(500);
+      res.status(403);
       res.json({ error: 'Unnable to authenticate user' });
     }
   } else {
-    res.status(500);
+    res.status(404);
     res.json({ error: 'Unnable to authenticate user' });
   }
 }

@@ -26,6 +26,15 @@
     font-size: 2rem;
     @include flex-x-y-d(center, center, column);
 
+    .inputValidation {
+      color: red;
+      background-color: white;
+      border-radius: 10rem;
+      padding: 1rem;
+      box-shadow: 0 2.5rem 4rem rgba(0, 0, 0, 0.447);
+      margin-bottom: 4rem;
+    }
+
     .form {
       position: relative;
       width: 30rem;

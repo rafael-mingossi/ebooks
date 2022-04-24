@@ -1,13 +1,21 @@
-import { useSession, signIn, signOut, getSession } from 'next-auth/react';
+import { useState, useEffect, useContext } from 'react';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 import prisma from '../../lib/prisma';
+import { ViewContext } from '../../pages/_app';
 
 export default function Home() {
+  const [viewContext, setViewContext] = useContext(ViewContext);
+  const { handleLogout, getItem } = useLocalStorage({});
+
+  const [token, setToken] = useState(getItem({ key: 'token' }));
+  const [user, setUser] = useState(getItem({ key: 'user' }));
+
+  //const { user, token, isLogged } = viewContext;
   return (
     <div>
-      <h1>
-        Logged In As
-        <button>Sign Out</button>
-      </h1>
+      <h1>Logged In As {user?.firstName || ''}</h1>
+      <h1>Token: {token || ''}</h1>
+      <button onClick={() => handleLogout()}>Log out</button>
     </div>
   );
 }
@@ -15,24 +23,6 @@ export default function Home() {
 // export async function getServerSideProps({ req }) {
 //   const book = await prisma.book.findMany({});
 //   const users = await prisma.user.findMany({});
-//   // const session = await getSession(context);
-//   // //console.log('sesss ->>', session);
-//   // if (!session) {
-//   //   context.res.writeHead(302, { Location: '/' });
-//   //   context.res.end();
-//   //   return {};
-//   // }
-
-//   const session = await getSession({ req });
-
-//   if (!session) {
-//     return {
-//       redirect: {
-//         destination: '/',
-//         permanent: false,
-//       },
-//     };
-//   }
 
 //   const books = book?.map((item) => ({
 //     bookId: item?.bookId,
@@ -45,7 +35,7 @@ export default function Home() {
 //   //console.log(session);
 //   return {
 //     props: {
-//       user: session.user,
+//       users: users,
 //       books: books,
 //     },
 //   };

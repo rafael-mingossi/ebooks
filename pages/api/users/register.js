@@ -13,8 +13,6 @@ export default async function register(req, res) {
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(password, salt);
 
-    console.log('paa -->', hash);
-
     const users = await prisma.user.create({
       data: {
         firstName: firstName,
@@ -23,11 +21,6 @@ export default async function register(req, res) {
         email: email,
         image: image,
         password: hash,
-        // role: userData.role,
-        // userId: userData.userId,
-        // createdAt: userData.createdAt,
-        // updatedAt: userData.updatedAt,
-        // emailVerified: userData.emailVerified,
       },
     });
 

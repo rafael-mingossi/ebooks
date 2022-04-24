@@ -2,7 +2,6 @@ import '../utils/globals.css';
 import { ApolloProvider } from '@apollo/client';
 import apolloClient from '../lib/apollo';
 import { createContext, useState } from 'react';
-import { SessionProvider } from 'next-auth/react';
 
 export const ViewContext = createContext();
 
@@ -13,6 +12,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       show: false,
       text: 'test text here',
     },
+    token: '',
+    user: {},
   });
 
   return (

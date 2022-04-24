@@ -1,12 +1,13 @@
 import Head from 'next/head';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { gql, useQuery } from '@apollo/client';
 import Header from '../src/components/common/Header';
 import About from '../src/components/common/About';
 import Login from '../src/components/common/Login';
 import { useRouter } from 'next/router';
-import { useSession, signIn, signOut, getSession } from 'next-auth/react';
 import prisma from '../lib/prisma';
+import { useLocalStorage } from '../hooks/useLocalStorage';
+import { ViewContext } from '../pages/_app';
 
 const AllBooksQuery = gql`
   query {
@@ -17,6 +18,11 @@ const AllBooksQuery = gql`
 `;
 
 export default function Home() {
+  const [viewContext, setViewContext] = useContext(ViewContext);
+  const { setItem, getItem } = useLocalStorage({});
+  const router = useRouter();
+  const [token, setToken] = useState();
+  const [user, setUser] = useState();
   //const session = getSession();
   //console.log('sess ->>', session);
 
@@ -25,14 +31,18 @@ export default function Home() {
   // if (loading) return <p>Loading....</p>;
   // if (error) return <p>Error, {error.message}</p>
 
-  //console.log(data);
+  useEffect(() => {
+    const loggedInUser = getItem({ key: 'user' });
+    const userToken = getItem({ key: 'token' });
+    if (loggedInUser && userToken) {
+      setUser(loggedInUser);
+      setToken(userToken);
+      router.push('/home');
+    }
+  }, []);
 
-  // useEffect(() => {
-  //   if (session) {
-  //     router.push('/Home');
-  //   }
-  //   return;
-  // }, []);
+  console.log('st -->', token);
+
   return (
     <div>
       <Head>

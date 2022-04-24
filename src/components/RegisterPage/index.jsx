@@ -4,12 +4,15 @@ import Button from '../common/Button';
 import { Spinner } from '../common/Spinner';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 
 import { useContext, useState } from 'react';
 import { ViewContext } from '../../../pages/_app';
 
 const Register = () => {
   const [viewContext, setViewContext] = useContext(ViewContext);
+  const router = useRouter();
+  const { setItem, getItem } = useLocalStorage();
 
   const { isRegisterOpen } = viewContext;
 
@@ -18,12 +21,13 @@ const Register = () => {
   const [phoneNo, setPhoneNo] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [loading, setLoading] = useState(false);
+  const [r, setR] = useState(false);
 
   // get functions to build form with useForm() hook
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState } = useForm();
 
   const submitData = () => {
+    setR(true);
     const bodyData = {
       firstName,
       lastName,
@@ -31,7 +35,6 @@ const Register = () => {
       password,
       phoneNo,
     };
-    console.log('bdyData ->> ', JSON.stringify(bodyData));
 
     const data = JSON.stringify(bodyData);
 
@@ -39,13 +42,16 @@ const Register = () => {
       method: 'POST',
       body: data,
     })
-      .then((res) => console.log(res))
+      .then((res) => {
+        if (res.status === 201) {
+          router.push('/');
+        } else if (res.status === 201) {
+          alert('failed to register');
+        }
+        setR(true);
+      })
       .catch((error) => console.error(error));
   };
-
-  // if (loading) {
-  //   return <Spinner />;
-  // }
 
   return (
     <div
@@ -53,7 +59,6 @@ const Register = () => {
         !isRegisterOpen ? styles.openDrawer : ''
       }`}
     >
-      {loading && <Spinner />}
       <Link href='/'>
         <img src='/close.svg' alt='icon close' className={styles.close} />
       </Link>
@@ -70,8 +75,6 @@ const Register = () => {
               onChange={(e) => setFirstName(e.target.value)}
               ref={register}
               required
-              //id='firstName'
-              //value={firstName}
               name='firstName'
             />
           </div>
@@ -83,8 +86,6 @@ const Register = () => {
               onChange={(e) => setLastName(e.target.value)}
               ref={register}
               required
-              //id='lastName'
-              //value={lastName}
               name='lastName'
             />
           </div>
@@ -95,9 +96,6 @@ const Register = () => {
               label={'Phone No.'}
               onChange={(e) => setPhoneNo(e.target.value)}
               ref={register}
-              required
-              //id='phoneNo'
-              //value={phoneNo}
               name='phoneNo'
             />
           </div>
@@ -109,8 +107,6 @@ const Register = () => {
               onChange={(e) => setEmail(e.target.value)}
               ref={register}
               required
-              //id='email'
-              //value={email}
               name='email'
             />
           </div>
@@ -122,12 +118,10 @@ const Register = () => {
               onChange={(e) => setPassword(e.target.value)}
               ref={register}
               required
-              //id='password'
-              //value={password}
               name='password'
             />
           </div>
-          <Button label={'Register'} onClick={() => submitData} />
+          {!r ? <Button label={'Register'} disabled={r} /> : <Spinner />}
         </form>
       </div>
     </div>

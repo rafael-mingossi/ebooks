@@ -1,17 +1,13 @@
 .ldsSpinner {
   color: white;
   display: inline-block;
-  position: absolute;
+  position: relative;
   width: 100px;
-  height: 100px;
-  //background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  transform: translate(-710%, -100%);
-  bottom: 0;
+  height: fit-content;
+  z-index: 50;
   right: 0;
+  transform: translate(110%);
+  margin-bottom: 10rem;
 
   div {
     transform-origin: 40px 40px;

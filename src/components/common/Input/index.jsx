@@ -10,6 +10,8 @@ const Input = ({
   id,
   label,
   name,
+  pattern,
+  title,
 }) => {
   return (
     <div className={styles.inputWrapper}>
