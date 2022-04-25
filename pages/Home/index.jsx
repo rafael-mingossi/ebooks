@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import prisma from '../../lib/prisma';
-import { ViewContext } from '../../pages/_app';
+import { ViewContext } from '../_app';
 
 export default function Home() {
   const [viewContext, setViewContext] = useContext(ViewContext);

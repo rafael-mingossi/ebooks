@@ -46,7 +46,7 @@ const Login = () => {
           });
           setItem({ key: 'token', value: data?.token });
           setItem({ key: 'user', value: data?.userLogin });
-          router.push('/home');
+          router.push('/Home');
         }
         setR(false);
       })

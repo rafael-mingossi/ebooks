@@ -37,7 +37,7 @@ export default function Home() {
     if (loggedInUser && userToken) {
       setUser(loggedInUser);
       setToken(userToken);
-      router.push('/home');
+      router.push('/Home');
     }
   }, []);
 
