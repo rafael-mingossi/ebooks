@@ -3,27 +3,35 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 import styles from './styles.module.scss';
 import prisma from '../../lib/prisma';
 import { ViewContext } from '../_app';
-import { BookCard } from '/src/components';
+import { BookCard, MainHeader } from '/src/components';
 
 export default function Home({ data }) {
   const [viewContext, setViewContext] = useContext(ViewContext);
-  const { handleLogout, getItem } = useLocalStorage({});
-  //console.log(data);
+  const { setItem, getItem } = useLocalStorage({});
+  const [favourites, setFavourites] = useState([]);
 
   const [token, setToken] = useState(getItem({ key: 'token' }));
   const [user, setUser] = useState(getItem({ key: 'user' }));
 
+  useEffect(() => {
+    const booksLocalStorage = getItem({ key: 'fav-books' });
+    setFavourites(booksLocalStorage);
+  }, []);
+
   return (
     <div>
-      <h1>Logged In As {user?.firstName || ''}</h1>
-      <h1>Token: {token || ''}</h1>
-      <button onClick={() => handleLogout()}>Log out</button>
+      <MainHeader user={user} />
+
       <div className={styles.cards}>
         {data?.books?.map((book, index) => (
           <BookCard
+            key={index}
             img={book.image}
             title={book.title}
-            onClick={() => alert(index)}
+            clicks={() => alert(index)}
+            favourites={favourites}
+            setFavourites={setFavourites}
+            index={index}
           />
         ))}
       </div>
