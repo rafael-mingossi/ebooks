@@ -1,0 +1,6 @@
+@import 'utils/variables';
+
+.cards {
+  @include flex-x-y-d(center, center, row);
+  flex-wrap: wrap;
+}
