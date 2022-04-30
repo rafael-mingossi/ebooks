@@ -1,0 +1,28 @@
+@import 'utils/variables';
+
+.container {
+  min-height: 70px;
+  background: $lightGreen;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  color: white;
+  //margin-top: 5rem;
+  font-size: 2rem;
+
+  //   @include sm {
+  //     min-height: 60px;
+  //     margin-bottom: 0;
+  //     font-size: 30px;
+  //     padding-top: 5px;
+  //   }
+
+  //   @include xsm {
+  //     min-height: 50px;
+  //   }
+
+  p {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5ch;
+  }
+}

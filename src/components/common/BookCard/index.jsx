@@ -34,7 +34,7 @@ const BookCard = ({ img, title, clicks, favourites, setFavourites, index }) => {
     <div className={styles.bookWrapper}>
       <div className={styles.cover} onClick={clicks}>
         <img src={img} className={styles.img} />
-        <p className={styles.title}>{title}</p>
+        {/* <p className={styles.title}>{title}</p> */}
       </div>
 
       {!exists(index) ? (

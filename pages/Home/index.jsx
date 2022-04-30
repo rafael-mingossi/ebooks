@@ -3,7 +3,12 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 import styles from './styles.module.scss';
 import prisma from '../../lib/prisma';
 import { ViewContext } from '../_app';
-import { BookCard, MainHeader } from '/src/components';
+import {
+  BookCard,
+  MainHeader,
+  SearchBar,
+  MarqueeWrapper,
+} from '/src/components';
 
 export default function Home({ data }) {
   const [viewContext, setViewContext] = useContext(ViewContext);
@@ -19,8 +24,20 @@ export default function Home({ data }) {
   }, []);
 
   return (
-    <div>
+    <div className={styles.main}>
       <MainHeader user={user} />
+
+      <h1 className={styles.title}>LAST ADDED</h1>
+      <MarqueeWrapper>
+        {data?.books?.map((book, index) => (
+          <>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            <img src={book.image} className={styles.img} />
+          </>
+        ))}
+      </MarqueeWrapper>
+
+      <SearchBar placeholder='Enter a book title' data={data} />
 
       <div className={styles.cards}>
         {data?.books?.map((book, index) => (

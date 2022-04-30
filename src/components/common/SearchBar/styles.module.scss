@@ -1,0 +1,76 @@
+@import 'utils/variables';
+
+.searchContainer {
+  position: relative;
+  margin: 4rem 0;
+
+  input {
+    background-color: white;
+    border-radius: 7px 0 0 7px;
+    border: 0;
+    font-size: 18px;
+    padding: 15px 15px 15px 20px;
+    height: 50px;
+    width: 40vw;
+    min-width: 30rem;
+    justify-content: center;
+    outline: none;
+    border-left: 1px solid $darkGreen;
+    border-top: 1px solid $darkGreen;
+    border-bottom: 1px solid $darkGreen;
+  }
+
+  .searchInputs {
+    margin-top: 50px;
+    display: flex;
+  }
+
+  .searchIcon {
+    height: 50px;
+    width: 50px;
+    background-color: white;
+    display: grid;
+    place-items: center;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    border-right: 1px solid $darkGreen;
+    border-top: 1px solid $darkGreen;
+    border-bottom: 1px solid $darkGreen;
+
+    .icon {
+      width: 1.9rem;
+      height: auto;
+      cursor: pointer;
+    }
+  }
+
+  .dataResult {
+    position: absolute;
+    top: calc(100% - 5px);
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 5;
+    left: 0;
+    margin-top: 5px;
+    width: 450px;
+    height: fit-content;
+    max-height: 35vh;
+    box-shadow: 0px 5px 15px rgb(0, 0, 0, 0.35);
+    overflow: hidden;
+    overflow-y: auto;
+    padding-left: 20px;
+    border-radius: 7px;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .dataItem {
+    width: 100%;
+    height: 50px;
+    align-items: center;
+    color: #000;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+}

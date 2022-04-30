@@ -2,30 +2,30 @@
 
 .bookWrapper {
   @include flex-x-y-d(center, center, column);
-  width: 29rem;
-  height: 41rem;
+  width: 26rem;
+  height: 35rem;
   margin: 3rem;
   border: 1px dashed black;
   background-color: rgb(218, 218, 218);
-  padding: 0 0.5rem;
+  //padding: 0 0.5rem;
   border-radius: 1rem;
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.616);
-  margin-top: 10rem;
+  margin-top: 5rem;
 
   .cover {
-    width: fit-content;
-    height: fit-content;
+    width: 20rem;
+    height: 26rem;
     @include flex-x-y-d(center, center, column);
     cursor: pointer;
 
     .img {
-      width: 27rem;
-      height: auto;
+      width: auto;
+      max-height: 30rem;
       transition: transform 0.5s;
-      margin: -3rem 0;
+      object-fit: scale-down;
 
       &:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
       }
     }
   }
@@ -45,6 +45,7 @@
     height: 3.5rem;
     cursor: pointer;
     transition: transform 0.5s;
+    margin-top: 1rem;
 
     &:hover {
       transform: scale(1.3);
