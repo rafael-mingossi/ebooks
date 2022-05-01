@@ -1,12 +1,21 @@
 import styles from './styles.module.scss';
 import { useLocalStorage } from '../../../../hooks/useLocalStorage';
+import Link from 'next/link';
 
 const icons = {
   norm: '/fav.svg',
   filled: '/favFull.svg',
 };
 
-const BookCard = ({ img, title, clicks, favourites, setFavourites, index }) => {
+const BookCard = ({
+  img,
+  title,
+  clicks,
+  favourites,
+  setFavourites,
+  index,
+  isbn13,
+}) => {
   const { setItem, getItem } = useLocalStorage({});
 
   const exists = (fav) => {
@@ -33,8 +42,9 @@ const BookCard = ({ img, title, clicks, favourites, setFavourites, index }) => {
   return (
     <div className={styles.bookWrapper}>
       <div className={styles.cover} onClick={clicks}>
-        <img src={img} className={styles.img} />
-        {/* <p className={styles.title}>{title}</p> */}
+        <Link href={`/book/${isbn13}`}>
+          <img src={img} className={styles.img} />
+        </Link>
       </div>
 
       {!exists(index) ? (

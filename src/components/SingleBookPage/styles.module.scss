@@ -1,0 +1,22 @@
+@import 'utils/variables';
+
+.bookContainer {
+  font-size: 1.8rem;
+  line-height: 1.4ch;
+  .bookWrapper {
+    @include flex-x-y-d(center, center, row);
+
+    .left {
+      width: 50vw;
+      @include flex-x-y-d(flex-end, center, row);
+
+      .img {
+        width: 40vw;
+      }
+    }
+
+    .right {
+      width: 50vw;
+    }
+  }
+}

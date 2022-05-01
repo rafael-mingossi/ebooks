@@ -30,14 +30,14 @@ export default function Home({ data }) {
       <h1 className={styles.title}>LAST ADDED</h1>
       <MarqueeWrapper>
         {data?.books?.map((book, index) => (
-          <>
+          <div className={styles.marquee}>
             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
             <img src={book.image} className={styles.img} />
-          </>
+          </div>
         ))}
       </MarqueeWrapper>
 
-      <SearchBar placeholder='Enter a book title' data={data} />
+      <SearchBar placeholder='Enter a book title, ISBN' data={data} />
 
       <div className={styles.cards}>
         {data?.books?.map((book, index) => (
@@ -45,7 +45,8 @@ export default function Home({ data }) {
             key={index}
             img={book.image}
             title={book.title}
-            clicks={() => alert(index)}
+            // clicks={() => alert(index)}
+            isbn13={book.isbn13}
             favourites={favourites}
             setFavourites={setFavourites}
             index={index}
@@ -58,9 +59,11 @@ export default function Home({ data }) {
 
 export async function getServerSideProps() {
   // Fetch data from external API
+  //const res = await fetch(`https://api.itbook.store/1.0/search/de/1`);
   const res = await fetch(`https://api.itbook.store/1.0/new`);
   const data = await res.json();
 
+  console.log(data);
   // console.dir(data, { depth: null });
 
   // Pass data to the page via props

@@ -2,8 +2,8 @@ import { useState } from 'react';
 import styles from './styles.module.scss';
 
 function Search({ placeholder, data }) {
-  //console.log('dat -->', data);
   const [filteredData, setFilteredData] = useState([]);
+  const [filteredIsbn, setFilteredIsbn] = useState([]);
   const [enteredValue, setEnteredValue] = useState('');
 
   const res = data.books;
@@ -11,14 +11,30 @@ function Search({ placeholder, data }) {
   const handleFilter = (event) => {
     const searchWord = event.target.value;
     setEnteredValue(searchWord);
-    const newFilter = res.filter((value) => {
-      return value.title.toLowerCase().includes(searchWord.toLowerCase());
-    });
 
-    if (searchWord === '') {
+    if (searchWord.length >= 3) {
+      const filterTitle = res.filter((value) => {
+        return value.title.toLowerCase().includes(searchWord.toLowerCase());
+      });
+
+      const filterIsbn = res.filter((value) => {
+        return value.isbn13.toLowerCase().includes(searchWord.toLowerCase());
+      });
+
+      console.log(filterIsbn);
+
+      if (searchWord <= 2) {
+        setFilteredData([]);
+        setFilteredIsbn([]);
+      } else {
+        setFilteredData(filterTitle);
+        setFilteredIsbn(filterIsbn);
+      }
+    }
+
+    if (searchWord <= 2) {
       setFilteredData([]);
-    } else {
-      setFilteredData(newFilter);
+      setFilteredIsbn([]);
     }
   };
 
@@ -50,6 +66,7 @@ function Search({ placeholder, data }) {
       </div>
       {filteredData.length !== 0 && (
         <div className={styles.dataResult}>
+          <p className={styles.titles}>TITLES</p>
           {filteredData.map((value, index) => {
             return (
               <a
@@ -58,6 +75,24 @@ function Search({ placeholder, data }) {
                 //href={`movie/${value.uid}`}
               >
                 <p>{value.title}</p>
+              </a>
+            );
+          })}
+        </div>
+      )}
+      {filteredIsbn.length !== 0 && (
+        <div className={styles.dataResult}>
+          <p className={styles.titles}>ISBN + TITLE</p>
+          {filteredIsbn.map((value, index) => {
+            return (
+              <a
+                key={value.isbn13}
+                className={styles.dataItem}
+                //href={`movie/${value.uid}`}
+              >
+                <p>
+                  {value.isbn13} - {value.title}
+                </p>
               </a>
             );
           })}
