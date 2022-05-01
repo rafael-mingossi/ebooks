@@ -30,7 +30,7 @@ export default function Home({ data }) {
       <h1 className={styles.title}>LAST ADDED</h1>
       <MarqueeWrapper>
         {data?.books?.map((book, index) => (
-          <div className={styles.marquee}>
+          <div className={styles.marquee} key={index}>
             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
             <img src={book.image} className={styles.img} />
           </div>
