@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import Link from 'next/link';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import styles from './styles.module.scss';
 import prisma from '../../lib/prisma';
@@ -32,7 +33,9 @@ export default function Home({ data }) {
         {data?.books?.map((book, index) => (
           <div className={styles.marquee} key={index}>
             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-            <img src={book.image} className={styles.img} />
+            <Link href={`book/${book.isbn13}`}>
+              <img src={book.image} className={styles.img} />
+            </Link>
           </div>
         ))}
       </MarqueeWrapper>
@@ -63,7 +66,7 @@ export async function getServerSideProps() {
   const res = await fetch(`https://api.itbook.store/1.0/new`);
   const data = await res.json();
 
-  console.log(data);
+  //console.log(data);
   // console.dir(data, { depth: null });
 
   // Pass data to the page via props

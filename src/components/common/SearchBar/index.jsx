@@ -40,6 +40,7 @@ function Search({ placeholder, data }) {
 
   const clearInput = () => {
     setFilteredData([]);
+    setFilteredIsbn([]);
     setEnteredValue('');
   };
 
@@ -72,7 +73,7 @@ function Search({ placeholder, data }) {
               <a
                 key={value.isbn13}
                 className={styles.dataItem}
-                //href={`movie/${value.uid}`}
+                href={`book/${value.isbn13}`}
               >
                 <p>{value.title}</p>
               </a>
@@ -88,7 +89,7 @@ function Search({ placeholder, data }) {
               <a
                 key={value.isbn13}
                 className={styles.dataItem}
-                //href={`movie/${value.uid}`}
+                href={`book/${value.isbn13}`}
               >
                 <p>
                   {value.isbn13} - {value.title}
