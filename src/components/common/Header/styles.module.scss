@@ -7,16 +7,15 @@
   background-size: cover;
   background-position: top;
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  @include flex-x-y-d(center, center, column);
 
   .headerH1Wrapper {
     text-transform: uppercase;
     color: white;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: fit-content;
     backface-visibility: hidden; //this fix the letter shake in the end of the animation
+    @include flex-x-y-d(center, center, column);
+    margin-top: -8rem;
 
     .allLib {
       display: block;

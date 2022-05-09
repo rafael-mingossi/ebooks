@@ -2,6 +2,7 @@ import '../utils/globals.css';
 import { ApolloProvider } from '@apollo/client';
 import apolloClient from '../lib/apollo';
 import { createContext, useState } from 'react';
+import { Layout } from '/src/components';
 
 export const ViewContext = createContext();
 
@@ -19,7 +20,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <ViewContext.Provider value={[viewContext, setViewContext]}>
       <ApolloProvider client={apolloClient}>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ApolloProvider>
     </ViewContext.Provider>
   );

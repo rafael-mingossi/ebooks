@@ -1,8 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { gql, useQuery } from '@apollo/client';
-import Header from '../../src/components/common/Header';
-import About from '../../src/components/common/About';
-import Login from '../../src/components/common/Login';
+import { About, Login } from '/src/components';
 import { useRouter } from 'next/router';
 import prisma from '../../lib/prisma';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
@@ -40,11 +38,10 @@ const LoginPage = () => {
     }
   }, []);
 
-  console.log('st -->', token);
+  // console.log('st -->', token);
 
   return (
     <div>
-      <Header />
       <About />
       <Login />
       {/* <div>

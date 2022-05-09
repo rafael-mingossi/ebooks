@@ -1,0 +1,9 @@
+@import 'utils/variables';
+
+.container {
+  min-height: fit-content;
+  position: relative;
+  max-width: 100vw;
+  //z-index: 1;
+  overflow: hidden;
+}

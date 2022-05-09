@@ -1,0 +1,43 @@
+@import 'utils/variables';
+
+.footerWrapper {
+  @include flex-x-y-d(space-around, center, row);
+  width: 100%;
+  font-size: 2rem;
+  padding: 2.5rem;
+  line-height: 1.2ch;
+  background-color: $darkGreen;
+  color: white;
+  margin-top: 5rem;
+
+  .left {
+    width: 23%;
+
+    p {
+      cursor: pointer;
+    }
+  }
+
+  .middle {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 10rem;
+    border: 1;
+    background-color: white;
+    position: relative;
+
+    .img {
+      width: 13rem;
+      height: 13rem;
+      position: absolute;
+      top: 3rem;
+      right: 3rem;
+    }
+  }
+
+  .right {
+    width: 23%;
+    line-height: normal;
+    margin-left: 5rem;
+  }
+}

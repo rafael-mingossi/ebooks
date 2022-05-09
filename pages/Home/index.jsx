@@ -1,23 +1,22 @@
 import { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
 import styles from './styles.module.scss';
 import prisma from '../../lib/prisma';
 import { ViewContext } from '../_app';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+
 import {
   BookCard,
-  MainHeader,
+  CatCard,
   SearchBar,
   MarqueeWrapper,
+  Header,
 } from '/src/components';
 
 export default function Home({ data }) {
   const [viewContext, setViewContext] = useContext(ViewContext);
-  const { setItem, getItem } = useLocalStorage({});
   const [favourites, setFavourites] = useState([]);
-
-  const [token, setToken] = useState(getItem({ key: 'token' }));
-  const [user, setUser] = useState(getItem({ key: 'user' }));
+  const { setItem, getItem } = useLocalStorage({});
 
   useEffect(() => {
     const booksLocalStorage = getItem({ key: 'fav-books' });
@@ -26,8 +25,6 @@ export default function Home({ data }) {
 
   return (
     <div className={styles.main}>
-      <MainHeader user={user} />
-
       <h1 className={styles.title}>LAST ADDED</h1>
       <MarqueeWrapper>
         {data?.books?.map((book, index) => (
@@ -42,7 +39,29 @@ export default function Home({ data }) {
 
       <SearchBar placeholder='Enter a book title, ISBN' data={data} />
 
-      <div className={styles.cards}>
+      <h1 className={styles.title}>POPULAR TECH CATEGORIES</h1>
+      <div className={styles.line} />
+      <div className={styles.categories}>
+        <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
+        <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
+        <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
+        <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
+        <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
+        <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
+      </div>
+
+      <h1 className={styles.title}>OTHER BOOKS CATEGORIES</h1>
+      <div className={styles.line} />
+      <div className={styles.categories}>
+        <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
+        <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
+        <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
+        <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
+        <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
+        <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
+      </div>
+
+      {/* <div className={styles.cards}>
         {data?.books?.map((book, index) => (
           <BookCard
             key={index}
@@ -55,7 +74,7 @@ export default function Home({ data }) {
             index={index}
           />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -66,7 +85,22 @@ export async function getServerSideProps() {
   const res = await fetch(`https://api.itbook.store/1.0/new`);
   const data = await res.json();
 
-  //console.log(data);
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Host': 'hapi-books.p.rapidapi.com',
+      'X-RapidAPI-Key': 'c680d2ddabmsh84d9167c6748786p1f401fjsn82c5cb17e43b',
+    },
+  };
+
+  // const suspense = await fetch(
+  //   'https://hapi-books.p.rapidapi.com/week/suspense',
+  //   options
+  // );
+
+  // const susData = await suspense.json();
+
+  // console.log('sus -->', susData);
   // console.dir(data, { depth: null });
 
   // Pass data to the page via props
