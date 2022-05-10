@@ -4,13 +4,12 @@
   @include flex-x-y-d(center, center, column);
   width: 26rem;
   height: 35rem;
-  margin: 3rem;
   border: 1px dashed black;
   background-color: rgb(218, 218, 218);
   //padding: 0 0.5rem;
   border-radius: 1rem;
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.616);
-  margin-top: 5rem;
+  margin: 5rem 3rem;
 
   .cover {
     width: 20rem;

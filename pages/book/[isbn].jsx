@@ -19,7 +19,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const res = await fetch(`https://api.itbook.store/1.0/books/` + params.isbn);
-  //   const res = await fetch('https://api.itbook.store/1.0/new');
   const books = await res.json();
 
   console.log('tes ->>', books);

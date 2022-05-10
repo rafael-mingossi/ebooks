@@ -15,6 +15,7 @@ const BookCard = ({
   setFavourites,
   index,
   isbn13,
+  url,
 }) => {
   const { setItem, getItem } = useLocalStorage({});
 
@@ -42,7 +43,7 @@ const BookCard = ({
   return (
     <div className={styles.bookWrapper}>
       <div className={styles.cover} onClick={clicks}>
-        <Link href={`/book/${isbn13}`}>
+        <Link href={`/category/${url}/${isbn13}`}>
           <img src={img} className={styles.img} />
         </Link>
       </div>

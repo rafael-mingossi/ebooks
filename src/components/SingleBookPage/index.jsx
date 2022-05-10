@@ -1,5 +1,4 @@
 import styles from './styles.module.scss';
-import { MainHeader, Button } from '/src/components';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
@@ -8,7 +7,6 @@ const SingleBookPage = ({ book }) => {
   //console.log('com -->', book);
   return (
     <div className={styles.bookContainer}>
-      <MainHeader />
       <div className={styles.bookWrapper}>
         <div className={styles.left}>
           <img src={book?.image} className={styles.img} />

@@ -36,16 +36,11 @@
     }
   }
 
-  .cards {
-    @include flex-x-y-d(center, center, row);
-    flex-wrap: wrap;
-  }
-
   .categories {
     width: 90%;
     @include flex-x-y-d(space-around, center, row);
     flex-wrap: wrap;
-    margin-top: 3rem;
+    margin: 5rem 0;
     padding: 0 3rem;
   }
 }

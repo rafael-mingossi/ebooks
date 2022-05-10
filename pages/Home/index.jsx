@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 import prisma from '../../lib/prisma';
 import { ViewContext } from '../_app';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { category } from '../../utils/category';
 
 import {
   BookCard,
@@ -42,12 +43,16 @@ export default function Home({ data }) {
       <h1 className={styles.title}>POPULAR TECH CATEGORIES</h1>
       <div className={styles.line} />
       <div className={styles.categories}>
-        <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
-        <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
-        <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
-        <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
-        <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
-        <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
+        {category.map((cat) => (
+          <CatCard
+            key={cat?.id}
+            img1={cat?.img1}
+            img2={cat?.img2}
+            img3={cat?.img3}
+            title={cat?.title}
+            link={cat?.link}
+          />
+        ))}
       </div>
 
       <h1 className={styles.title}>OTHER BOOKS CATEGORIES</h1>
@@ -60,21 +65,6 @@ export default function Home({ data }) {
         <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
         <CatCard img1='/css1.png' img2='/css2.png' img3='/css3.png' />
       </div>
-
-      {/* <div className={styles.cards}>
-        {data?.books?.map((book, index) => (
-          <BookCard
-            key={index}
-            img={book.image}
-            title={book.title}
-            // clicks={() => alert(index)}
-            isbn13={book.isbn13}
-            favourites={favourites}
-            setFavourites={setFavourites}
-            index={index}
-          />
-        ))}
-      </div> */}
     </div>
   );
 }

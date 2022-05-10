@@ -5,7 +5,7 @@ export const category = [
     img1: '/css1.png',
     img2: '/css2.png',
     img3: '/css3.png',
-    link: '/css',
+    link: '/category/css',
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ export const category = [
     img1: '/java1.png',
     img2: '/java2.png',
     img3: '/java3.png',
-    link: '/java-js',
+    link: '/category/java-js',
   },
   {
     id: 3,
@@ -21,7 +21,7 @@ export const category = [
     img1: '/db1.png',
     img2: '/db2.png',
     img3: '/db3.png',
-    link: '/database',
+    link: '/category/database',
   },
   {
     id: 4,
@@ -29,7 +29,7 @@ export const category = [
     img1: '/py1.png',
     img2: '/py2.png',
     img3: '/py3.png',
-    link: '/python',
+    link: '/category/python',
   },
   {
     id: 5,
@@ -37,7 +37,7 @@ export const category = [
     img1: '/cloud1.png',
     img2: '/cloud2.png',
     img3: '/cloud3.png',
-    link: '/cloud',
+    link: '/category/cloud',
   },
   {
     id: 6,
@@ -45,6 +45,6 @@ export const category = [
     img1: '/php1.png',
     img2: '/php2.png',
     img3: '/php3.png',
-    link: '/php',
+    link: '/category/php',
   },
 ];
