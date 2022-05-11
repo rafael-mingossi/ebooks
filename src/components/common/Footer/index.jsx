@@ -5,16 +5,16 @@ const Footer = () => {
   return (
     <div className={styles.footerWrapper}>
       <div className={styles.left}>
-        <Link href='/'>
+        <Link href='/faq'>
           <p>FAQ</p>
         </Link>
-        <Link href='/'>
+        <Link href='/help'>
           <p>Help</p>
         </Link>
-        <Link href='/'>
+        <Link href='/privacy'>
           <p>Privacy</p>
         </Link>
-        <Link href='/'>
+        <Link href='/disclaimer'>
           <p>Disclaimer</p>
         </Link>
       </div>

@@ -48,17 +48,17 @@ const BookCard = ({
         </Link>
       </div>
 
-      {!exists(index) ? (
+      {!exists(title) ? (
         <img
           src={icons.norm}
           className={styles.icon}
-          onClick={() => addFavourite(index)}
+          onClick={() => addFavourite(title)}
         />
       ) : (
         <img
           src={icons.filled}
           className={styles.icon}
-          onClick={() => removeFavourite(index)}
+          onClick={() => removeFavourite(title)}
         />
       )}
     </div>

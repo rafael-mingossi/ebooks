@@ -13,7 +13,7 @@ export const category = [
     img1: '/java1.png',
     img2: '/java2.png',
     img3: '/java3.png',
-    link: '/category/java-js',
+    link: '/category/java',
   },
   {
     id: 3,
@@ -46,5 +46,56 @@ export const category = [
     img2: '/php2.png',
     img3: '/php3.png',
     link: '/category/php',
+  },
+];
+
+export const others = [
+  {
+    id: 1,
+    title: 'Suspense',
+    img1: '/sus1.jpeg',
+    img2: '/sus2.jpeg',
+    img3: '/sus3.jpeg',
+    link: '/category/suspense',
+  },
+  {
+    id: 2,
+    title: 'Horror',
+    img1: '/horror1.jpg',
+    img2: '/horror2.jpg',
+    img3: '/horror3.jpg',
+    link: '/category/horror',
+  },
+  {
+    id: 3,
+    title: 'Drama',
+    img1: '/drama1.jpg',
+    img2: '/drama2.jpg',
+    img3: '/drama3.jpg',
+    link: '/category/drama',
+  },
+  {
+    id: 4,
+    title: 'Comedy',
+    img1: '/comedy1.jpg',
+    img2: '/comedy2.jpg',
+    img3: '/comedy3.jpg',
+    link: '/category/comedy',
+  },
+  {
+    id: 5,
+    title: 'Action',
+    img1: '/action1.jpg',
+    img2: '/action2.jpg',
+    img3: '/action3.jpg',
+    link: '/category/action',
+  },
+  {
+    id: 6,
+    title: 'Fiction',
+    img1: '/fiction1.jpg',
+    img2: '/fiction2.jpg',
+    img3: '/fiction3.jpg',
+    link: '/category/fiction',
   },
 ];
