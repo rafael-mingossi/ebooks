@@ -3,26 +3,14 @@ import Link from 'next/link';
 import styles from './styles.module.scss';
 import prisma from '../../lib/prisma';
 import { ViewContext } from '../_app';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { category, others } from '../../utils/category';
 
-import {
-  BookCard,
-  CatCard,
-  SearchBar,
-  MarqueeWrapper,
-  Header,
-} from '/src/components';
+import { CatCard, SearchBar, MarqueeWrapper } from '/src/components';
 
-export default function Home({ data }) {
+export default function Home({ data, cloud }) {
   const [viewContext, setViewContext] = useContext(ViewContext);
-  const [favourites, setFavourites] = useState([]);
-  const { setItem, getItem } = useLocalStorage({});
 
-  useEffect(() => {
-    const booksLocalStorage = getItem({ key: 'fav-books' });
-    setFavourites(booksLocalStorage);
-  }, []);
+  const news = [...data.books, ...cloud.books];
 
   return (
     <div className={styles.main}>
@@ -38,7 +26,7 @@ export default function Home({ data }) {
         ))}
       </MarqueeWrapper>
 
-      <SearchBar placeholder='Enter a book title, ISBN' data={data} />
+      <SearchBar placeholder='Enter a book Title, ISBN, Category' data={news} />
 
       <h1 className={styles.title}>POPULAR TECH CATEGORIES</h1>
       <div className={styles.line} />
@@ -78,46 +66,9 @@ export async function getServerSideProps() {
   //const res = await fetch(`https://api.itbook.store/1.0/search/de/1`);
   const res = await fetch(`https://api.itbook.store/1.0/new`);
   const data = await res.json();
-
-  const options = {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Host': 'hapi-books.p.rapidapi.com',
-      'X-RapidAPI-Key': 'c680d2ddabmsh84d9167c6748786p1f401fjsn82c5cb17e43b',
-    },
-  };
-
-  // const suspense = await fetch(
-  //   'https://hapi-books.p.rapidapi.com/week/suspense',
-  //   options
-  // );
-
-  // const susData = await suspense.json();
-
-  // console.log('sus -->', susData);
-  // console.dir(data, { depth: null });
+  const clo = await fetch(`https://api.itbook.store/1.0/search/cloud`);
+  const cloud = await clo.json();
 
   // Pass data to the page via props
-  return { props: { data } };
+  return { props: { data, cloud } };
 }
-
-// export async function getServerSideProps({ req }) {
-//   const book = await prisma.book.findMany({});
-//   const users = await prisma.user.findMany({});
-
-//   const books = book?.map((item) => ({
-//     bookId: item?.bookId,
-//     cover: item?.cover,
-//     title: item?.title,
-//     category: item?.category,
-//     year: item?.year,
-//   }));
-
-//   //console.log(session);
-//   return {
-//     props: {
-//       users: users,
-//       books: books,
-//     },
-//   };
-// }

@@ -9,20 +9,20 @@ const SingleBookPage = ({ book }) => {
     <div className={styles.bookContainer}>
       <div className={styles.bookWrapper}>
         <div className={styles.left}>
-          <img src={book?.image} className={styles.img} />
+          <img src={book?.image || book?.cover} className={styles.img} />
         </div>
         <div className={styles.right}>
-          <h1>{book?.title || ''}</h1>
+          <h1>{book?.title || book?.name}</h1>
           <p>{book?.subtitle || ''}</p>
           <div className={styles.line} />
           <p>
-            <strong>Description:</strong> {book?.desc || ''}
+            <strong>Description:</strong> {book?.desc || book?.synopsis}
           </p>
           <div className={styles.line} />
           <div className={styles.sections}>
             <div className={styles.divLeft}>
               <p>
-                <strong>ISBN:</strong> {book?.isbn13 || ''}
+                <strong>ISBN:</strong> {book?.isbn13 || book?.book_id}
               </p>
               <p>
                 <strong>Total Pages:</strong> {book?.pages || ''}
@@ -33,13 +33,13 @@ const SingleBookPage = ({ book }) => {
             </div>
             <div className={styles.divRight}>
               <p>
-                <strong>Authors:</strong> {book?.authors || ''}
+                <strong>Authors:</strong> {book?.authors || book?.authors[0]}
               </p>
               <p>
                 <strong>Rating:</strong> {book?.rating || ''}
               </p>
               <p>
-                <strong>Year:</strong> {book?.year || ''}
+                <strong>Year:</strong> {book?.year || book?.published_date}
               </p>
             </div>
           </div>

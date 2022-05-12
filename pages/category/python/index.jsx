@@ -6,7 +6,7 @@ const Python = ({ python }) => {
   const router = useRouter();
   const last_segment = router.pathname.split('/').pop();
 
-  return <Category category={python} url={last_segment} />;
+  return <Category category={python?.books} url={last_segment} />;
 };
 
 export default Python;

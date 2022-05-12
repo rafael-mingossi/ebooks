@@ -6,7 +6,7 @@ const Php = ({ php }) => {
   const router = useRouter();
   const last_segment = router.pathname.split('/').pop();
 
-  return <Category category={php} url={last_segment} />;
+  return <Category category={php?.books} url={last_segment} />;
 };
 
 export default Php;

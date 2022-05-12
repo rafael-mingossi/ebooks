@@ -2,15 +2,16 @@
 
 .bookContainer {
   font-size: 1.7rem;
+  min-height: 65vh;
   .bookWrapper {
     @include flex-x-y-d(center, center, row);
 
     .left {
-      width: 40vw;
-      @include flex-x-y-d(flex-end, center, row);
+      width: 42vw;
+      @include flex-x-y-d(center, center, row);
 
       .img {
-        width: 40vw;
+        max-width: 42vw;
       }
     }
 

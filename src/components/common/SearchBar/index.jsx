@@ -8,9 +8,7 @@ function Search({ placeholder, data }) {
   const [filteredCategory, setFilteredCategory] = useState([]);
   const [enteredValue, setEnteredValue] = useState('');
 
-  const res = data.books;
-
-  //console.log('resss-->>', res);
+  const res = data;
 
   const categories = [
     { id: 1, category: 'Drama' },
@@ -55,7 +53,7 @@ function Search({ placeholder, data }) {
       }
     }
 
-    if (searchWord <= 2) {
+    if (searchWord.length <= 2) {
       setFilteredData([]);
       setFilteredIsbn([]);
       setFilteredCategory([]);
@@ -68,6 +66,9 @@ function Search({ placeholder, data }) {
     setFilteredCategory([]);
     setEnteredValue('');
   };
+
+  // console.log('ress11-->>', big);
+  // console.log('ress22-->>', big);
 
   return (
     <div className={styles.searchContainer}>
@@ -90,56 +91,58 @@ function Search({ placeholder, data }) {
           )}
         </div>
       </div>
-      {filteredData.length !== 0 && (
-        <div className={styles.dataResult}>
-          <p className={styles.titles}>TITLES</p>
-          {filteredData.map((value, index) => {
-            return (
-              <a
-                key={value.isbn13}
-                className={styles.dataItem}
-                href={`book/${value.isbn13}`}
-              >
-                <p>{value.title}</p>
-              </a>
-            );
-          })}
-        </div>
-      )}
-      {filteredIsbn.length !== 0 && (
-        <div className={styles.dataResult}>
-          <p className={styles.titles}>ISBN + TITLE</p>
-          {filteredIsbn.map((value, index) => {
-            return (
-              <a
-                key={value.isbn13}
-                className={styles.dataItem}
-                href={`book/${value.isbn13}`}
-              >
-                <p>
-                  {value.isbn13} - {value.title}
-                </p>
-              </a>
-            );
-          })}
-        </div>
-      )}
-      {filteredCategory.length !== 0 && (
-        <div className={styles.dataResult}>
-          <p className={styles.titles}>CATEGORY</p>
-          {filteredCategory.map((value, index) => {
-            return (
-              <a
-                key={value.id}
-                className={styles.dataItem}
-                href={`category/${value.category.toLowerCase()}`}
-              >
-                <p>{value.category}</p>
-              </a>
-            );
-          })}
-        </div>
-      )}
+      <div className={styles.dataResult}>
+        {filteredData.length !== 0 && (
+          <>
+            <p className={styles.titles}>TITLES</p>
+            {filteredData.map((value, index) => {
+              return (
+                <a
+                  key={value.isbn13}
+                  className={styles.dataItem}
+                  href={`book/${value.isbn13}`}
+                >
+                  <p>{value.title}</p>
+                </a>
+              );
+            })}
+          </>
+        )}
+        {filteredIsbn.length !== 0 && (
+          <>
+            <p className={styles.titles}>ISBN + TITLE</p>
+            {filteredIsbn.map((value, index) => {
+              return (
+                <a
+                  key={value.isbn13}
+                  className={styles.dataItem}
+                  href={`book/${value.isbn13}`}
+                >
+                  <p>
+                    {value.isbn13} - {value.title}
+                  </p>
+                </a>
+              );
+            })}
+          </>
+        )}
+        {filteredCategory.length !== 0 && (
+          <>
+            <p className={styles.titles}>CATEGORY</p>
+            {filteredCategory.map((value, index) => {
+              return (
+                <a
+                  key={value.id}
+                  className={styles.dataItem}
+                  href={`category/${value.category.toLowerCase()}`}
+                >
+                  <p>{value.category}</p>
+                </a>
+              );
+            })}
+          </>
+        )}
+      </div>
     </div>
   );
 }

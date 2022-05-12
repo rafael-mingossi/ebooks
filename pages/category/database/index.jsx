@@ -6,7 +6,7 @@ const Database = ({ database }) => {
   const router = useRouter();
   const last_segment = router.pathname.split('/').pop();
 
-  return <Category category={database} url={last_segment} />;
+  return <Category category={database?.books} url={last_segment} />;
 };
 
 export default Database;

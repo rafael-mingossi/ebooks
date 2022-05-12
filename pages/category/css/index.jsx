@@ -6,7 +6,7 @@ const Css = ({ css }) => {
   const router = useRouter();
   const last_segment = router.pathname.split('/').pop();
 
-  return <Category category={css} url={last_segment} />;
+  return <Category category={css?.books} url={last_segment} />;
 };
 
 export default Css;

@@ -14,13 +14,13 @@ const Category = ({ category, url }) => {
 
   return (
     <div className={styles.cards}>
-      {category?.books?.map((book, index) => (
+      {category?.map((book, index) => (
         <BookCard
           key={index}
-          img={book.image}
-          title={book.title}
+          img={book?.image || book?.cover}
+          title={book?.title || book?.name}
           // clicks={() => alert(index)}
-          isbn13={book.isbn13}
+          isbn13={book?.isbn13 || book?.book_id}
           favourites={favourites}
           setFavourites={setFavourites}
           index={index}

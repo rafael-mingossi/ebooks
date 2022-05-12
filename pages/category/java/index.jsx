@@ -6,7 +6,7 @@ const Java = ({ java }) => {
   const router = useRouter();
   const last_segment = router.pathname.split('/').pop();
 
-  return <Category category={java} url={last_segment} />;
+  return <Category category={java?.books} url={last_segment} />;
 };
 
 export default Java;

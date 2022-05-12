@@ -6,7 +6,7 @@ const Cloud = ({ cloud }) => {
   const router = useRouter();
   const last_segment = router.pathname.split('/').pop();
 
-  return <Category category={cloud} url={last_segment} />;
+  return <Category category={cloud?.books} url={last_segment} />;
 };
 
 export default Cloud;
