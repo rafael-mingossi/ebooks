@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const SingleBookPage = ({ book }) => {
   const router = useRouter();
-  //console.log('com -->', book);
+
   return (
     <div className={styles.bookContainer}>
       <div className={styles.bookWrapper}>
@@ -12,20 +12,20 @@ const SingleBookPage = ({ book }) => {
           <img src={book?.image || book?.cover} className={styles.img} />
         </div>
         <div className={styles.right}>
-          <h1>{book?.title || book?.name}</h1>
-          <p>{book?.subtitle || ''}</p>
+          <h1>{book?.title || ''}</h1>
+          <p>{book?.subtitle || `${book?.category} category`}</p>
           <div className={styles.line} />
           <p>
-            <strong>Description:</strong> {book?.desc || book?.synopsis}
+            <strong>Description:</strong> {book?.desc || book?.description}
           </p>
           <div className={styles.line} />
           <div className={styles.sections}>
             <div className={styles.divLeft}>
               <p>
-                <strong>ISBN:</strong> {book?.isbn13 || book?.book_id}
+                <strong>ISBN:</strong> {book?.isbn13 || book?.bookId}
               </p>
               <p>
-                <strong>Total Pages:</strong> {book?.pages || ''}
+                <strong>Total Pages:</strong> {book?.pages || book?.totalPages}
               </p>
               <p>
                 <strong>Language:</strong> {book?.language || ''}
@@ -33,13 +33,13 @@ const SingleBookPage = ({ book }) => {
             </div>
             <div className={styles.divRight}>
               <p>
-                <strong>Authors:</strong> {book?.authors || book?.authors[0]}
+                <strong>Authors:</strong> {book?.authors || ''}
               </p>
               <p>
                 <strong>Rating:</strong> {book?.rating || ''}
               </p>
               <p>
-                <strong>Year:</strong> {book?.year || book?.published_date}
+                <strong>Year:</strong> {book?.year || ''}
               </p>
             </div>
           </div>

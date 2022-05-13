@@ -20,7 +20,7 @@ const Category = ({ category, url }) => {
           img={book?.image || book?.cover}
           title={book?.title || book?.name}
           // clicks={() => alert(index)}
-          isbn13={book?.isbn13 || book?.book_id}
+          isbn13={book?.isbn13 || book?.bookId}
           favourites={favourites}
           setFavourites={setFavourites}
           index={index}

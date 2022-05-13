@@ -1,54 +1,54 @@
 import SingleBookPage from '../../../../src/components/SingleBookPage';
 
-const Css = ({ suspense }) => {
-  return <SingleBookPage book={suspense} />;
+const Suspense = ({ suspense }) => {
+  return <SingleBookPage book={suspense[0]} />;
 };
 
-export default Css;
+export default Suspense;
 
 export async function getStaticPaths() {
-  const options = {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Host': 'hapi-books.p.rapidapi.com',
-      'X-RapidAPI-Key': 'c680d2ddabmsh84d9167c6748786p1f401fjsn82c5cb17e43b',
-    },
-  };
+  const env = process.env.NODE_ENV;
+  let url = '';
 
-  const sus = await fetch(
-    'https://hapi-books.p.rapidapi.com/week/suspense',
-    options
-  );
-  const isbnNum = await sus.json();
+  if (env == 'development') {
+    url = process.env.DEV;
+  } else if (env == 'production') {
+    url = process.env.PROD;
+  }
 
-  const paths = isbnNum?.map((num) => ({
-    params: { suspense: num.book_id.toString() },
+  const sus = await fetch(url);
+  const susp = await sus.json();
+
+  const paths = susp?.books?.map((num) => ({
+    params: { suspense: num.bookId },
   }));
 
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
-  const options = {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Host': 'hapi-books.p.rapidapi.com',
-      'X-RapidAPI-Key': 'c680d2ddabmsh84d9167c6748786p1f401fjsn82c5cb17e43b',
-    },
-  };
+  const env = process.env.NODE_ENV;
+  let url = '';
 
-  const sus = await fetch(
-    `https://hapi-books.p.rapidapi.com/book/` + params.suspense,
-    options
-  ).catch((err) => console.error(err));
-
-  const suspense = await sus.json();
-
-  if (!suspense) {
-    return {
-      notFound: true,
-    };
+  if (env == 'development') {
+    url = process.env.DEV;
+  } else if (env == 'production') {
+    url = process.env.PROD;
   }
+  const sus = await fetch(url);
+  const susp = await sus.json();
+
+  const suspense = susp?.books
+    ?.map((book) => ({
+      bookId: book?.bookId,
+      cover: book?.cover,
+      title: book?.title,
+      category: book?.category,
+      description: book?.description,
+      totalPages: book?.totalPages,
+      year: book?.year,
+    }))
+    .filter(({ bookId }) => bookId === params.suspense);
 
   return { props: { suspense }, revalidate: 600 };
 }
