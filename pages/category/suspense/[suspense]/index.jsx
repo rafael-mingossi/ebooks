@@ -21,8 +21,6 @@ export async function getStaticPaths() {
   );
   const isbnNum = await sus.json();
 
-  //console.log('is -->', isbnNum);
-
   const paths = isbnNum?.map((num) => ({
     params: { suspense: num.book_id.toString() },
   }));
