@@ -10,9 +10,9 @@ export async function getStaticPaths() {
   const env = process.env.NODE_ENV;
   let url = '';
 
-  if (env == 'development') {
+  if (env === 'development') {
     url = process.env.DEV;
-  } else if (env == 'production') {
+  } else if (env === 'production') {
     url = process.env.PROD;
   }
 
@@ -30,9 +30,9 @@ export async function getStaticProps({ params }) {
   const env = process.env.NODE_ENV;
   let url = '';
 
-  if (env == 'development') {
+  if (env === 'development') {
     url = process.env.DEV;
-  } else if (env == 'production') {
+  } else if (env === 'production') {
     url = process.env.PROD;
   }
   const sus = await fetch(url);

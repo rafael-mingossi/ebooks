@@ -12,7 +12,15 @@ const Horror = ({ horror }) => {
 export default Horror;
 
 export async function getServerSideProps() {
-  const hor = await fetch(process.env.DEV);
+  const env = process.env.NODE_ENV;
+  let url = '';
+
+  if (env === 'development') {
+    url = process.env.DEV;
+  } else if (env === 'production') {
+    url = process.env.PROD;
+  }
+  const hor = await fetch(url);
   const horr = await hor.json();
 
   const horror = horr?.books
