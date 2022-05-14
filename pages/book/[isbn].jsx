@@ -21,7 +21,7 @@ export async function getStaticProps({ params }) {
   const res = await fetch(`https://api.itbook.store/1.0/books/` + params.isbn);
   const books = await res.json();
 
-  console.log('tes ->>', books);
+  //console.log('tes ->>', books);
 
   if (!books) {
     return {

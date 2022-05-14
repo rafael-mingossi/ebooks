@@ -1,56 +1,38 @@
 import SingleBookPage from '../../../../src/components/SingleBookPage';
+import prisma from '../../../../lib/prisma';
 
-const Horror = () => {
-  // return <SingleBookPage book={horror[0]} />;
-  return <div>hey</div>;
+const Horror = ({ horror }) => {
+  return <SingleBookPage book={horror} />;
 };
 
 export default Horror;
 
-// export async function getStaticPaths() {
-//   const env = process.env.NODE_ENV;
-//   let url = '';
+export async function getStaticPaths() {
+  const hor = await prisma.book.findMany();
 
-//   if (env === 'development') {
-//     url = process.env.DEV;
-//   } else if (env === 'production') {
-//     url = process.env.PROD;
-//   }
+  const paths = hor?.map((num) => ({
+    params: { horror: num?.bookId },
+  }));
 
-//   const hor = await fetch(url);
-//   const horr = await hor?.json();
+  return { paths, fallback: true };
+}
 
-//   const paths = horr?.books?.map((num) => ({
-//     params: { horror: num.bookId },
-//   }));
+export async function getStaticProps({ params }) {
+  const hor = await prisma.book.findUnique({
+    where: {
+      bookId: params.horror,
+    },
+  });
 
-//   return { paths, fallback: true };
-// }
+  const horror = {
+    bookId: hor?.bookId,
+    cover: hor?.cover,
+    title: hor?.title,
+    category: hor?.category,
+    description: hor?.description,
+    totalPages: hor?.totalPages,
+    year: hor?.year,
+  };
 
-// export async function getStaticProps({ params }) {
-//   const env = process.env.NODE_ENV;
-//   let url = '';
-
-//   if (env === 'development') {
-//     url = process.env.DEV;
-//   } else if (env === 'production') {
-//     url = process.env.PROD;
-//   }
-
-//   const hor = await fetch(url);
-//   const horr = await hor?.json();
-
-//   const horror = horr?.books
-//     ?.map((book) => ({
-//       bookId: book?.bookId,
-//       cover: book?.cover,
-//       title: book?.title,
-//       category: book?.category,
-//       description: book?.description,
-//       totalPages: book?.totalPages,
-//       year: book?.year,
-//     }))
-//     .filter(({ bookId }) => bookId === params?.horror);
-
-//   return { props: { horror }, revalidate: 600 };
-// }
+  return { props: { horror }, revalidate: 600 };
+}
