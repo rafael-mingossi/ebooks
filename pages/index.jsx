@@ -18,7 +18,7 @@ const AllBooksQuery = gql`
 `;
 
 export default function Home() {
-  const [viewContext, setViewContext] = useContext(ViewContext);
+  //const [viewContext, setViewContext] = useContext(ViewContext);
   const { setItem, getItem } = useLocalStorage({});
   const router = useRouter();
   const [token, setToken] = useState();
