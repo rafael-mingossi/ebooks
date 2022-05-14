@@ -17,7 +17,7 @@ export async function getStaticPaths() {
   }
 
   const hor = await fetch(url);
-  const horr = await hor.json();
+  const horr = await hor?.json();
 
   const paths = horr?.books?.map((num) => ({
     params: { horror: num.bookId },
@@ -37,7 +37,7 @@ export async function getStaticProps({ params }) {
   }
 
   const hor = await fetch(url);
-  const horr = await hor.json();
+  const horr = await hor?.json();
 
   const horror = horr?.books
     ?.map((book) => ({
@@ -49,7 +49,7 @@ export async function getStaticProps({ params }) {
       totalPages: book?.totalPages,
       year: book?.year,
     }))
-    .filter(({ bookId }) => bookId === params.horror);
+    .filter(({ bookId }) => bookId === params?.horror);
 
   return { props: { horror }, revalidate: 600 };
 }
