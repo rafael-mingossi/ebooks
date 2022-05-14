@@ -23,7 +23,7 @@ export async function getStaticPaths() {
     params: { suspense: num.bookId },
   }));
 
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 }
 
 export async function getStaticProps({ params }) {
