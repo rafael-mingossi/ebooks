@@ -9,3 +9,5 @@ export { default as About } from './common/About';
 export { default as Login } from './common/Login';
 export { default as Layout } from './common/Layout';
 export { default as CatCard } from './common/CatCard';
+export { default as Input } from './common/Input';
+export { default as Spinner } from './common/Spinner';

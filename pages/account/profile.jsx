@@ -1,12 +1,13 @@
 import { useState, useEffect, useContext } from 'react';
 import { gql, useQuery } from '@apollo/client';
 import { About, Login } from '/src/components';
+import Profile from '../../src/components/ProfilePage';
 import { useRouter } from 'next/router';
 import prisma from '../../lib/prisma';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { ViewContext } from '../../pages/_app';
 
-const LoginPage = () => {
+const ProfilePage = () => {
   const [viewContext, setViewContext] = useContext(ViewContext);
   const { setItem, getItem } = useLocalStorage({});
   const router = useRouter();
@@ -19,16 +20,16 @@ const LoginPage = () => {
     if (loggedInUser && userToken) {
       setUser(loggedInUser);
       setToken(userToken);
-      router.push('/Home');
+    } else {
+      router.push('/');
     }
   }, []);
 
   return (
     <div>
-      <About />
-      <Login />
+      <Profile user={user} />
     </div>
   );
 };
 
-export default LoginPage;
+export default ProfilePage;
