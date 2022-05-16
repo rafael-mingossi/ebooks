@@ -1,8 +1,8 @@
 import styles from './styles.module.scss';
-import { useLocalStorage } from '../../../../hooks/useLocalStorage';
+import { useRouter } from 'next/router';
 
 const MainHeader = ({ user }) => {
-  const { handleLogout } = useLocalStorage();
+  const router = useRouter();
 
   return (
     <div className={styles.mainWrapper}>
@@ -10,7 +10,7 @@ const MainHeader = ({ user }) => {
         <img src='/logo.png' className={styles.img} />
       </div>
       <h1>ALL-LIBRARY</h1>
-      <div className={styles.right} onClick={() => handleLogout()}>
+      <div className={styles.right} onClick={router.push('/account/profile')}>
         <p>Hello, {user?.firstName || 'Guest'}!</p>
         <img src='/user.svg' className={styles.user} />
       </div>

@@ -1,7 +1,5 @@
 import styles from './styles.module.scss';
-import Input from '../common/Input';
-import Button from '../common/Button';
-import { Spinner } from '../common/Spinner';
+import { Spinner, Button, Input } from '/src/components';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
@@ -45,7 +43,7 @@ const Register = () => {
       .then((res) => {
         if (res.status === 201) {
           router.push('/');
-        } else if (res.status === 201) {
+        } else if (res.status !== 201) {
           alert('failed to register');
         }
         setR(true);

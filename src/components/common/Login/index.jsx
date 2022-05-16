@@ -1,10 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import styles from './styles.module.scss';
-import Input from '../../common/Input';
-import Button from '../Button';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { Spinner } from '../Spinner';
+import { Spinner, Button, Input } from '/src/components';
 import { useLocalStorage } from '../../../../hooks/useLocalStorage';
 
 import Link from 'next/link';

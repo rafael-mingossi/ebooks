@@ -9,6 +9,7 @@ import { CatCard, SearchBar, MarqueeWrapper } from '/src/components';
 
 export default function Home({ data, cloud }) {
   const [viewContext, setViewContext] = useContext(ViewContext);
+  //console.log('home ->>', viewContext);
 
   const news = [...data.books, ...cloud.books];
 

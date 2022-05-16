@@ -1,25 +1,42 @@
 import styles from './styles.module.scss';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { Input, Button, Spinner } from '/src/components';
 import prisma from '../../../lib/prisma';
+import { ViewContext } from '../../../pages/_app';
 
-const Profile = ({ user }) => {
+const Profile = () => {
+  const [viewContext, setViewContext] = useContext(ViewContext);
+  const [user, setUser] = useState();
+  const { setItem, getItem, handleLogout } = useLocalStorage({});
+  useEffect(() => {
+    const loggedInUser = getItem({ key: 'user' });
+    if (loggedInUser) {
+      setUser(loggedInUser);
+      setFirstName(loggedInUser?.firstName);
+      setPhoneNo(parseInt(loggedInUser?.phoneNo));
+      setUserId(loggedInUser?.userId);
+      setEmail(loggedInUser?.email);
+    }
+  }, []);
+
   console.log('us ->>', user);
-  const [firstName, setFirstName] = useState(user?.firstName);
-  const [lastName, setLastName] = useState(user?.lastName);
-  const [phoneNo, setPhoneNo] = useState(user?.phoneNo);
-  const [email, setEmail] = useState(user?.email);
-  const [password, setPassword] = useState(user?.password);
+  const [userId, setUserId] = useState();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [phoneNo, setPhoneNo] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   const [r, setR] = useState(false);
   const { register, handleSubmit, formState } = useForm();
 
   const submitData = () => {
     setR(true);
     const bodyData = {
+      userId,
       firstName,
       lastName,
       email,
@@ -36,7 +53,7 @@ const Profile = ({ user }) => {
       .then((res) => {
         if (res.status === 201) {
           console.log('worked');
-        } else if (res.status === 201) {
+        } else if (res.status !== 201) {
           alert('failed to update');
         }
         setR(false);
@@ -73,7 +90,7 @@ const Profile = ({ user }) => {
               ref={register}
               required
               name='lastName'
-              value={lastName}
+              value={user?.lastName}
             />
           </div>
           <div className={styles.form}>
@@ -108,10 +125,11 @@ const Profile = ({ user }) => {
               ref={register}
               required
               name='password'
-              value={password}
+              //value={password}
             />
           </div>
           {!r ? <Button label={'Update'} disabled={r} /> : <Spinner />}
+          <Button label='Log Out' onClick={() => handleLogout()} />
         </form>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import styles from './styles.module.scss';
 
-export const Spinner = () => {
+const Spinner = () => {
   return (
     <div className={styles.ldsSpinner}>
       <div></div>
@@ -18,3 +18,5 @@ export const Spinner = () => {
     </div>
   );
 };
+
+export default Spinner;
