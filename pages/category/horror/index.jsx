@@ -12,29 +12,19 @@ const Horror = ({ horror }) => {
 export default Horror;
 
 export async function getServerSideProps() {
-  const env = process.env.NODE_ENV;
-  let url = '';
+  const sus = await prisma.book.findMany();
 
-  if (env === 'development') {
-    url = process.env.DEV;
-  } else if (env === 'production') {
-    url = process.env.PROD;
-  }
-  const hor = await fetch(url);
-  const horr = await hor.json();
-
-  const horror = horr?.books
-    ?.map((book) => ({
-      bookId: book?.bookId,
-      cover: book?.cover,
-      title: book?.title,
-      category: book?.category,
-      description: book?.description,
-      totalPages: book?.totalPages,
-      year: book?.year,
+  const horror = sus
+    ?.map((sus) => ({
+      bookId: sus?.bookId,
+      cover: sus?.cover,
+      title: sus?.title,
+      category: sus?.category,
+      description: sus?.description,
+      totalPages: sus?.totalPages,
+      year: sus?.year,
     }))
     .filter(({ category }) => category === 'horror');
-  //console.log(suspense);
 
   // Pass data to the page via props
   return { props: { horror } };

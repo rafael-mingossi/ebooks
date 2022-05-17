@@ -13,21 +13,19 @@ const Suspense = ({ suspense }) => {
 export default Suspense;
 
 export async function getServerSideProps() {
-  const sus = await prisma.book.findUnique({
-    where: {
-      bookId: params.suspense,
-    },
-  });
+  const sus = await prisma.book.findMany();
 
-  const suspense = {
-    bookId: sus?.bookId,
-    cover: sus?.cover,
-    title: sus?.title,
-    category: sus?.category,
-    description: sus?.description,
-    totalPages: sus?.totalPages,
-    year: sus?.year,
-  };
+  const suspense = sus
+    ?.map((sus) => ({
+      bookId: sus?.bookId,
+      cover: sus?.cover,
+      title: sus?.title,
+      category: sus?.category,
+      description: sus?.description,
+      totalPages: sus?.totalPages,
+      year: sus?.year,
+    }))
+    .filter(({ category }) => category === 'suspense');
 
   // Pass data to the page via props
   return { props: { suspense } };

@@ -10,28 +10,33 @@ import { ViewContext } from '../../../pages/_app';
 
 const Profile = () => {
   const [viewContext, setViewContext] = useContext(ViewContext);
-  const [user, setUser] = useState();
   const { setItem, getItem, handleLogout } = useLocalStorage({});
-  useEffect(() => {
-    const loggedInUser = getItem({ key: 'user' });
-    if (loggedInUser) {
-      setUser(loggedInUser);
-      setFirstName(loggedInUser?.firstName);
-      setPhoneNo(parseInt(loggedInUser?.phoneNo));
-      setUserId(loggedInUser?.userId);
-      setEmail(loggedInUser?.email);
-    }
-  }, []);
 
-  console.log('us ->>', user);
+  const [user, setUser] = useState();
   const [userId, setUserId] = useState();
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [phoneNo, setPhoneNo] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [file, setFile] = useState();
   const [r, setR] = useState(false);
   const { register, handleSubmit, formState } = useForm();
+
+  useEffect(() => {
+    //const loggedInUser = getItem({ key: 'user' });
+    const loggedInUser = viewContext?.user;
+    if (loggedInUser) {
+      setUser(loggedInUser);
+      setFirstName(loggedInUser?.firstName);
+      setLastName(loggedInUser?.lastName);
+      setPhoneNo(parseInt(loggedInUser?.phoneNo));
+      setUserId(loggedInUser?.userId);
+      setEmail(loggedInUser?.email);
+    }
+  }, []);
+
+  let favs = getItem({ key: user?.userId });
 
   const submitData = () => {
     setR(true);
@@ -50,87 +55,124 @@ const Profile = () => {
       method: 'PUT',
       body: data,
     })
-      .then((res) => {
-        if (res.status === 201) {
-          console.log('worked');
-        } else if (res.status !== 201) {
-          alert('failed to update');
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          setViewContext({
+            ...viewContext,
+            user: data.newUsers,
+          });
+          setItem({ key: 'user', value: data?.newUsers });
         }
         setR(false);
       })
       .catch((error) => console.error(error));
   };
 
+  //   console.log('file ->>', file);
   return (
     <div className={styles.profileWrapper}>
-      <h1>Profile</h1>
-      <div className={styles.contentWrapper}>
-        <form
-          onSubmit={handleSubmit(submitData)}
-          style={{ display: 'flex', flexDirection: 'column' }}
-        >
-          <div className={styles.form}>
-            <Input
-              placeholder=' '
-              type='text'
-              label={'First Name'}
-              onChange={(e) => setFirstName(e.target.value)}
-              ref={register}
-              required
-              name='firstName'
-              value={firstName}
-            />
+      <div className={styles.top}>
+        <div className={styles.left}>
+          <img src='/user.svg' className={styles.profileImg} />
+          <div className={styles.btnLeft}>
+            <div className={styles.textbox}>
+              <label className={styles.btnWhite}>
+                Select Image
+                <input
+                  type='file'
+                  onChange={(e) => setFile(e.target.files[0])}
+                />
+              </label>
+            </div>
+
+            <Button label='Upload' onClick={() => handleLogout()} />
           </div>
-          <div className={styles.form}>
-            <Input
-              placeholder=' '
-              type='text'
-              label={'Last Name'}
-              onChange={(e) => setLastName(e.target.value)}
-              ref={register}
-              required
-              name='lastName'
-              value={user?.lastName}
-            />
-          </div>
-          <div className={styles.form}>
-            <Input
-              placeholder=' '
-              type='number'
-              label={'Phone No.'}
-              onChange={(e) => setPhoneNo(e.target.value)}
-              ref={register}
-              name='phoneNo'
-              value={phoneNo}
-            />
-          </div>
-          <div className={styles.form}>
-            <Input
-              placeholder=' '
-              type='email'
-              label={'E-mail'}
-              onChange={(e) => setEmail(e.target.value)}
-              ref={register}
-              required
-              name='email'
-              value={email}
-            />
-          </div>
-          <div className={styles.form}>
-            <Input
-              placeholder=' '
-              type='password'
-              label={'Password'}
-              onChange={(e) => setPassword(e.target.value)}
-              ref={register}
-              required
-              name='password'
-              //value={password}
-            />
-          </div>
-          {!r ? <Button label={'Update'} disabled={r} /> : <Spinner />}
+
+          <strong>
+            <u>
+              <p>{file?.name ? file?.name : 'No Image Selected!'}</p>
+            </u>
+          </strong>
+
           <Button label='Log Out' onClick={() => handleLogout()} />
-        </form>
+        </div>
+        <div className={styles.contentWrapper}>
+          <form onSubmit={handleSubmit(submitData)}>
+            <div className={styles.form}>
+              <Input
+                placeholder=' '
+                type='text'
+                label={'First Name'}
+                onChange={(e) => setFirstName(e.target.value)}
+                ref={register}
+                required
+                name='firstName'
+                value={firstName}
+              />
+            </div>
+            <div className={styles.form}>
+              <Input
+                placeholder=' '
+                type='text'
+                label={'Last Name'}
+                onChange={(e) => setLastName(e.target.value)}
+                ref={register}
+                required
+                name='lastName'
+                value={lastName}
+              />
+            </div>
+            <div className={styles.form}>
+              <Input
+                placeholder=' '
+                type='number'
+                label={'Phone No.'}
+                onChange={(e) => setPhoneNo(e.target.value)}
+                ref={register}
+                name='phoneNo'
+                value={phoneNo}
+              />
+            </div>
+            <div className={styles.form}>
+              <Input
+                placeholder=' '
+                type='email'
+                label={'E-mail'}
+                onChange={(e) => setEmail(e.target.value)}
+                ref={register}
+                required
+                name='email'
+                value={email}
+              />
+            </div>
+            <div className={styles.form}>
+              <Input
+                placeholder=' '
+                type='password'
+                label={'Password'}
+                onChange={(e) => setPassword(e.target.value)}
+                ref={register}
+                required
+                name='password'
+                //value={password}
+              />
+            </div>
+            {!r ? <Button label={'Update'} disabled={r} /> : <Spinner />}
+          </form>
+        </div>
+      </div>
+      <div className={styles.bottom}>
+        <div className={styles.favList}>
+          <div className={styles.header}>
+            <h1>Favourite Books</h1>
+            {favs?.map((fav) => (
+              <p key={fav} className={styles.list}>
+                {fav}
+              </p>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,19 +1,22 @@
 import styles from './styles.module.scss';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Header, MainHeader, Footer } from '/src/components';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useLocalStorage } from '../../../../hooks/useLocalStorage';
+import { ViewContext } from '../../../../pages/_app';
 
 const Layout = ({ children }) => {
   const { setItem, getItem } = useLocalStorage({});
+  const [viewContext, setViewContext] = useContext(ViewContext);
   const router = useRouter();
 
   const [token, setToken] = useState(getItem({ key: 'token' }));
-  const [user, setUser] = useState(getItem({ key: 'user' }));
+  const [user, setUser] = useState();
   useEffect(() => {
-    setUser(getItem({ key: 'user' }));
-  }, [router.pathname]);
+    setUser(viewContext?.user);
+    // setUser(getItem({ key: 'user' }));
+  }, [router.pathname, children]);
 
   return (
     <div className={styles.container}>
