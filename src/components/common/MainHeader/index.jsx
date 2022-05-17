@@ -1,5 +1,6 @@
 import styles from './styles.module.scss';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const MainHeader = ({ user }) => {
   const router = useRouter();
@@ -10,8 +11,10 @@ const MainHeader = ({ user }) => {
         <img src='/logo.png' className={styles.img} />
       </div>
       <h1>ALL-LIBRARY</h1>
-      <div className={styles.right} onClick={router.push('/account/profile')}>
-        <p>Hello, {user?.firstName || 'Guest'}!</p>
+      <div className={styles.right}>
+        <Link href={'/account/profile'}>
+          <p>Hello, {user?.firstName || 'Guest'}!</p>
+        </Link>
         <img src='/user.svg' className={styles.user} />
       </div>
     </div>
