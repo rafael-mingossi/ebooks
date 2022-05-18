@@ -158,7 +158,9 @@ const Profile = () => {
                 //value={password}
               />
             </div>
-            {!r ? <Button label={'Update'} disabled={r} /> : <Spinner />}
+            <div className={styles.btn}>
+              {!r ? <Button label={'Update'} disabled={r} /> : <Spinner />}
+            </div>
           </form>
         </div>
       </div>

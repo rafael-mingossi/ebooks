@@ -123,6 +123,12 @@
       form {
         @include flex-x-y-d(center, center, column);
         height: 97%;
+        width: 100%;
+
+        .btn {
+          @include flex-x-y-d(none, none, column);
+          width: 50%;
+        }
 
         .form {
           position: relative;
