@@ -19,8 +19,9 @@ const Profile = () => {
   const [phoneNo, setPhoneNo] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [file, setFile] = useState();
   const [r, setR] = useState(false);
+  const [imageSrc, setImageSrc] = useState();
+  const [uploadData, setUploadData] = useState();
   const { register, handleSubmit, formState } = useForm();
 
   useEffect(() => {
@@ -36,7 +37,59 @@ const Profile = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const userImage = getItem({ key: 'userImg' });
+    if (userImage) {
+      setImageSrc(userImage);
+    }
+  }, [setUploadData]);
+
   let favs = getItem({ key: user?.userId });
+
+  //handle img upload and img change
+  function handleOnChange(changeEvent) {
+    const reader = new FileReader();
+
+    reader.onload = function (onLoadEvent) {
+      setImageSrc(onLoadEvent.target.result);
+      setUploadData(undefined);
+    };
+
+    reader.readAsDataURL(changeEvent.target.files[0]);
+  }
+
+  async function handleOnSubmit(event) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const fileInput = Array.from(form.elements).find(
+      ({ name }) => name === 'file'
+    );
+
+    const formData = new FormData();
+
+    for (const file of fileInput.files) {
+      formData.append('file', file);
+    }
+
+    formData.append('upload_preset', 'my-uploads');
+
+    const imgUrl = process.env.CLOUDINARY;
+    console.log(imgUrl);
+
+    const data = await fetch(
+      'https://api.cloudinary.com/v1_1/rafaelmingossi/image/upload',
+      {
+        method: 'POST',
+        body: formData,
+      }
+    ).then((res) => res.json());
+
+    setImageSrc(data.secure_url);
+    setUploadData(data);
+    setItem({ key: 'userImg', value: data?.secure_url });
+    console.log('worked');
+  }
 
   const submitData = () => {
     setR(true);
@@ -74,28 +127,34 @@ const Profile = () => {
     <div className={styles.profileWrapper}>
       <div className={styles.top}>
         <div className={styles.left}>
-          <img src='/user.svg' className={styles.profileImg} />
-          <div className={styles.btnLeft}>
-            <div className={styles.textbox}>
-              <label className={styles.btnWhite}>
-                Select Image
-                <input
-                  type='file'
-                  onChange={(e) => setFile(e.target.files[0])}
-                />
-              </label>
+          <form
+            className={styles.formWrapper}
+            method='post'
+            onChange={handleOnChange}
+            onSubmit={handleOnSubmit}
+          >
+            <div className={styles.imgWrapper}>
+              <img
+                src={imageSrc ? imageSrc : '/user.svg'}
+                className={styles.profileImg}
+              />
+            </div>
+            <div className={styles.btnLeft}>
+              <div className={styles.textbox}>
+                <label className={styles.btnWhite}>
+                  Select Image
+                  <input type='file' name='file' />
+                </label>
+              </div>
+
+              <Button
+                disabled={!imageSrc && !uploadData ? true : false}
+                label='Upload'
+              />
             </div>
 
-            <Button label='Upload' onClick={() => handleLogout()} />
-          </div>
-
-          <strong>
-            <u>
-              <p>{file?.name ? file?.name : 'No Image Selected!'}</p>
-            </u>
-          </strong>
-
-          <Button label='Log Out' onClick={() => handleLogout()} />
+            <Button label='Log Out' onClick={() => handleLogout()} />
+          </form>
         </div>
         <div className={styles.contentWrapper}>
           <form onSubmit={handleSubmit(submitData)}>
@@ -165,16 +224,25 @@ const Profile = () => {
         </div>
       </div>
       <div className={styles.bottom}>
-        <div className={styles.favList}>
-          <div className={styles.header}>
-            <h1>Favourite Books</h1>
-            {favs?.map((fav) => (
-              <p key={fav} className={styles.list}>
-                {fav}
-              </p>
-            ))}
+        {user?.role === 'USER' ? (
+          <div className={styles.favList}>
+            <div className={styles.header}>
+              <h1>Favourite Books</h1>
+              {favs?.map((fav) => (
+                <p key={fav} className={styles.list}>
+                  {fav}
+                </p>
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          ''
+        )}
+        {user?.role === 'ADMIN' ? (
+          <div className={styles.adminWrapper}>NOW IS ADMIN</div>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );

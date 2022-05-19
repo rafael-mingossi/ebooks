@@ -20,94 +20,104 @@
       height: 100%;
       border-radius: 2rem;
 
-      .profileImg {
-        width: 20rem;
-        height: auto;
-        margin: 2rem 0;
-      }
-
-      .btnLeft {
-        @include flex-x-y-d(space-around, center, row);
+      .formWrapper {
+        @include flex-x-y-d(space-around, center, column);
         width: 100%;
-        margin: 2rem 0;
 
-        .textbox {
-          margin-bottom: 1rem;
-          position: relative;
-          width: fit-content;
-          place-self: center;
+        .imgWrapper {
+          border-radius: 100rem;
+          z-index: 10;
+          width: 26rem;
+          height: 26rem;
+          background-color: white;
+          @include flex-x-y-d(center, center, column);
+          overflow: hidden;
+          margin: 1rem 0;
 
-          label {
-            text-transform: uppercase;
-            text-decoration: none;
-            padding: 1rem 4rem;
-            display: inline-block;
-            border-radius: 10rem;
-            transition: all 0.2s;
-            font-size: 2rem;
-            cursor: pointer;
-            font-weight: bold;
-            border: 0;
+          .profileImg {
+            width: 19rem;
+            height: auto;
+          }
+        }
 
-            &:hover {
-              transform: translateY(-0.3rem);
-              box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+        .btnLeft {
+          @include flex-x-y-d(space-around, center, row);
+          width: 100%;
+          margin: 3rem 0;
+
+          .textbox {
+            margin-bottom: 1rem;
+            position: relative;
+            width: fit-content;
+            place-self: center;
+
+            label {
+              text-transform: uppercase;
+              text-decoration: none;
+              padding: 1rem 4rem;
+              display: inline-block;
+              border-radius: 10rem;
+              transition: all 0.2s;
+              font-size: 2rem;
+              cursor: pointer;
+              font-weight: bold;
+              border: 0;
+
+              &:hover {
+                transform: translateY(-0.3rem);
+                box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+              }
+
+              &:active {
+                transform: translateY(-0.1rem);
+                box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+              }
+
+              &::after {
+                content: '';
+                display: inline-block;
+                height: 100%;
+                width: 100%;
+                border-radius: 10rem;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -10;
+                transition: all 0.4s;
+              }
+
+              &:hover::after {
+                transform: scaleX(1.4) scaleY(1.6);
+                opacity: 0;
+              }
             }
+          }
 
-            &:active {
-              transform: translateY(-0.1rem);
-              box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+          .btnWhite {
+            background-color: white;
+            color: #777;
+
+            input {
+              display: none;
             }
 
             &::after {
-              content: '';
-              display: inline-block;
-              height: 100%;
-              width: 100%;
-              border-radius: 10rem;
-              position: absolute;
-              top: 0;
-              left: 0;
-              z-index: -10;
-              transition: all 0.4s;
+              background-color: white;
             }
+          }
 
-            &:hover::after {
-              transform: scaleX(1.4) scaleY(1.6);
+          @keyframes moveInBottom {
+            0% {
               opacity: 0;
+              transform: translateY(3rem);
+            }
+
+            100% {
+              opacity: 1;
+              transform: translateY(0px);
             }
           }
         }
-
-        .btnWhite {
-          background-color: white;
-          color: #777;
-
-          input {
-            display: none;
-          }
-
-          &::after {
-            background-color: white;
-          }
-        }
-
-        @keyframes moveInBottom {
-          0% {
-            opacity: 0;
-            transform: translateY(3rem);
-          }
-
-          100% {
-            opacity: 1;
-            transform: translateY(0px);
-          }
-        }
-      }
-      p {
-        color: white;
-        font-size: 2rem;
-        margin: 1rem 0 3rem 0;
       }
     }
 
@@ -180,6 +190,10 @@
           margin: 1.5rem;
         }
       }
+    }
+
+    .adminWrapper {
+      font-size: 4rem;
     }
   }
 }
