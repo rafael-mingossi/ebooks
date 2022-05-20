@@ -14,7 +14,7 @@ export default Horror;
 export async function getServerSideProps() {
   const sus = await prisma.book.findMany();
 
-  const horror = sus
+  const horror = await sus
     ?.map((sus) => ({
       bookId: sus?.bookId,
       cover: sus?.cover,

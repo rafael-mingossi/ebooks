@@ -155,21 +155,18 @@
     margin-top: 5rem;
 
     .favList {
-      @include flex-x-y-d(space-evenly, center, column);
+      //@include flex-x-y-d(space-evenly, center, column);
       width: 45%;
       background-color: $middleGreen;
       box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.616);
-      padding: 2rem;
-      min-height: fit-content;
+      padding: 2rem 1rem;
       max-height: 60vh;
       border-radius: 2rem;
       overflow-y: auto;
 
       .header {
         width: 100%;
-        margin: auto;
         @include flex-x-y-d(space-evenly, center, column);
-        margin: 1.5rem 0;
 
         h1 {
           font-size: 2.8rem;
@@ -189,11 +186,56 @@
           text-align: center;
           margin: 1.5rem;
         }
-      }
-    }
 
-    .adminWrapper {
-      font-size: 4rem;
+        .listWrapper {
+          border: 1px solid white;
+          border-radius: 2rem;
+          width: 90%;
+          @include flex-x-y-d(center, center, row);
+          height: 14vh;
+          font-size: 2rem;
+          color: white;
+          margin: 1rem;
+
+          .left {
+            //@include flex-x-y-d(center, center, column);
+            width: 90%;
+            height: 100%;
+
+            p {
+              margin: 0;
+              padding: 0;
+            }
+
+            .top {
+              border-bottom: 1px solid white;
+              width: 100%;
+              height: 50%;
+              @include flex-x-y-d(space-evenly, center, row);
+            }
+
+            .bottom {
+              @include flex-x-y-d(space-evenly, center, row);
+              height: 50%;
+              width: 100%;
+              margin: 0;
+            }
+          }
+
+          .right {
+            @include flex-x-y-d(center, center, column);
+            width: 10%;
+            border-left: 1px solid white;
+            height: 100%;
+
+            .icon {
+              width: 2rem;
+              height: auto;
+              cursor: pointer;
+            }
+          }
+        }
+      }
     }
   }
 }

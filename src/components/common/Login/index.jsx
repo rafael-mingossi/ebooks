@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { ViewContext } from '../../../../pages/_app';
 
 const Login = () => {
-  const { setItem, getItem } = useLocalStorage();
+  const { setItem, setUserItem, getItem } = useLocalStorage();
   const router = useRouter();
   const [viewContext, setViewContext] = useContext(ViewContext);
   const [email, setEmail] = useState();
@@ -42,8 +42,8 @@ const Login = () => {
             isLogged: true,
             user: data.userLogin,
           });
-          setItem({ key: 'token', value: data?.token });
-          setItem({ key: 'user', value: data?.userLogin });
+          setUserItem({ key: 'token', value: data?.token });
+          setUserItem({ key: 'user', value: data?.userLogin });
           router.push('/Home');
         }
         setR(false);

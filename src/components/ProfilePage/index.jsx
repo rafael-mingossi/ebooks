@@ -10,9 +10,10 @@ import { ViewContext } from '../../../pages/_app';
 
 const Profile = () => {
   const [viewContext, setViewContext] = useContext(ViewContext);
-  const { setItem, getItem, handleLogout } = useLocalStorage({});
+  const { setItem, getItem, handleLogout, getUserItem } = useLocalStorage({});
 
   const [user, setUser] = useState();
+  const [usersList, setUsersList] = useState();
   const [userId, setUserId] = useState();
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
@@ -25,8 +26,16 @@ const Profile = () => {
   const { register, handleSubmit, formState } = useForm();
 
   useEffect(() => {
-    //const loggedInUser = getItem({ key: 'user' });
-    const loggedInUser = viewContext?.user;
+    fetch('/api/users', {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((data) => setUsersList(data?.users));
+  }, [usersList, setUsersList]);
+
+  useEffect(() => {
+    const loggedInUser = getUserItem({ key: 'user' });
+    //const loggedInUser = viewContext?.user;
     if (loggedInUser) {
       setUser(loggedInUser);
       setFirstName(loggedInUser?.firstName);
@@ -44,7 +53,7 @@ const Profile = () => {
     }
   }, [setUploadData]);
 
-  let favs = getItem({ key: user?.userId });
+  let favs = getUserItem({ key: user?.userId });
 
   //handle img upload and img change
   function handleOnChange(changeEvent) {
@@ -58,6 +67,7 @@ const Profile = () => {
     reader.readAsDataURL(changeEvent.target.files[0]);
   }
 
+  //handle submit img to Cloudinary
   async function handleOnSubmit(event) {
     event.preventDefault();
 
@@ -90,6 +100,25 @@ const Profile = () => {
     setItem({ key: 'userImg', value: data?.secure_url });
     console.log('worked');
   }
+
+  const deleteUser = (userId) => {
+    const bodyData = {
+      userId,
+    };
+    const data = JSON.stringify(bodyData);
+
+    fetch(`/api/users/delete`, {
+      method: 'DELETE',
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          alert(`User ${data?.delUsers?.firstName} deleted!`);
+        }
+      })
+      .catch((error) => console.error(error));
+  };
 
   const submitData = () => {
     setR(true);
@@ -153,7 +182,7 @@ const Profile = () => {
               />
             </div>
 
-            <Button label='Log Out' onClick={() => handleLogout()} />
+            <Button label='Log Out' onClick={() => handleLogout('user')} />
           </form>
         </div>
         <div className={styles.contentWrapper}>
@@ -239,7 +268,34 @@ const Profile = () => {
           ''
         )}
         {user?.role === 'ADMIN' ? (
-          <div className={styles.adminWrapper}>NOW IS ADMIN</div>
+          <div className={styles.favList}>
+            <div className={styles.header}>
+              <h1>List of Users</h1>
+              {usersList
+                ?.filter(({ role }) => role?.includes('USER'))
+                .map((filt) => (
+                  <div key={filt?.userId} className={styles.listWrapper}>
+                    <div className={styles.left}>
+                      <div className={styles.top}>
+                        <p>First Name: {filt?.firstName}</p>
+                        <p>Last Name: {filt?.lastName}</p>
+                      </div>
+                      <div className={styles.bottom}>
+                        <p>Email: {filt?.email}</p>
+                        <p>Phone: {filt?.phoneNo}</p>
+                      </div>
+                    </div>
+                    <div className={styles.right}>
+                      <img
+                        src='/bin.svg'
+                        className={styles.icon}
+                        onClick={() => deleteUser(filt?.userId)}
+                      />
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
         ) : (
           ''
         )}

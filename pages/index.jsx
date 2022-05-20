@@ -6,12 +6,11 @@ import { ViewContext } from '../pages/_app';
 
 export default function Home() {
   const [viewContext, setViewContext] = useContext(ViewContext);
-  const { setItem, getItem } = useLocalStorage({});
+  const { getUserItem, getItem } = useLocalStorage({});
   const router = useRouter();
 
   useEffect(() => {
-    const loggedInUser = getItem({ key: 'user' });
-    const userToken = getItem({ key: 'token' });
+    const loggedInUser = getUserItem({ key: 'user' });
     if (loggedInUser) {
       router.push('/Home');
     } else {
