@@ -17,7 +17,6 @@ const MainHeader = ({ user }) => {
         <Link href={'/account/profile'}>
           <p>Hello, {user?.firstName || 'Guest'}!</p>
         </Link>
-        {/* <img src='/user.svg' className={styles.user} /> */}
       </div>
     </div>
   );

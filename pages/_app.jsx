@@ -9,12 +9,12 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 export const ViewContext = createContext();
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
-  const { setItem, getItem } = useLocalStorage({});
+  const { setUserItem, getUserItem } = useLocalStorage({});
   const router = useRouter();
 
   useEffect(() => {
-    const loggedInUser = getItem({ key: 'user' });
-    const userToken = getItem({ key: 'token' });
+    const loggedInUser = getUserItem({ key: 'user' });
+    const userToken = getUserItem({ key: 'token' });
     if (loggedInUser && userToken) {
       setViewContext({
         ...viewContext,

@@ -10,7 +10,9 @@ import { ViewContext } from '../../../pages/_app';
 
 const Profile = () => {
   const [viewContext, setViewContext] = useContext(ViewContext);
-  const { setItem, getItem, handleLogout, getUserItem } = useLocalStorage({});
+  const { setUserItem, handleLogout, getUserItem, getItem } = useLocalStorage(
+    {}
+  );
 
   const [user, setUser] = useState();
   const [usersList, setUsersList] = useState();
@@ -43,17 +45,11 @@ const Profile = () => {
       setPhoneNo(parseInt(loggedInUser?.phoneNo));
       setUserId(loggedInUser?.userId);
       setEmail(loggedInUser?.email);
+      setImageSrc(loggedInUser?.image);
     }
   }, []);
 
-  useEffect(() => {
-    const userImage = getItem({ key: 'userImg' });
-    if (userImage) {
-      setImageSrc(userImage);
-    }
-  }, [setUploadData]);
-
-  let favs = getUserItem({ key: user?.userId });
+  let favs = getItem({ key: user?.userId });
 
   //handle img upload and img change
   function handleOnChange(changeEvent) {
@@ -97,8 +93,6 @@ const Profile = () => {
 
     setImageSrc(data.secure_url);
     setUploadData(data);
-    setItem({ key: 'userImg', value: data?.secure_url });
-    console.log('worked');
   }
 
   const deleteUser = (userId) => {
@@ -126,6 +120,7 @@ const Profile = () => {
       userId,
       firstName,
       lastName,
+      image: imageSrc,
       email,
       password,
       phoneNo,
@@ -144,7 +139,7 @@ const Profile = () => {
             ...viewContext,
             user: data.newUsers,
           });
-          setItem({ key: 'user', value: data?.newUsers });
+          setUserItem({ key: 'user', value: data?.newUsers });
         }
         setR(false);
       })
@@ -196,7 +191,7 @@ const Profile = () => {
                 ref={register}
                 required
                 name='firstName'
-                value={firstName}
+                value={firstName || ''}
               />
             </div>
             <div className={styles.form}>
@@ -208,7 +203,7 @@ const Profile = () => {
                 ref={register}
                 required
                 name='lastName'
-                value={lastName}
+                value={lastName || ''}
               />
             </div>
             <div className={styles.form}>
@@ -219,7 +214,7 @@ const Profile = () => {
                 onChange={(e) => setPhoneNo(e.target.value)}
                 ref={register}
                 name='phoneNo'
-                value={phoneNo}
+                value={phoneNo || ''}
               />
             </div>
             <div className={styles.form}>
@@ -231,7 +226,7 @@ const Profile = () => {
                 ref={register}
                 required
                 name='email'
-                value={email}
+                value={email || ''}
               />
             </div>
             <div className={styles.form}>

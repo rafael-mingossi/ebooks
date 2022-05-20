@@ -7,15 +7,14 @@ import { useLocalStorage } from '../../../../hooks/useLocalStorage';
 import { ViewContext } from '../../../../pages/_app';
 
 const Layout = ({ children }) => {
-  const { setItem, getItem } = useLocalStorage({});
+  const { getUserItem } = useLocalStorage({});
   const [viewContext, setViewContext] = useContext(ViewContext);
   const router = useRouter();
 
-  const [token, setToken] = useState(getItem({ key: 'token' }));
   const [user, setUser] = useState();
   useEffect(() => {
-    setUser(viewContext?.user);
-    // setUser(getItem({ key: 'user' }));
+    //setUser(viewContext?.user);
+    setUser(getUserItem({ key: 'user' }));
   }, [router.pathname, children]);
 
   return (

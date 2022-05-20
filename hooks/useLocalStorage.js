@@ -17,17 +17,10 @@ export function useLocalStorage() {
   };
 
   const setUserItem = ({ key, value }) => {
-    const state = localStorage?.getItem('state');
+    const state = localStorage?.getItem('user');
     const parsedState = JSON.parse(state ?? '{}');
     const newState = { ...parsedState, [`${key}`]: value };
     localStorage?.setItem('user', JSON.stringify(newState));
-  };
-
-  const setImgItem = ({ key, value }) => {
-    const state = localStorage?.getItem('state');
-    const parsedState = JSON.parse(state ?? '{}');
-    const newState = { ...parsedState, [`${key}`]: value };
-    localStorage?.setItem('useImg', JSON.stringify(newState));
   };
 
   const getItem = ({ key }) => {
@@ -60,7 +53,6 @@ export function useLocalStorage() {
     getItem,
     handleLogout,
     setUserItem,
-    setImgItem,
     getUserItem,
   };
 }

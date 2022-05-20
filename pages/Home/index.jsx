@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import Link from 'next/link';
 import styles from './styles.module.scss';
 import prisma from '../../lib/prisma';

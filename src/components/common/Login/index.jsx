@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { ViewContext } from '../../../../pages/_app';
 
 const Login = () => {
-  const { setItem, setUserItem, getItem } = useLocalStorage();
+  const { setUserItem } = useLocalStorage();
   const router = useRouter();
   const [viewContext, setViewContext] = useContext(ViewContext);
   const [email, setEmail] = useState();
