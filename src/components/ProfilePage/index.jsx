@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { Input, Button, Spinner } from '/src/components';
-import prisma from '../../../lib/prisma';
 import { ViewContext } from '../../../pages/_app';
 
 const Profile = () => {
@@ -94,25 +93,6 @@ const Profile = () => {
     setImageSrc(data.secure_url);
     setUploadData(data);
   }
-
-  const deleteUser = (userId) => {
-    const bodyData = {
-      userId,
-    };
-    const data = JSON.stringify(bodyData);
-
-    fetch(`/api/users/delete`, {
-      method: 'DELETE',
-      body: data,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) {
-          alert(`User ${data?.delUsers?.firstName} deleted!`);
-        }
-      })
-      .catch((error) => console.error(error));
-  };
 
   const submitData = () => {
     setR(true);
@@ -263,33 +243,22 @@ const Profile = () => {
           ''
         )}
         {user?.role === 'ADMIN' ? (
-          <div className={styles.favList}>
-            <div className={styles.header}>
-              <h1>List of Users</h1>
-              {usersList
-                ?.filter(({ role }) => role?.includes('USER'))
-                .map((filt) => (
-                  <div key={filt?.userId} className={styles.listWrapper}>
-                    <div className={styles.left}>
-                      <div className={styles.top}>
-                        <p>First Name: {filt?.firstName}</p>
-                        <p>Last Name: {filt?.lastName}</p>
-                      </div>
-                      <div className={styles.bottom}>
-                        <p>Email: {filt?.email}</p>
-                        <p>Phone: {filt?.phoneNo}</p>
-                      </div>
-                    </div>
-                    <div className={styles.right}>
-                      <img
-                        src='/bin.svg'
-                        className={styles.icon}
-                        onClick={() => deleteUser(filt?.userId)}
-                      />
-                    </div>
-                  </div>
-                ))}
-            </div>
+          <div className={styles.btnDiv}>
+            <Link href='/admin/users'>
+              <div className={styles.btnWrapper}>
+                <a className={styles.learnMoreBtn}>Manage Users</a>
+              </div>
+            </Link>
+            <Link href='/admin/books'>
+              <div className={styles.btnWrapper}>
+                <a className={styles.learnMoreBtn}>Manage Books</a>
+              </div>
+            </Link>
+            <Link href='/Home'>
+              <div className={styles.btnWrapper}>
+                <a className={styles.learnMoreBtn}>Return</a>
+              </div>
+            </Link>
           </div>
         ) : (
           ''
