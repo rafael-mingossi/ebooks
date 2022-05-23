@@ -14,6 +14,7 @@ const Books = () => {
   const [year, setYear] = useState();
   const [content, setContent] = useState();
   const [r, setR] = useState(false);
+  const [rImg, setRImg] = useState(false);
   const [imageSrc, setImageSrc] = useState();
   const [uploadData, setUploadData] = useState();
   const { register, handleSubmit, formState } = useForm();
@@ -64,6 +65,7 @@ const Books = () => {
   async function handleOnSubmit(event) {
     event.preventDefault();
 
+    setRImg(true);
     const form = event.currentTarget;
     const fileInput = Array.from(form.elements).find(
       ({ name }) => name === 'file'
@@ -90,6 +92,7 @@ const Books = () => {
 
     setImageSrc(data?.secure_url);
     setUploadData(data);
+    setRImg(false);
   }
 
   return (
@@ -117,10 +120,13 @@ const Books = () => {
                 </label>
               </div>
 
-              <Button
-                disabled={!imageSrc && !uploadData ? true : false}
-                label='Upload'
-              />
+              {!rImg ? (
+                <Button disabled={rImg} label='Upload' />
+              ) : (
+                <div className={styles.spin}>
+                  <Spinner />
+                </div>
+              )}
             </div>
           </form>
           <form

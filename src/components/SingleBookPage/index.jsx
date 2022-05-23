@@ -1,9 +1,16 @@
 import styles from './styles.module.scss';
-import { useRouter } from 'next/router';
+import { useRouter, useState } from 'next/router';
 import Link from 'next/link';
+import { Rating } from 'react-simple-star-rating';
 
 const SingleBookPage = ({ book }) => {
   const router = useRouter();
+  //const [rating, setRating] = useState('');
+
+  const handleRating = (rate) => {
+    //setRating(rate);
+    // Some logic
+  };
 
   return (
     <div className={styles.bookContainer}>
@@ -35,9 +42,24 @@ const SingleBookPage = ({ book }) => {
               <p>
                 <strong>Authors:</strong> {book?.authors || ''}
               </p>
-              <p>
-                <strong>Rating:</strong> {book?.rating || ''}
-              </p>
+              <div className={styles.rating}>
+                <p>
+                  <strong>Rating:</strong>
+                </p>
+                <div className={styles.rate}>
+                  <Rating
+                    onClick={() => handleRating}
+                    ratingValue={0}
+                    size={20}
+                    label
+                    transition
+                    fillColor='orange'
+                    emptyColor='gray'
+                    className='foo' // Will remove the inline style if applied
+                  />
+                </div>
+              </div>
+
               <p>
                 <strong>Year:</strong> {book?.year || ''}
               </p>

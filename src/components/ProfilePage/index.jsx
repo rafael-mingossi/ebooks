@@ -22,6 +22,7 @@ const Profile = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [r, setR] = useState(false);
+  const [rImg, setRImg] = useState(false);
   const [imageSrc, setImageSrc] = useState();
   const [uploadData, setUploadData] = useState();
   const { register, handleSubmit, formState } = useForm();
@@ -66,6 +67,7 @@ const Profile = () => {
   async function handleOnSubmit(event) {
     event.preventDefault();
 
+    setRImg(true);
     const form = event.currentTarget;
     const fileInput = Array.from(form.elements).find(
       ({ name }) => name === 'file'
@@ -92,6 +94,7 @@ const Profile = () => {
 
     setImageSrc(data.secure_url);
     setUploadData(data);
+    setRImg(false);
   }
 
   const submitData = () => {
@@ -151,10 +154,13 @@ const Profile = () => {
                 </label>
               </div>
 
-              <Button
-                disabled={!imageSrc && !uploadData ? true : false}
-                label='Upload'
-              />
+              {!rImg ? (
+                <Button disabled={rImg} label='Upload' />
+              ) : (
+                <div className={styles.spin}>
+                  <Spinner />
+                </div>
+              )}
             </div>
 
             <Button label='Log Out' onClick={() => handleLogout('user')} />

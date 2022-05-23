@@ -121,6 +121,12 @@
         width: 100%;
         margin: 3rem 0;
 
+        .spin {
+          // @include flex-x-y-d(flex-start, center, row);
+          margin-right: 9rem;
+          margin-left: -9rem;
+        }
+
         .textbox {
           margin-bottom: 1rem;
           position: relative;

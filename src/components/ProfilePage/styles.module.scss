@@ -41,9 +41,15 @@
         }
 
         .btnLeft {
-          @include flex-x-y-d(space-around, center, row);
+          @include flex-x-y-d(space-evenly, center, row);
           width: 100%;
           margin: 3rem 0;
+
+          .spin {
+            // @include flex-x-y-d(flex-start, center, row);
+            margin-right: 8rem;
+            margin-left: -8rem;
+          }
 
           .textbox {
             margin-bottom: 1rem;

@@ -36,8 +36,21 @@
       .sections {
         @include flex-x-y-d(flex-start, center, row);
 
+        .divLeft {
+          @include flex-x-y-d(space-around, flex-start, column);
+        }
+
         .divRight {
-          margin-left: 10rem;
+          margin-left: 15rem;
+
+          .rating {
+            @include flex-x-y-d(flex-start, center, row);
+
+            .rate {
+              margin-top: 0.5rem;
+              margin-left: 1rem;
+            }
+          }
         }
       }
 
