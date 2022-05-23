@@ -1,6 +1,7 @@
 import Category from '../../../src/components/CategoryPage';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import prisma from '../../../lib/prisma';
 
 const Horror = ({ horror }) => {
   const router = useRouter();
@@ -11,7 +12,7 @@ const Horror = ({ horror }) => {
 
 export default Horror;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const sus = await prisma.book.findMany();
 
   const horror = await sus
