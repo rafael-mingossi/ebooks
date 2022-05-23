@@ -3,20 +3,34 @@ import { Button, Input, TextArea } from '/src/components';
 import { useState } from 'react';
 
 const Help = () => {
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [email, setEmail] = useState();
-  const [phoneNo, setPhoneNo] = useState();
-  const [message, setMessage] = useState();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNo, setPhoneNo] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = () => {
+    if (firstName !== '' && lastName !== '' && email !== '' && message !== '') {
+      alert('Message sent! Thank you!');
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setPhoneNo('');
+      setMessage('');
+    } else {
+      alert('Fields cannot be empty!');
+    }
+  };
 
   return (
     <div className={styles.container}>
       <h1>Help</h1>
-      <p>
-        If you have any question you can check the FAQ or you can send us an
-        email helpall.library@gmail.com
-      </p>
+
       <div className={styles.formContainer}>
+        <p>
+          If you have any question you can check the FAQ or you can send us an
+          email helpall.library@gmail.com
+        </p>
         <div className={styles.top}>
           <div className={styles.left}>
             <div className={styles.form}>
@@ -28,6 +42,7 @@ const Help = () => {
                 //ref={register}
                 required
                 name='firstName'
+                value={firstName}
               />
             </div>
             <div className={styles.form}>
@@ -39,6 +54,7 @@ const Help = () => {
                 //ref={register}
                 required
                 name='email'
+                value={email}
               />
             </div>
           </div>
@@ -52,6 +68,7 @@ const Help = () => {
                 //ref={register}
                 required
                 name='lastName'
+                value={lastName}
               />
             </div>
             <div className={styles.form}>
@@ -63,6 +80,7 @@ const Help = () => {
                 //ref={register}
                 required
                 name='phoneNo'
+                value={phoneNo}
               />
             </div>
           </div>
@@ -77,13 +95,14 @@ const Help = () => {
               //ref={register}
               required
               name='message'
-              rows='5'
+              rows='3'
               cols='50'
+              value={message}
             />
           </div>
         </div>
         <div className={styles.bottom}>
-          <Button label={'Send'} />
+          <Button label={'Send'} onClick={() => handleSubmit()} />
         </div>
       </div>
     </div>

@@ -15,10 +15,14 @@
     box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.616);
     border-radius: 5rem;
 
+    p {
+      color: white;
+      margin: 5rem 0;
+    }
+
     .top {
       @include flex-x-y-d(space-around, center, row);
       width: 100%;
-      margin-top: 5rem;
 
       .left {
         width: 50%;

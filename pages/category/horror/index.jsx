@@ -11,7 +11,7 @@ const Horror = ({ horror }) => {
 
 export default Horror;
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const sus = await prisma.book.findMany();
 
   const horror = await sus
