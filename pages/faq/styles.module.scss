@@ -1,0 +1,59 @@
+@import 'utils/variables';
+
+.container {
+  min-height: 65vh;
+  font-size: 2rem;
+  text-align: center;
+  padding: 1.5rem;
+  @include flex-x-y-d(flex-start, center, column);
+
+  .wrapper {
+    width: 55vw;
+    @include flex-x-y-d(center, center, column);
+
+    .top {
+      background-color: lightgray;
+      width: 100%;
+      height: 10rem;
+      padding: 1rem;
+      border-bottom: 1px solid black;
+      @include flex-x-y-d(center, center, row);
+      z-index: 10;
+
+      .title {
+        width: 92%;
+      }
+
+      .icon {
+        width: 8%;
+        transition: transform 1.3s ease-in-out;
+
+        .img {
+          width: 2.5rem;
+          height: auto;
+          cursor: pointer;
+        }
+
+        .imgs {
+          transform: rotate(-180deg);
+        }
+      }
+    }
+
+    .bottom {
+      background-color: lightgray;
+      width: 100%;
+      height: 10rem;
+      padding: 1rem;
+      @include flex-x-y-d(center, center, column);
+      transform: translateY(-100%);
+      transition: transform 0.3s ease-in-out;
+      margin-bottom: 2rem;
+    }
+
+    .openDrawer {
+      transform: translateY(0%);
+      -webkit-transform: translateY(0%);
+    }
+  }
+}

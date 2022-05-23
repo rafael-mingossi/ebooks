@@ -12,7 +12,7 @@ const Drama = ({ drama }) => {
 
 export default Drama;
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const sus = await prisma.book.findMany();
 
   const drama = await sus
@@ -28,5 +28,5 @@ export async function getServerSideProps() {
     .filter(({ category }) => category === 'drama');
 
   // Pass data to the page via props
-  return { props: { drama } };
+  return { props: { drama }, revalidate: 10 };
 }

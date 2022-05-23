@@ -11,3 +11,4 @@ export { default as Layout } from './common/Layout';
 export { default as CatCard } from './common/CatCard';
 export { default as Input } from './common/Input';
 export { default as Spinner } from './common/Spinner';
+export { default as TextArea } from './common/TextArea';

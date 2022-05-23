@@ -1,0 +1,67 @@
+@import 'utils/variables';
+
+.container {
+  min-height: 65vh;
+  font-size: 2rem;
+  text-align: center;
+  padding: 1.5rem;
+  width: 100%;
+  @include flex-x-y-d(flex-start, center, column);
+
+  .formContainer {
+    @include flex-x-y-d(center, center, column);
+    width: 80%;
+    background-color: $middleGreen;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.616);
+    border-radius: 5rem;
+
+    .top {
+      @include flex-x-y-d(space-around, center, row);
+      width: 100%;
+      margin-top: 5rem;
+
+      .left {
+        width: 50%;
+        @include flex-x-y-d(space-around, center, column);
+
+        .form {
+          position: relative;
+          width: 30rem;
+          height: 8rem;
+        }
+      }
+
+      .right {
+        width: 50%;
+        @include flex-x-y-d(space-around, center, column);
+
+        .form {
+          position: relative;
+          width: 30rem;
+          height: 8rem;
+        }
+      }
+    }
+
+    .middle {
+      width: 50%;
+      margin-top: 5rem;
+
+      .form {
+        position: relative;
+        width: 50%;
+        height: 8rem;
+
+        .inputs {
+          height: 10vh;
+        }
+      }
+    }
+
+    .bottom {
+      @include flex-x-y-d(flex-end, center, row);
+      margin: 5rem 0;
+      width: 80%;
+    }
+  }
+}
