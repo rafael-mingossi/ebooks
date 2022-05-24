@@ -68,7 +68,7 @@ const Profile = () => {
   const logOutHandler = () => {
     handleUserLogOut();
     handleLogout('user');
-    setTimeout(forceReload, 1500);
+    setTimeout(forceReload, 1000);
   };
 
   let favs = getItem({ key: user?.userId });

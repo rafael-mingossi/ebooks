@@ -9,13 +9,13 @@ const LoginPage = () => {
   const { setItem, getItem } = useLocalStorage({});
   const router = useRouter();
 
-  useEffect(() => {
-    const loggedInUser = getItem({ key: 'user' });
-    // const userToken = getItem({ key: 'token' });
-    if (loggedInUser) {
-      router.push('/Home');
-    }
-  }, []);
+  // useEffect(() => {
+  //   const loggedInUser = getItem({ key: 'user' });
+  //   // const userToken = getItem({ key: 'token' });
+  //   if (loggedInUser) {
+  //     router.push('/Home');
+  //   }
+  // }, []);
 
   return (
     <div>
