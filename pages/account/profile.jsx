@@ -1,4 +1,5 @@
 import Profile from '../../src/components/ProfilePage';
+import { requireAuthentication } from '../../utils/requireAuthentication';
 
 const ProfilePage = () => {
   return (
@@ -9,3 +10,7 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
+
+export const getServerSideProps = requireAuthentication(async (context) => {
+  return { props: {} };
+});

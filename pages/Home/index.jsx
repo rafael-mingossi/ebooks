@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 import prisma from '../../lib/prisma';
 import { ViewContext } from '../_app';
 import { category, others } from '../../utils/category';
+import { requireAuthentication } from '../../utils/requireAuthentication';
 
 import { CatCard, SearchBar, MarqueeWrapper } from '/src/components';
 
@@ -73,7 +74,7 @@ export default function Home({ data, cloud }) {
   );
 }
 
-export async function getServerSideProps() {
+export const getServerSideProps = requireAuthentication(async (context) => {
   // Fetch data from external API
   //const res = await fetch(`https://api.itbook.store/1.0/search/de/1`);
   const res = await fetch(`https://api.itbook.store/1.0/new`);
@@ -83,4 +84,4 @@ export async function getServerSideProps() {
 
   // Pass data to the page via props
   return { props: { data, cloud } };
-}
+});

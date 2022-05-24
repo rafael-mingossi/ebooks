@@ -2,6 +2,7 @@ import styles from './styles.module.scss';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { requireAuthentication } from '../../utils/requireAuthentication';
 
 const Users = () => {
   const { setUserItem, getUserItem } = useLocalStorage({});
@@ -80,3 +81,7 @@ const Users = () => {
 };
 
 export default Users;
+
+export const getServerSideProps = requireAuthentication(async (context) => {
+  return { props: {} };
+});

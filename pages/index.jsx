@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { ViewContext } from '../pages/_app';
 import { About, Login } from '/src/components';
+import { authUser } from '../utils/authUser';
 
 export default function Home() {
   const [viewContext, setViewContext] = useContext(ViewContext);
@@ -40,3 +41,7 @@ export default function Home() {
     </div>
   );
 }
+
+export const getServerSideProps = authUser(async (context) => {
+  return { props: {} };
+});

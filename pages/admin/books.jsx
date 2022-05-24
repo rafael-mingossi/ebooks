@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useForm } from 'react-hook-form';
 import { Input, Button, Spinner } from '/src/components';
+import { requireAuthentication } from '../../utils/requireAuthentication';
 
 const Books = () => {
   const [bookId, setBookId] = useState();
@@ -214,3 +215,7 @@ const Books = () => {
 };
 
 export default Books;
+
+export const getServerSideProps = requireAuthentication(async (context) => {
+  return { props: {} };
+});
