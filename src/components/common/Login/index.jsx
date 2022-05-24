@@ -42,6 +42,7 @@ const Login = () => {
             isLogged: true,
             user: data.userLogin,
           });
+          console.log('full --> ', data);
           setUserItem({ key: 'token', value: data?.token });
           setUserItem({ key: 'user', value: data?.userLogin });
           router.push('/Home');

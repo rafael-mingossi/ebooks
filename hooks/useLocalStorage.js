@@ -35,11 +35,10 @@ export function useLocalStorage() {
     return parsedState?.[key];
   };
 
-  const handleLogout = ({ key }) => {
+  const handleLogout = async ({ key }) => {
     const state = localStorage?.getItem('user');
-    const parsedState = JSON.parse(state ?? '{}');
+    const parsedState = await JSON.parse(state ?? '{}');
     localStorage?.removeItem('user', key);
-    router.push('/');
   };
 
   const clearLocalStorage = () => {

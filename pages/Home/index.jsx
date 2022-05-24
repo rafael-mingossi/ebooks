@@ -7,6 +7,17 @@ import { category, others } from '../../utils/category';
 
 import { CatCard, SearchBar, MarqueeWrapper } from '/src/components';
 
+// const handleUser = () => {
+//   fetch('/api/user', {
+//     method: 'GET',
+//   })
+//     .then((res) => res.json())
+//     .then((r) => console.log('user -->', r))
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
+
 export default function Home({ data, cloud }) {
   const [viewContext, setViewContext] = useContext(ViewContext);
   //console.log('home ->>', viewContext);

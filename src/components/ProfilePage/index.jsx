@@ -12,6 +12,7 @@ const Profile = () => {
   const { setUserItem, handleLogout, getUserItem, getItem } = useLocalStorage(
     {}
   );
+  const router = useRouter();
 
   const [user, setUser] = useState();
   const [usersList, setUsersList] = useState();
@@ -48,6 +49,27 @@ const Profile = () => {
       setImageSrc(loggedInUser?.image);
     }
   }, []);
+
+  const forceReload = () => {
+    router.reload();
+  };
+
+  const handleUserLogOut = () => {
+    fetch('/api/users/logout', {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((r) => console.log('userOUT -->', r))
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const logOutHandler = () => {
+    handleUserLogOut();
+    handleLogout('user');
+    setTimeout(forceReload, 1500);
+  };
 
   let favs = getItem({ key: user?.userId });
 
@@ -163,7 +185,7 @@ const Profile = () => {
               )}
             </div>
 
-            <Button label='Log Out' onClick={() => handleLogout('user')} />
+            <Button label='Log Out' onClick={() => logOutHandler()} />
           </form>
         </div>
         <div className={styles.contentWrapper}>
