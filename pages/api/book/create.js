@@ -7,8 +7,6 @@ export default async function register(req, res) {
   const { title, cover, description, category, totalPages, year, content } =
     body;
 
-  console.log('first body -->', body);
-
   try {
     const book = await prisma.book.create({
       data: {

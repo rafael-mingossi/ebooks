@@ -55,8 +55,11 @@ const Profile = () => {
   };
 
   const handleUserLogOut = () => {
+    let key = 'static_key';
+
     fetch('/api/users/logout', {
-      method: 'GET',
+      method: 'POST',
+      body: key,
     })
       .then((res) => res.json())
       .then((r) => console.log('userOUT -->', r))
@@ -72,6 +75,18 @@ const Profile = () => {
   };
 
   let favs = getItem({ key: user?.userId });
+
+  const showFavs = () => {
+    return favs?.map((fav) => (
+      <p key={fav} className={styles.list}>
+        {fav}
+      </p>
+    ));
+  };
+
+  const showNoFavs = () => {
+    return <p className={styles.noList}>You don't have any favourites!</p>;
+  };
 
   //handle img upload and img change
   function handleOnChange(changeEvent) {
@@ -261,11 +276,7 @@ const Profile = () => {
           <div className={styles.favList}>
             <div className={styles.header}>
               <h1>Favourite Books</h1>
-              {favs?.map((fav) => (
-                <p key={fav} className={styles.list}>
-                  {fav}
-                </p>
-              ))}
+              {favs.length !== 0 ? showFavs() : showNoFavs()}
             </div>
           </div>
         ) : (

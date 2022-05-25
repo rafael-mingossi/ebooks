@@ -2,19 +2,17 @@ import styles from './styles.module.scss';
 import { BookCard } from '/src/components';
 import { useState, useEffect, useContext } from 'react';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
+import { ViewContext } from '../../../pages/_app';
 
 const Category = ({ category, url }) => {
+  const [viewContext, setViewContext] = useContext(ViewContext);
   const [favourites, setFavourites] = useState([]);
-  const [user, setUser] = useState();
   const { getUserItem, getItem } = useLocalStorage({});
-
-  useEffect(() => {
-    const userId = getUserItem({ key: 'user' });
-    setUser(userId?.userId.toString());
-  }, []);
+  const user = viewContext?.user?.userId;
 
   useEffect(() => {
     const booksLocalStorage = getItem({ key: user });
+
     setFavourites(booksLocalStorage);
   }, []);
 

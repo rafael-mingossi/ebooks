@@ -1,7 +1,8 @@
 import styles from './styles.module.scss';
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { useLocalStorage } from '../../../../hooks/useLocalStorage';
 import Link from 'next/link';
+import { ViewContext } from '../../../../pages/_app';
 
 const icons = {
   norm: '/fav.svg',
@@ -19,12 +20,8 @@ const BookCard = ({
   url,
 }) => {
   const { setItem, getUserItem } = useLocalStorage({});
-  const [user, setUser] = useState();
-
-  useEffect(() => {
-    const userId = getUserItem({ key: 'user' });
-    setUser(userId?.userId.toString());
-  }, []);
+  const [viewContext, setViewContext] = useContext(ViewContext);
+  const user = viewContext?.user?.userId;
 
   const exists = (fav) => {
     return favourites?.includes(fav);
