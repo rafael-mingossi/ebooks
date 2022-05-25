@@ -111,6 +111,7 @@ const Books = () => {
               <img
                 src={imageSrc ? imageSrc : '/noPic.svg'}
                 className={styles.profileImg}
+                alt='book image'
               />
             </div>
             <div className={styles.btnLeft}>

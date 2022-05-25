@@ -81,10 +81,11 @@ function Search({ placeholder, data }) {
         />
         <div className={styles.searchIcon}>
           {enteredValue.length === 0 ? (
-            <img src='/search.svg' className={styles.icon} />
+            <img src='/search.svg' alt='search image' className={styles.icon} />
           ) : (
             <img
               src='/close2.svg'
+              alt='close image'
               className={styles.icon}
               onClick={clearInput}
             />
@@ -100,7 +101,7 @@ function Search({ placeholder, data }) {
                 <a
                   key={value.isbn13}
                   className={styles.dataItem}
-                  href={`book/${value.isbn13}`}
+                  href={`category/cloud/${value.isbn13}`}
                 >
                   <p>{value.title}</p>
                 </a>
@@ -116,7 +117,7 @@ function Search({ placeholder, data }) {
                 <a
                   key={value.isbn13}
                   className={styles.dataItem}
-                  href={`book/${value.isbn13}`}
+                  href={`category/cloud/${value.isbn13}`}
                 >
                   <p>
                     {value.isbn13} - {value.title}

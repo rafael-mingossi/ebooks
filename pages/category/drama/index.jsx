@@ -1,6 +1,6 @@
 import Category from '../../../src/components/CategoryPage';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { requireAuthentication } from '../../../utils/requireAuthentication';
 import prisma from '../../../lib/prisma';
 
 const Drama = ({ drama }) => {
@@ -12,7 +12,7 @@ const Drama = ({ drama }) => {
 
 export default Drama;
 
-export async function getStaticProps() {
+export const getServerSideProps = requireAuthentication(async (context) => {
   const sus = await prisma.book.findMany();
 
   const drama = await sus
@@ -29,4 +29,4 @@ export async function getStaticProps() {
 
   // Pass data to the page via props
   return { props: { drama }, revalidate: 10 };
-}
+});

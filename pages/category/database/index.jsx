@@ -1,6 +1,6 @@
 import Category from '../../../src/components/CategoryPage';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { requireAuthentication } from '../../../utils/requireAuthentication';
 
 const Database = ({ database }) => {
   const router = useRouter();
@@ -11,13 +11,11 @@ const Database = ({ database }) => {
 
 export default Database;
 
-export async function getServerSideProps() {
+export const getServerSideProps = requireAuthentication(async (context) => {
   // Fetch data from external API
   const res = await fetch(`https://api.itbook.store/1.0/search/database`);
   const database = await res.json();
 
-  //console.log('css -->', css);
-
   // Pass data to the page via props
   return { props: { database } };
-}
+});

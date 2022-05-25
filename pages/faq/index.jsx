@@ -27,6 +27,7 @@ const Faq = () => {
           <div className={styles.icon}>
             <img
               src='/up.svg'
+              alt='up image'
               className={`${styles.img}  ${open ? styles.imgs : ''}`}
               onClick={() => toggleOpen()}
             />
@@ -45,6 +46,7 @@ const Faq = () => {
           <div className={styles.icon}>
             <img
               src='/up.svg'
+              alt='up image'
               className={`${styles.img}  ${open1 ? styles.imgs : ''}`}
               onClick={() => toggleOpen1()}
             />
@@ -62,6 +64,7 @@ const Faq = () => {
           <div className={styles.icon}>
             <img
               src='/up.svg'
+              alt='up image'
               className={`${styles.img}  ${open2 ? styles.imgs : ''}`}
               onClick={() => toggleOpen2()}
             />

@@ -1,6 +1,6 @@
 import Category from '../../../src/components/CategoryPage';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { requireAuthentication } from '../../../utils/requireAuthentication';
 import prisma from '../../../lib/prisma';
 
 const Comedy = ({ comedy }) => {
@@ -12,7 +12,7 @@ const Comedy = ({ comedy }) => {
 
 export default Comedy;
 
-export async function getServerSideProps() {
+export const getServerSideProps = requireAuthentication(async (context) => {
   const sus = await prisma.book.findMany();
 
   const comedy = await sus
@@ -29,4 +29,4 @@ export async function getServerSideProps() {
 
   // Pass data to the page via props
   return { props: { comedy } };
-}
+});

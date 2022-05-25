@@ -48,19 +48,21 @@ const BookCard = ({
     <div className={styles.bookWrapper}>
       <div className={styles.cover} onClick={clicks}>
         <Link href={`/category/${url}/${isbn13}`}>
-          <img src={img} className={styles.img} />
+          <img src={img} alt='book image' className={styles.img} />
         </Link>
       </div>
 
       {!exists(title) ? (
         <img
           src={icons.norm}
+          alt='icon image'
           className={styles.icon}
           onClick={() => addFavourite(title)}
         />
       ) : (
         <img
           src={icons.filled}
+          alt='icon image'
           className={styles.icon}
           onClick={() => removeFavourite(title)}
         />

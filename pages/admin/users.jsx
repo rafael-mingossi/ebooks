@@ -69,6 +69,7 @@ const Users = () => {
                   <img
                     src='/bin.svg'
                     className={styles.icon}
+                    alt='bin image'
                     onClick={() => deleteUser(filt?.userId)}
                   />
                 </div>

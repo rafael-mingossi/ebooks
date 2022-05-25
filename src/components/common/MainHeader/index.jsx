@@ -8,7 +8,7 @@ const MainHeader = ({ user }) => {
   return (
     <div className={styles.mainWrapper}>
       <div className={styles.imgs}>
-        <img src='/logo.png' className={styles.img} />
+        <img src='/logo.png' alt='logo image' className={styles.img} />
       </div>
       <Link href={'/Home'}>
         <h1>ALL-LIBRARY</h1>

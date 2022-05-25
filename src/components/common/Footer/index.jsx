@@ -19,7 +19,7 @@ const Footer = () => {
         </Link>
       </div>
       <div className={styles.middle}>
-        <img src='/logo.png' className={styles.img} />
+        <img src='/logo.png' alt='logo image' className={styles.img} />
       </div>
       <div className={styles.right}>
         <p>

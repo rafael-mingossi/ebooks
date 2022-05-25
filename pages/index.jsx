@@ -1,34 +1,8 @@
 import Head from 'next/head';
-import { useState, useEffect, useContext } from 'react';
-import { useRouter } from 'next/router';
-import { useLocalStorage } from '../hooks/useLocalStorage';
-import { ViewContext } from '../pages/_app';
 import { About, Login } from '/src/components';
 import { authUser } from '../utils/authUser';
 
 export default function Home() {
-  const [viewContext, setViewContext] = useContext(ViewContext);
-  const { getUserItem, getItem } = useLocalStorage({});
-  const router = useRouter();
-
-  // useEffect(() => {
-  //   const loggedInUser = getUserItem({ key: 'user' });
-  //   if (loggedInUser) {
-  //     router.push('/Home');
-  //   } else {
-  //     router.push('/account/login');
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   const loggedInUser = getUserItem({ key: 'user' });
-  //   if (!loggedInUser) {
-  //     router.push('/account/login');
-  //   }
-  // }, []);
-
-  //console.log('st -->', token);
-
   return (
     <div>
       <Head>

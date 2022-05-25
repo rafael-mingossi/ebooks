@@ -16,7 +16,11 @@ const SingleBookPage = ({ book }) => {
     <div className={styles.bookContainer}>
       <div className={styles.bookWrapper}>
         <div className={styles.left}>
-          <img src={book?.image || book?.cover} className={styles.img} />
+          <img
+            src={book?.image || book?.cover}
+            alt='book image'
+            className={styles.img}
+          />
         </div>
         <div className={styles.right}>
           <h1>{book?.title || ''}</h1>

@@ -2,20 +2,20 @@ import Category from '../../../src/components/CategoryPage';
 import { useRouter } from 'next/router';
 import { requireAuthentication } from '../../../utils/requireAuthentication';
 
-const Python = ({ python }) => {
+const NewTitles = ({ newTitles }) => {
   const router = useRouter();
   const last_segment = router.pathname.split('/').pop();
 
-  return <Category category={python?.books} url={last_segment} />;
+  return <Category category={newTitles?.books} url={last_segment} />;
 };
 
-export default Python;
+export default NewTitles;
 
 export const getServerSideProps = requireAuthentication(async (context) => {
   // Fetch data from external API
-  const res = await fetch(`https://api.itbook.store/1.0/search/python`);
-  const python = await res.json();
+  const res = await fetch(`https://api.itbook.store/1.0/new`);
+  const newTitles = await res.json();
 
   // Pass data to the page via props
-  return { props: { python } };
+  return { props: { newTitles } };
 });

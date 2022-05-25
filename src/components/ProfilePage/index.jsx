@@ -165,6 +165,7 @@ const Profile = () => {
             <div className={styles.imgWrapper}>
               <img
                 src={imageSrc ? imageSrc : '/user.svg'}
+                alt='user image'
                 className={styles.profileImg}
               />
             </div>
