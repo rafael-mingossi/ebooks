@@ -28,5 +28,5 @@ export const getServerSideProps = requireAuthentication(async (context) => {
     .filter(({ category }) => category === 'drama');
 
   // Pass data to the page via props
-  return { props: { drama }, revalidate: 10 };
+  return { props: { drama } };
 });
