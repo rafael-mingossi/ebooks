@@ -5,7 +5,7 @@ export function authUser(gssp) {
 
     const { cookies } = req;
 
-    const jwt = cookies.OursiteJWT;
+    const jwt = cookies.EbooksJWT;
 
     if (jwt) {
       // Redirect to login page

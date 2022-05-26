@@ -1,44 +1,35 @@
 import cookie from 'cookie';
+//import { serialize } from 'cookie';
 
-export default async function (req, res) {
-  if (req.method !== 'POST')
-    return res
-      .status(405)
-      .json({ status: 'fail', message: 'Method not allowed here!' });
-
+export default function (req, res) {
   const { cookies } = req;
 
-  const jwt = cookies.OursiteJWT;
+  const jwt = cookies.EbooksJWT;
 
   if (!jwt) {
     return res.json({ message: 'you are already not logged in...' });
   } else {
-    if (req.body.key === 'static_key') {
-      res.setHeader('Set-Cookie', [
-        cookie.serialize('OursiteJWT', 'false', {
-          httpOnly: true,
-          secure: process.env.NODE_ENV !== 'development',
-          sameSite: true,
-          maxAge: -1,
-          path: '/',
-        }),
-      ]);
+    res.setHeader(
+      'Set-Cookie',
+      cookie.serialize('EbooksJWT', null, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV !== 'development',
+        sameSite: 'strict',
+        expires: new Date(0),
+        path: '/',
+      })
+    );
 
-      return res.status(200).json({ message: 'Successfuly logged out!' });
-    }
-
-    return res
-      .status(400)
-      .json({ status: 'fail', message: 'Bad request happened!' });
+    return res.status(200).json({ message: 'Successfuly logged out!' });
   }
 
   // if (!jwt) {
   //   return res.json({ message: 'you are already not logged in...' });
   // } else {
-  //   const serialised = serialize('OursiteJWT', null, {
+  //   const serialised = serialize('EbooksJWT', null, {
   //     httpOnly: true,
-  //     //secure: process.env.NODE_ENV !== 'development',
-  //     sameSite: 'strict',
+  //     secure: process.env.NODE_ENV !== 'development',
+  //     sameSite: true,
   //     maxAge: -1,
   //     path: '/',
   //   });

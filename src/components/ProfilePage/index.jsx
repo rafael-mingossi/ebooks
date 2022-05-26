@@ -55,11 +55,10 @@ const Profile = () => {
   };
 
   const handleUserLogOut = () => {
-    let key = 'static_key';
-
     fetch('/api/users/logout', {
       method: 'POST',
-      body: key,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({}),
     })
       .then((res) => res.json())
       .then((r) => console.log('userOUT -->', r))

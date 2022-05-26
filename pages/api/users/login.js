@@ -30,7 +30,7 @@ export default async function login(req, res) {
         expiresIn: '30d',
       });
 
-      const serialised = serialize('OursiteJWT', token, {
+      const serialised = serialize('EbooksJWT', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV !== 'development',
         sameSite: 'strict',
