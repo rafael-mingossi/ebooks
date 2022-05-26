@@ -3,7 +3,7 @@ import styles from './styles.module.scss';
 
 const MarqueeWrapper = ({ children }) => {
   return (
-    <Marquee gradient={false} className={styles.container} speed={30}>
+    <Marquee gradient={false} className={styles.container} speed={25}>
       {children}
     </Marquee>
   );

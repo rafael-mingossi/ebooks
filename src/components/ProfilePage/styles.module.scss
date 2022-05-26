@@ -10,9 +10,21 @@
     @include flex-x-y-d(space-around, space-around, column);
     width: 100%;
 
+    @include sm {
+      padding: 0;
+    }
+
+    @include xsm {
+      padding: 1.5rem;
+    }
+
     .top {
       @include flex-x-y-d(space-around, center, row);
       width: 100%;
+
+      @include xsm {
+        @include flex-x-y-d(space-around, center, column);
+      }
 
       .left {
         @include flex-x-y-d(space-around, center, column);
@@ -22,6 +34,11 @@
         padding: 2rem;
         height: 100%;
         border-radius: 2rem;
+
+        @include xsm {
+          width: 100%;
+          margin-bottom: 4rem;
+        }
 
         .formWrapper {
           @include flex-x-y-d(space-around, center, column);
@@ -37,9 +54,18 @@
             overflow: hidden;
             margin: 1rem 0;
 
+            @include sm {
+              width: 21.5rem;
+              height: 21.5rem;
+            }
+
             .profileImg {
               width: 35rem;
               height: auto;
+
+              @include sm {
+                width: 24rem;
+              }
             }
           }
 
@@ -47,6 +73,10 @@
             @include flex-x-y-d(space-evenly, center, row);
             width: 100%;
             margin: 3rem 0;
+
+            @include sm {
+              @include flex-x-y-d(space-evenly, center, column);
+            }
 
             .spin {
               // @include flex-x-y-d(flex-start, center, row);
@@ -139,14 +169,23 @@
         background-color: $middleGreen;
         box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.616);
 
+        @include xsm {
+          width: 100%;
+        }
+
         form {
           @include flex-x-y-d(center, center, column);
           height: 97%;
           width: 100%;
+          //position: relative;
 
           .btn {
             @include flex-x-y-d(none, none, column);
             width: 50%;
+
+            @include xsm {
+              //width: 100%;
+            }
           }
 
           .form {
@@ -173,6 +212,15 @@
         border-radius: 2rem;
         overflow-y: auto;
 
+        @include sm {
+          width: 80%;
+        }
+
+        @include xsm {
+          width: 100%;
+          padding: 2rem 0;
+        }
+
         .header {
           width: 100%;
           @include flex-x-y-d(space-evenly, center, column);
@@ -194,6 +242,10 @@
             padding: 1rem;
             text-align: center;
             margin: 1.5rem;
+
+            @include xsm {
+              width: 90%;
+            }
           }
 
           .noList {
@@ -203,59 +255,45 @@
         }
       }
 
-      .btnDiv {
-        @include flex-x-y-d(space-around, center, row);
+      .admin {
         width: 80%;
-        margin-top: 2rem;
+        @include flex-x-y-d(flex-start, center, column);
         background-color: $middleGreen;
-        height: 15vh;
         box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.616);
         border-radius: 2rem;
 
-        .btnWrapper {
-          display: inline-block;
-          cursor: pointer;
+        @include sm {
+          width: 95%;
+        }
 
-          .learnMoreBtn {
+        h1 {
+          font-size: 2.8rem;
+          color: white;
+          text-decoration: underline;
+          font-weight: bold;
+          margin-top: 3rem;
+        }
+
+        .btnDiv {
+          @include flex-x-y-d(space-around, center, row);
+          width: 80%;
+          height: 15vh;
+
+          @include sm {
+            width: 95%;
+          }
+
+          @include xsm {
+            @include flex-x-y-d(space-around, center, column);
+            height: 45vh;
+          }
+
+          .btnWrapper {
             display: inline-block;
-            padding: 0.75rem 1.25rem;
-            color: white;
-            text-transform: uppercase;
-            font-size: 1.6rem;
-            letter-spacing: 0.15rem;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
+            cursor: pointer;
 
-            &:after {
-              content: '';
-              position: absolute;
-              bottom: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              z-index: -2;
-              border-bottom: 1px solid white;
-            }
-
-            &:before {
-              content: '';
-              position: absolute;
-              bottom: 0;
-              left: 0;
-              width: 0%;
-              height: 100%;
-              background-color: white;
-              transition: all 0.3s;
-              z-index: -1;
-            }
-
-            &:hover {
-              color: $darkGreen;
-              &:before {
-                width: 100%;
-              }
+            .learnMoreBtn {
+              @include learnMoreBtn;
             }
           }
         }

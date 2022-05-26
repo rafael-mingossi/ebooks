@@ -12,6 +12,10 @@
     margin-top: 2rem;
     @include flex-x-y-d(center, center, column);
 
+    @include sm {
+      width: 90vw;
+    }
+
     .top {
       background-color: lightgray;
       width: 100%;

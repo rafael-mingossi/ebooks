@@ -24,7 +24,7 @@ const Help = () => {
 
   return (
     <div className={styles.container}>
-      <PageHeader title={'Help'} />
+      <PageHeader title={'Feedback'} />
 
       <div className={styles.formContainer}>
         <p>

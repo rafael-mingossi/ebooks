@@ -3,12 +3,25 @@
 .bookContainer {
   font-size: 1.7rem;
   min-height: 65vh;
+
+  @include sm {
+    margin-top: 5rem;
+  }
+
   .bookWrapper {
     @include flex-x-y-d(center, center, row);
+
+    @include sm {
+      @include flex-x-y-d(center, center, column);
+    }
 
     .left {
       width: 42vw;
       @include flex-x-y-d(center, center, row);
+
+      @include sm {
+        width: 90vw;
+      }
 
       .img {
         max-width: 33rem;
@@ -19,6 +32,10 @@
 
     .right {
       width: 45vw;
+
+      @include sm {
+        width: 90vw;
+      }
 
       strong {
         font-size: 1.9rem;
@@ -36,12 +53,20 @@
       .sections {
         @include flex-x-y-d(flex-start, center, row);
 
+        @include sm {
+          @include flex-x-y-d(space-evenly, center, row);
+        }
+
         .divLeft {
           @include flex-x-y-d(space-around, flex-start, column);
         }
 
         .divRight {
           margin-left: 15rem;
+
+          @include sm {
+            margin-left: 0;
+          }
 
           .rating {
             @include flex-x-y-d(flex-start, center, row);
@@ -58,6 +83,10 @@
         @include flex-x-y-d(space-around, center, row);
         width: 80%;
         margin-top: 2rem;
+
+        @include sm {
+          width: 100%;
+        }
 
         .btnWrapper {
           display: inline-block;

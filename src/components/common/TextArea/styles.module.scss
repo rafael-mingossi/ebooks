@@ -17,6 +17,10 @@
     top: 0;
     left: 0;
 
+    @include xsm {
+      width: 37rem;
+    }
+
     &:hover,
     &:focus {
       background-color: $lightGreen;

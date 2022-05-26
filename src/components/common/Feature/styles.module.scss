@@ -15,6 +15,14 @@
   clip-path: polygon(0 25%, 100% 0, 100% 100%, 0 100%);
   align-items: center;
 
+  @include sm {
+    display: none;
+  }
+
+  @include xsm {
+    display: none;
+  }
+
   .singleBoxWrapper {
     @include flex-x-y-d(center, center, column);
     background-color: $bgColorLading;
@@ -28,6 +36,10 @@
     position: relative;
     transform-style: preserve-3d;
 
+    @include sm {
+      display: none;
+    }
+
     &:hover {
       transform: rotateY(180deg);
     }
@@ -37,6 +49,10 @@
       position: absolute;
       backface-visibility: hidden;
       text-align: center;
+
+      @include sm {
+        display: none;
+      }
 
       .frontImgWrapper {
         width: fit-content;
@@ -49,6 +65,10 @@
         .frontImg {
           width: 11rem;
           height: auto;
+
+          @include sm {
+            width: 6rem;
+          }
         }
       }
     }
@@ -57,9 +77,12 @@
       transform: rotateY(180deg);
       backface-visibility: hidden;
       position: absolute;
-
       text-align: center;
       padding: 3rem;
+
+      @include sm {
+        display: none;
+      }
 
       .featImg {
         width: 6rem;

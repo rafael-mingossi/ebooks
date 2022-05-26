@@ -33,6 +33,49 @@ $bgColorLading: #f7f7f7;
   }
 }
 
+@mixin learnMoreBtn {
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+  color: white;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    border-bottom: 1px solid white;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: white;
+    transition: all 0.3s;
+    z-index: -1;
+  }
+
+  &:hover {
+    color: $darkGreen;
+    &:before {
+      width: 100%;
+    }
+  }
+}
+
 @mixin flex-x-y-d($vertical, $horizontal, $direction) {
   display: flex;
   flex-direction: $direction;
@@ -75,7 +118,7 @@ $bp-xl: 1400px;
 }
 
 @mixin sm {
-  @media (max-width: #{bp-sm}) {
+  @media (max-width: #{$bp-sm}) {
     @content;
   }
 }

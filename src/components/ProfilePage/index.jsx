@@ -284,22 +284,25 @@ const Profile = () => {
             ''
           )}
           {user?.role === 'ADMIN' ? (
-            <div className={styles.btnDiv}>
-              <Link href='/admin/users'>
-                <div className={styles.btnWrapper}>
-                  <a className={styles.learnMoreBtn}>Manage Users</a>
-                </div>
-              </Link>
-              <Link href='/admin/books'>
-                <div className={styles.btnWrapper}>
-                  <a className={styles.learnMoreBtn}>Manage Books</a>
-                </div>
-              </Link>
-              <Link href='/Home'>
-                <div className={styles.btnWrapper}>
-                  <a className={styles.learnMoreBtn}>Return</a>
-                </div>
-              </Link>
+            <div className={styles.admin}>
+              <h1>ADMIN Panel</h1>
+              <div className={styles.btnDiv}>
+                <Link href='/admin/users'>
+                  <div className={styles.btnWrapper}>
+                    <a className={styles.learnMoreBtn}>Manage Users</a>
+                  </div>
+                </Link>
+                <Link href='/admin/books'>
+                  <div className={styles.btnWrapper}>
+                    <a className={styles.learnMoreBtn}>Manage Books</a>
+                  </div>
+                </Link>
+                <Link href='/Home'>
+                  <div className={styles.btnWrapper}>
+                    <a className={styles.learnMoreBtn}>Return</a>
+                  </div>
+                </Link>
+              </div>
             </div>
           ) : (
             ''

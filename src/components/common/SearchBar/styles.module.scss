@@ -18,6 +18,10 @@
     border-left: 1px solid $darkGreen;
     border-top: 1px solid $darkGreen;
     border-bottom: 1px solid $darkGreen;
+
+    @include sm {
+      width: 75vw;
+    }
   }
 
   .searchInputs {
@@ -62,6 +66,17 @@
     overflow-y: auto;
     padding-left: 20px;
     border-radius: 7px;
+
+    @include sm {
+      width: 75vw;
+      max-width: calc(65vw + 50px);
+      min-width: calc(57.5rem + 50px);
+    }
+
+    @include xsm {
+      width: 86.5vw;
+      min-width: 86.5vw;
+    }
 
     .titles {
       font-size: 1.6rem;

@@ -15,6 +15,10 @@
     box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.616);
     border-radius: 5rem;
 
+    @include sm {
+      width: 100%;
+    }
+
     p {
       color: white;
       margin: 5rem 0;
@@ -23,6 +27,10 @@
     .top {
       @include flex-x-y-d(space-around, center, row);
       width: 100%;
+
+      @include xsm {
+        @include flex-x-y-d(space-around, center, column);
+      }
 
       .left {
         width: 50%;
@@ -51,10 +59,22 @@
       width: 50%;
       margin-top: 5rem;
 
+      @include sm {
+        width: 80%;
+      }
+
+      @include xsm {
+        width: 95%;
+      }
+
       .form {
         position: relative;
         width: 50%;
         height: 8rem;
+
+        @include xsm {
+          width: 15%;
+        }
 
         .inputs {
           height: 10vh;

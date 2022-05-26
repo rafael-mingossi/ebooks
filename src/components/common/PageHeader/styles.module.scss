@@ -10,4 +10,16 @@
   color: white;
   margin: 3rem;
   border: 3px dashed black;
+
+  @include sm {
+    width: 75vw;
+    font-size: 1.5rem;
+    height: 8vh;
+  }
+
+  @include sm {
+    width: 85vw;
+    font-size: 1.5rem;
+    height: 8vh;
+  }
 }

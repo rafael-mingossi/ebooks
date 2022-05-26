@@ -15,6 +15,14 @@
     border-radius: 2rem;
     overflow-y: auto;
 
+    @include sm {
+      width: 90%;
+    }
+
+    @include xsm {
+      width: 98%;
+    }
+
     .header {
       width: 100%;
       @include flex-x-y-d(space-evenly, center, column);
@@ -35,6 +43,11 @@
         font-size: 2rem;
         color: white;
         margin: 1rem;
+
+        @include xsm {
+          width: 98%;
+          font-size: 1.5rem;
+        }
 
         .left {
           //@include flex-x-y-d(center, center, column);
@@ -87,6 +100,14 @@
   background-color: $middleGreen;
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.616);
 
+  @include sm {
+    width: 98%;
+  }
+
+  @include xsm {
+    width: 90%;
+  }
+
   h1 {
     font-size: 2.8rem;
     color: white;
@@ -98,9 +119,17 @@
     @include flex-x-y-d(space-evenly, center, row);
     width: 100%;
 
+    @include xsm {
+      @include flex-x-y-d(space-evenly, center, column);
+    }
+
     .formWrapper {
       width: 50%;
       @include flex-x-y-d(space-evenly, center, column);
+
+      @include xsm {
+        width: 90%;
+      }
 
       .imgWrapper {
         z-index: 10;
@@ -120,6 +149,10 @@
         @include flex-x-y-d(space-around, center, row);
         width: 100%;
         margin: 3rem 0;
+
+        @include sm {
+          @include flex-x-y-d(space-around, center, column);
+        }
 
         .spin {
           // @include flex-x-y-d(flex-start, center, row);
@@ -207,9 +240,33 @@
       height: 97%;
       width: 50%;
 
+      @include xsm {
+        width: 80%;
+      }
+
       .btn {
         @include flex-x-y-d(none, none, column);
         width: 50%;
+
+        @include sm {
+          width: 100%;
+        }
+
+        @include xsm {
+          width: 100%;
+        }
+
+        .spin {
+          //margin-left: 9rem;
+
+          @include sm {
+            margin-left: 9rem;
+          }
+
+          @include xsm {
+            margin-left: 5rem;
+          }
+        }
       }
 
       .form {

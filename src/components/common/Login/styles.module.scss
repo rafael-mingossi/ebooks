@@ -2,7 +2,6 @@
 
 .loginWrapper {
   margin: 13rem 2rem 5rem 2rem;
-
   background-image: linear-gradient(
       105deg,
       rgba($middleGreen, 0.884) 0%,
@@ -17,14 +16,55 @@
   height: 50rem;
   box-shadow: 0 2.5rem 4rem rgba(0, 0, 0, 0.247);
 
+  @include xsm {
+    margin: 2rem 2rem 5rem 2rem;
+    height: 42rem;
+    background-image: linear-gradient(
+        105deg,
+        rgba($middleGreen, 0.884) 0%,
+        rgba($middleGreen, 0.884) 100%,
+        rgba(255, 255, 255, 0.788) 50%
+      ),
+      url('/loginbg.jpeg');
+  }
+
   .fieldsWrapper {
     text-align: center;
     width: 50%;
     height: 100%;
     color: $middleGreen;
-
     font-size: 2rem;
     @include flex-x-y-d(center, center, column);
+
+    @include xsm {
+      width: 100%;
+    }
+
+    .btn {
+      @include flex-x-y-d(none, none, column);
+      width: 100%;
+      height: 7.5rem;
+
+      @include sm {
+        width: 50%;
+        margin-left: 5.5rem;
+      }
+
+      .btnLogin {
+        margin-left: 8rem;
+
+        @include sm {
+          margin-left: 3rem;
+        }
+      }
+    }
+
+    .registerMsg {
+      @include xsm {
+        color: white;
+        margin-top: 2rem;
+      }
+    }
 
     .inputValidation {
       color: red;
@@ -39,6 +79,7 @@
       position: relative;
       width: 30rem;
       height: 7.5rem;
+      //@include flex-x-y-d(center, center, column);
     }
 
     p {

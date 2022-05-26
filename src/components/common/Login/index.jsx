@@ -91,17 +91,21 @@ const Login = () => {
               name='password'
             />
           </div>
-          {!r ? (
-            <Button
-              label={'Login'}
-              onClick={() => console.log('login')}
-              disabled={r}
-            />
-          ) : (
-            <Spinner />
-          )}
+          <div className={styles.btn}>
+            {!r ? (
+              <div className={styles.btnLogin}>
+                <Button
+                  label={'Login'}
+                  onClick={() => console.log('login')}
+                  disabled={r}
+                />
+              </div>
+            ) : (
+              <Spinner />
+            )}
+          </div>
         </form>
-        <p>
+        <p className={styles.registerMsg}>
           Don`t have an account?{' '}
           <div className={styles.linkRegister}>
             <Link href='/account/register'>Click here to register!</Link>

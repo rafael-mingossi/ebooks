@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import styles from './styles.module.scss';
-import { others } from '../../../../utils/category';
+import { useBreakpoint } from '../../../../hooks/useBreakPoint';
 
 function Search({ placeholder, data }) {
   const [filteredData, setFilteredData] = useState([]);
   const [filteredIsbn, setFilteredIsbn] = useState([]);
   const [filteredCategory, setFilteredCategory] = useState([]);
   const [enteredValue, setEnteredValue] = useState('');
+  const { xsm } = useBreakpoint();
 
   const res = data;
 
@@ -103,7 +104,13 @@ function Search({ placeholder, data }) {
                   className={styles.dataItem}
                   href={`category/cloud/${value.isbn13}`}
                 >
-                  <p>{value.title}</p>
+                  <p>
+                    {xsm
+                      ? value?.title.length > 46
+                        ? value?.title.substring(0, 45 - 3) + '...'
+                        : value?.title
+                      : value?.title}
+                  </p>
                 </a>
               );
             })}

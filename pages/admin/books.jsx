@@ -206,7 +206,13 @@ const Books = () => {
               />
             </div>
             <div className={styles.btn}>
-              {!r ? <Button label={'Add Book'} disabled={r} /> : <Spinner />}
+              {!r ? (
+                <Button label={'Add Book'} disabled={r} />
+              ) : (
+                <div className={styles.spin}>
+                  <Spinner />
+                </div>
+              )}
             </div>
           </form>
         </div>

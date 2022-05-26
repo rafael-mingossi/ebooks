@@ -17,6 +17,14 @@
     border-left: 1px solid black;
     border-right: 1px solid black;
     letter-spacing: 0.3ch;
+
+    @include sm {
+      font-size: 2rem;
+    }
+
+    @include xsm {
+      font-size: 1.8rem;
+    }
   }
 
   .line {
@@ -42,5 +50,10 @@
     flex-wrap: wrap;
     margin: 5rem 0;
     padding: 0 3rem;
+
+    @include sm {
+      width: 100%;
+      padding: 0 2rem;
+    }
   }
 }
