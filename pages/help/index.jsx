@@ -1,5 +1,5 @@
 import styles from './styles.module.scss';
-import { Button, Input, TextArea } from '/src/components';
+import { Button, Input, TextArea, PageHeader } from '/src/components';
 import { useState } from 'react';
 
 const Help = () => {
@@ -24,7 +24,7 @@ const Help = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Help</h1>
+      <PageHeader title={'Help'} />
 
       <div className={styles.formContainer}>
         <p>

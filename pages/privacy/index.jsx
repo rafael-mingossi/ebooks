@@ -1,9 +1,10 @@
 import styles from './styles.module.scss';
+import { PageHeader } from '/src/components';
 
 const Privacy = () => {
   return (
     <div className={styles.container}>
-      <h1>Privacy Policy</h1>
+      <PageHeader title={'Privacy Policy'} />
       <p>
         WHAT DO WE DO WITH YOUR INFORMATION? <br /> When you register in our
         website, as part of the register process, we collect the personal

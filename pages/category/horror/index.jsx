@@ -2,12 +2,20 @@ import Category from '../../../src/components/CategoryPage';
 import { useRouter } from 'next/router';
 import { requireAuthentication } from '../../../utils/requireAuthentication';
 import prisma from '../../../lib/prisma';
+import { PageHeader } from '/src/components';
 
 const Horror = ({ horror }) => {
   const router = useRouter();
   const last_segment = router.pathname.split('/').pop();
 
-  return <Category category={horror} url={last_segment} />;
+  return (
+    <div
+      style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}
+    >
+      <PageHeader title={'Horror'} />
+      <Category category={horror} url={last_segment} />
+    </div>
+  );
 };
 
 export default Horror;

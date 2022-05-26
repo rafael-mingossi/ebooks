@@ -1,257 +1,261 @@
 @import 'utils/variables';
 
-.profileWrapper {
-  height: fit-content;
-  margin-top: 3rem;
-  padding: 1rem;
-  @include flex-x-y-d(space-around, space-around, column);
-  width: 100%;
+.container {
+  @include flex-x-y-d(flex-start, center, column);
 
-  .top {
-    @include flex-x-y-d(space-around, center, row);
+  .profileWrapper {
+    height: fit-content;
+    margin-top: 1rem;
+    padding: 1rem;
+    @include flex-x-y-d(space-around, space-around, column);
     width: 100%;
 
-    .left {
-      @include flex-x-y-d(space-around, center, column);
-      width: 45%;
-      background-color: $middleGreen;
-      box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.616);
-      padding: 2rem;
-      height: 100%;
-      border-radius: 2rem;
+    .top {
+      @include flex-x-y-d(space-around, center, row);
+      width: 100%;
 
-      .formWrapper {
+      .left {
         @include flex-x-y-d(space-around, center, column);
-        width: 100%;
+        width: 45%;
+        background-color: $middleGreen;
+        box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.616);
+        padding: 2rem;
+        height: 100%;
+        border-radius: 2rem;
 
-        .imgWrapper {
-          border-radius: 100rem;
-          z-index: 10;
-          width: 26rem;
-          height: 26rem;
-          // background-color: white;
-          @include flex-x-y-d(center, center, column);
-          overflow: hidden;
-          margin: 1rem 0;
-
-          .profileImg {
-            width: 35rem;
-            height: auto;
-          }
-        }
-
-        .btnLeft {
-          @include flex-x-y-d(space-evenly, center, row);
+        .formWrapper {
+          @include flex-x-y-d(space-around, center, column);
           width: 100%;
-          margin: 3rem 0;
 
-          .spin {
-            // @include flex-x-y-d(flex-start, center, row);
-            margin-right: 8rem;
-            margin-left: -8rem;
+          .imgWrapper {
+            border-radius: 100rem;
+            z-index: 10;
+            width: 26rem;
+            height: 26rem;
+            // background-color: white;
+            @include flex-x-y-d(center, center, column);
+            overflow: hidden;
+            margin: 1rem 0;
+
+            .profileImg {
+              width: 35rem;
+              height: auto;
+            }
           }
 
-          .textbox {
-            margin-bottom: 1rem;
-            position: relative;
-            width: fit-content;
-            place-self: center;
+          .btnLeft {
+            @include flex-x-y-d(space-evenly, center, row);
+            width: 100%;
+            margin: 3rem 0;
 
-            label {
-              text-transform: uppercase;
-              text-decoration: none;
-              padding: 1rem 4rem;
-              display: inline-block;
-              border-radius: 10rem;
-              transition: all 0.2s;
-              font-size: 2rem;
-              cursor: pointer;
-              font-weight: bold;
-              border: 0;
+            .spin {
+              // @include flex-x-y-d(flex-start, center, row);
+              margin-right: 8rem;
+              margin-left: -8rem;
+            }
 
-              &:hover {
-                transform: translateY(-0.3rem);
-                box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+            .textbox {
+              margin-bottom: 1rem;
+              position: relative;
+              width: fit-content;
+              place-self: center;
+
+              label {
+                text-transform: uppercase;
+                text-decoration: none;
+                padding: 1rem 4rem;
+                display: inline-block;
+                border-radius: 10rem;
+                transition: all 0.2s;
+                font-size: 2rem;
+                cursor: pointer;
+                font-weight: bold;
+                border: 0;
+
+                &:hover {
+                  transform: translateY(-0.3rem);
+                  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+                }
+
+                &:active {
+                  transform: translateY(-0.1rem);
+                  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+                }
+
+                &::after {
+                  content: '';
+                  display: inline-block;
+                  height: 100%;
+                  width: 100%;
+                  border-radius: 10rem;
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  z-index: -10;
+                  transition: all 0.4s;
+                }
+
+                &:hover::after {
+                  transform: scaleX(1.4) scaleY(1.6);
+                  opacity: 0;
+                }
               }
+            }
 
-              &:active {
-                transform: translateY(-0.1rem);
-                box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+            .btnWhite {
+              background-color: white;
+              color: #777;
+
+              input {
+                display: none;
               }
 
               &::after {
-                content: '';
-                display: inline-block;
-                height: 100%;
-                width: 100%;
-                border-radius: 10rem;
-                position: absolute;
-                top: 0;
-                left: 0;
-                z-index: -10;
-                transition: all 0.4s;
+                background-color: white;
               }
+            }
 
-              &:hover::after {
-                transform: scaleX(1.4) scaleY(1.6);
+            @keyframes moveInBottom {
+              0% {
                 opacity: 0;
+                transform: translateY(3rem);
+              }
+
+              100% {
+                opacity: 1;
+                transform: translateY(0px);
               }
             }
           }
-
-          .btnWhite {
-            background-color: white;
-            color: #777;
-
-            input {
-              display: none;
-            }
-
-            &::after {
-              background-color: white;
-            }
-          }
-
-          @keyframes moveInBottom {
-            0% {
-              opacity: 0;
-              transform: translateY(3rem);
-            }
-
-            100% {
-              opacity: 1;
-              transform: translateY(0px);
-            }
-          }
         }
       }
-    }
 
-    .contentWrapper {
-      border-radius: 2rem;
-      height: 100%;
-      width: 45%;
-      @include flex-x-y-d(center, center, column);
-      padding: 2rem;
-      background-color: $middleGreen;
-      box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.616);
-
-      form {
+      .contentWrapper {
+        border-radius: 2rem;
+        height: 100%;
+        width: 45%;
         @include flex-x-y-d(center, center, column);
-        height: 97%;
-        width: 100%;
+        padding: 2rem;
+        background-color: $middleGreen;
+        box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.616);
 
-        .btn {
-          @include flex-x-y-d(none, none, column);
-          width: 50%;
-        }
+        form {
+          @include flex-x-y-d(center, center, column);
+          height: 97%;
+          width: 100%;
 
-        .form {
-          position: relative;
-          width: 30rem;
-          height: 8rem;
-        }
-      }
-    }
-  }
+          .btn {
+            @include flex-x-y-d(none, none, column);
+            width: 50%;
+          }
 
-  .bottom {
-    width: 100%;
-    @include flex-x-y-d(space-around, center, row);
-    margin-top: 5rem;
-
-    .favList {
-      //@include flex-x-y-d(space-evenly, center, column);
-      width: 45%;
-      background-color: $middleGreen;
-      box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.616);
-      padding: 2rem 1rem;
-      max-height: 60vh;
-      border-radius: 2rem;
-      overflow-y: auto;
-
-      .header {
-        width: 100%;
-        @include flex-x-y-d(space-evenly, center, column);
-
-        h1 {
-          font-size: 2.8rem;
-          color: white;
-          text-decoration: underline;
-          font-weight: bold;
-        }
-
-        .list {
-          width: 80%;
-          background-color: white;
-          border-radius: 50rem;
-          height: fit-content;
-          color: $darkGreen;
-          font-size: 2rem;
-          padding: 1rem;
-          text-align: center;
-          margin: 1.5rem;
-        }
-
-        .noList {
-          font-size: 2rem;
-          color: white;
+          .form {
+            position: relative;
+            width: 30rem;
+            height: 8rem;
+          }
         }
       }
     }
 
-    .btnDiv {
+    .bottom {
+      width: 100%;
       @include flex-x-y-d(space-around, center, row);
-      width: 80%;
-      margin-top: 2rem;
-      background-color: $middleGreen;
-      height: 15vh;
-      box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.616);
-      border-radius: 2rem;
+      margin-top: 5rem;
 
-      .btnWrapper {
-        display: inline-block;
-        cursor: pointer;
+      .favList {
+        //@include flex-x-y-d(space-evenly, center, column);
+        width: 45%;
+        background-color: $middleGreen;
+        box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.616);
+        padding: 2rem 1rem;
+        max-height: 60vh;
+        border-radius: 2rem;
+        overflow-y: auto;
 
-        .learnMoreBtn {
-          display: inline-block;
-          padding: 0.75rem 1.25rem;
-          color: white;
-          text-transform: uppercase;
-          font-size: 1.6rem;
-          letter-spacing: 0.15rem;
-          transition: all 0.3s;
-          position: relative;
-          overflow: hidden;
-          z-index: 1;
+        .header {
+          width: 100%;
+          @include flex-x-y-d(space-evenly, center, column);
 
-          &:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            border-bottom: 1px solid white;
+          h1 {
+            font-size: 2.8rem;
+            color: white;
+            text-decoration: underline;
+            font-weight: bold;
           }
 
-          &:before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
+          .list {
+            width: 80%;
             background-color: white;
-            transition: all 0.3s;
-            z-index: -1;
+            border-radius: 50rem;
+            height: fit-content;
+            color: $darkGreen;
+            font-size: 2rem;
+            padding: 1rem;
+            text-align: center;
+            margin: 1.5rem;
           }
 
-          &:hover {
-            color: $darkGreen;
-            &:before {
+          .noList {
+            font-size: 2rem;
+            color: white;
+          }
+        }
+      }
+
+      .btnDiv {
+        @include flex-x-y-d(space-around, center, row);
+        width: 80%;
+        margin-top: 2rem;
+        background-color: $middleGreen;
+        height: 15vh;
+        box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.616);
+        border-radius: 2rem;
+
+        .btnWrapper {
+          display: inline-block;
+          cursor: pointer;
+
+          .learnMoreBtn {
+            display: inline-block;
+            padding: 0.75rem 1.25rem;
+            color: white;
+            text-transform: uppercase;
+            font-size: 1.6rem;
+            letter-spacing: 0.15rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+
+            &:after {
+              content: '';
+              position: absolute;
+              bottom: 0;
+              left: 0;
               width: 100%;
+              height: 100%;
+              z-index: -2;
+              border-bottom: 1px solid white;
+            }
+
+            &:before {
+              content: '';
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 0%;
+              height: 100%;
+              background-color: white;
+              transition: all 0.3s;
+              z-index: -1;
+            }
+
+            &:hover {
+              color: $darkGreen;
+              &:before {
+                width: 100%;
+              }
             }
           }
         }

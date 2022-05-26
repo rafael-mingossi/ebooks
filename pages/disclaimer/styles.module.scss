@@ -1,8 +1,10 @@
+@import 'utils/variables';
+
 .container {
   min-height: 65vh;
   font-size: 2rem;
-  text-align: center;
   padding: 1.5rem;
+  @include flex-x-y-d(flex-start, center, column);
 
   p {
     text-align: left;

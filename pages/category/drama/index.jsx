@@ -1,13 +1,21 @@
 import Category from '../../../src/components/CategoryPage';
 import { useRouter } from 'next/router';
 import { requireAuthentication } from '../../../utils/requireAuthentication';
+import { PageHeader } from '/src/components';
 import prisma from '../../../lib/prisma';
 
 const Drama = ({ drama }) => {
   const router = useRouter();
   const last_segment = router.pathname.split('/').pop();
 
-  return <Category category={drama} url={last_segment} />;
+  return (
+    <div
+      style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}
+    >
+      <PageHeader title={'Drama'} />
+      <Category category={drama} url={last_segment} />
+    </div>
+  );
 };
 
 export default Drama;

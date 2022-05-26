@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
-import { Input, Button, Spinner } from '/src/components';
+import { Input, Button, Spinner, PageHeader } from '/src/components';
 import { ViewContext } from '../../../pages/_app';
 
 const Profile = () => {
@@ -167,141 +167,144 @@ const Profile = () => {
 
   //   console.log('file ->>', file);
   return (
-    <div className={styles.profileWrapper}>
-      <div className={styles.top}>
-        <div className={styles.left}>
-          <form
-            className={styles.formWrapper}
-            method='post'
-            onChange={handleOnChange}
-            onSubmit={handleOnSubmit}
-          >
-            <div className={styles.imgWrapper}>
-              <img
-                src={imageSrc ? imageSrc : '/user.svg'}
-                alt='user image'
-                className={styles.profileImg}
-              />
-            </div>
-            <div className={styles.btnLeft}>
-              <div className={styles.textbox}>
-                <label className={styles.btnWhite}>
-                  Select Image
-                  <input type='file' name='file' />
-                </label>
+    <div className={styles.container}>
+      <PageHeader title={'Profile'} />
+      <div className={styles.profileWrapper}>
+        <div className={styles.top}>
+          <div className={styles.left}>
+            <form
+              className={styles.formWrapper}
+              method='post'
+              onChange={handleOnChange}
+              onSubmit={handleOnSubmit}
+            >
+              <div className={styles.imgWrapper}>
+                <img
+                  src={imageSrc ? imageSrc : '/user.svg'}
+                  alt='user image'
+                  className={styles.profileImg}
+                />
               </div>
-
-              {!rImg ? (
-                <Button disabled={rImg} label='Upload' />
-              ) : (
-                <div className={styles.spin}>
-                  <Spinner />
+              <div className={styles.btnLeft}>
+                <div className={styles.textbox}>
+                  <label className={styles.btnWhite}>
+                    Select Image
+                    <input type='file' name='file' />
+                  </label>
                 </div>
-              )}
-            </div>
 
-            <Button label='Log Out' onClick={() => logOutHandler()} />
-          </form>
-        </div>
-        <div className={styles.contentWrapper}>
-          <form onSubmit={handleSubmit(submitData)}>
-            <div className={styles.form}>
-              <Input
-                placeholder=' '
-                type='text'
-                label={'First Name'}
-                onChange={(e) => setFirstName(e.target.value)}
-                ref={register}
-                required
-                name='firstName'
-                value={firstName || ''}
-              />
-            </div>
-            <div className={styles.form}>
-              <Input
-                placeholder=' '
-                type='text'
-                label={'Last Name'}
-                onChange={(e) => setLastName(e.target.value)}
-                ref={register}
-                required
-                name='lastName'
-                value={lastName || ''}
-              />
-            </div>
-            <div className={styles.form}>
-              <Input
-                placeholder=' '
-                type='number'
-                label={'Phone No.'}
-                onChange={(e) => setPhoneNo(e.target.value)}
-                ref={register}
-                name='phoneNo'
-                value={phoneNo || ''}
-              />
-            </div>
-            <div className={styles.form}>
-              <Input
-                placeholder=' '
-                type='email'
-                label={'E-mail'}
-                onChange={(e) => setEmail(e.target.value)}
-                ref={register}
-                required
-                name='email'
-                value={email || ''}
-              />
-            </div>
-            <div className={styles.form}>
-              <Input
-                placeholder=' '
-                type='password'
-                label={'Password'}
-                onChange={(e) => setPassword(e.target.value)}
-                ref={register}
-                required
-                name='password'
-                //value={password}
-              />
-            </div>
-            <div className={styles.btn}>
-              {!r ? <Button label={'Update'} disabled={r} /> : <Spinner />}
-            </div>
-          </form>
-        </div>
-      </div>
-      <div className={styles.bottom}>
-        {user?.role === 'USER' ? (
-          <div className={styles.favList}>
-            <div className={styles.header}>
-              <h1>Favourite Books</h1>
-              {favs.length !== 0 ? showFavs() : showNoFavs()}
-            </div>
+                {!rImg ? (
+                  <Button disabled={rImg} label='Upload' />
+                ) : (
+                  <div className={styles.spin}>
+                    <Spinner />
+                  </div>
+                )}
+              </div>
+
+              <Button label='Log Out' onClick={() => logOutHandler()} />
+            </form>
           </div>
-        ) : (
-          ''
-        )}
-        {user?.role === 'ADMIN' ? (
-          <div className={styles.btnDiv}>
-            <Link href='/admin/users'>
-              <div className={styles.btnWrapper}>
-                <a className={styles.learnMoreBtn}>Manage Users</a>
+          <div className={styles.contentWrapper}>
+            <form onSubmit={handleSubmit(submitData)}>
+              <div className={styles.form}>
+                <Input
+                  placeholder=' '
+                  type='text'
+                  label={'First Name'}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  ref={register}
+                  required
+                  name='firstName'
+                  value={firstName || ''}
+                />
               </div>
-            </Link>
-            <Link href='/admin/books'>
-              <div className={styles.btnWrapper}>
-                <a className={styles.learnMoreBtn}>Manage Books</a>
+              <div className={styles.form}>
+                <Input
+                  placeholder=' '
+                  type='text'
+                  label={'Last Name'}
+                  onChange={(e) => setLastName(e.target.value)}
+                  ref={register}
+                  required
+                  name='lastName'
+                  value={lastName || ''}
+                />
               </div>
-            </Link>
-            <Link href='/Home'>
-              <div className={styles.btnWrapper}>
-                <a className={styles.learnMoreBtn}>Return</a>
+              <div className={styles.form}>
+                <Input
+                  placeholder=' '
+                  type='number'
+                  label={'Phone No.'}
+                  onChange={(e) => setPhoneNo(e.target.value)}
+                  ref={register}
+                  name='phoneNo'
+                  value={phoneNo || ''}
+                />
               </div>
-            </Link>
+              <div className={styles.form}>
+                <Input
+                  placeholder=' '
+                  type='email'
+                  label={'E-mail'}
+                  onChange={(e) => setEmail(e.target.value)}
+                  ref={register}
+                  required
+                  name='email'
+                  value={email || ''}
+                />
+              </div>
+              <div className={styles.form}>
+                <Input
+                  placeholder=' '
+                  type='password'
+                  label={'Password'}
+                  onChange={(e) => setPassword(e.target.value)}
+                  ref={register}
+                  required
+                  name='password'
+                  //value={password}
+                />
+              </div>
+              <div className={styles.btn}>
+                {!r ? <Button label={'Update'} disabled={r} /> : <Spinner />}
+              </div>
+            </form>
           </div>
-        ) : (
-          ''
-        )}
+        </div>
+        <div className={styles.bottom}>
+          {user?.role === 'USER' ? (
+            <div className={styles.favList}>
+              <div className={styles.header}>
+                <h1>Favourite Books</h1>
+                {favs.length !== 0 ? showFavs() : showNoFavs()}
+              </div>
+            </div>
+          ) : (
+            ''
+          )}
+          {user?.role === 'ADMIN' ? (
+            <div className={styles.btnDiv}>
+              <Link href='/admin/users'>
+                <div className={styles.btnWrapper}>
+                  <a className={styles.learnMoreBtn}>Manage Users</a>
+                </div>
+              </Link>
+              <Link href='/admin/books'>
+                <div className={styles.btnWrapper}>
+                  <a className={styles.learnMoreBtn}>Manage Books</a>
+                </div>
+              </Link>
+              <Link href='/Home'>
+                <div className={styles.btnWrapper}>
+                  <a className={styles.learnMoreBtn}>Return</a>
+                </div>
+              </Link>
+            </div>
+          ) : (
+            ''
+          )}
+        </div>
       </div>
     </div>
   );

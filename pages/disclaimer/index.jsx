@@ -1,9 +1,10 @@
 import styles from './styles.module.scss';
+import { PageHeader } from '/src/components';
 
 const Disclaimer = () => {
   return (
     <div className={styles.container}>
-      <h1>Disclaimer</h1>
+      <PageHeader title={'Disclaimer'} />
       <p>
         This website was created as a project for the Victoria Univerity, and
         the information contained herein is not intended to be a source of

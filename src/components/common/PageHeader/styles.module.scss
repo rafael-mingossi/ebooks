@@ -1,0 +1,13 @@
+@import 'utils/variables';
+
+.container {
+  height: 10vh;
+  width: 60vw;
+  background-color: $middleGreen;
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+  @include flex-x-y-d(center, center, column);
+  font-size: 1.8rem;
+  color: white;
+  margin: 3rem;
+  border: 3px dashed black;
+}

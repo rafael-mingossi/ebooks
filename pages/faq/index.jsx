@@ -1,5 +1,6 @@
 import styles from './styles.module.scss';
 import { useState } from 'react';
+import { PageHeader } from '/src/components';
 
 const Faq = () => {
   const [open, setOpen] = useState(false);
@@ -18,7 +19,7 @@ const Faq = () => {
 
   return (
     <div className={styles.container}>
-      <h1>FAQs</h1>
+      <PageHeader title={'FAQs'} />
       <div className={styles.wrapper}>
         <div className={styles.top}>
           <div className={styles.title}>

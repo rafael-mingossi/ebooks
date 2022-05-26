@@ -9,6 +9,7 @@
 
   .wrapper {
     width: 55vw;
+    margin-top: 2rem;
     @include flex-x-y-d(center, center, column);
 
     .top {
