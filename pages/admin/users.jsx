@@ -1,14 +1,15 @@
 import styles from './styles.module.scss';
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { requireAuthentication } from '../../utils/requireAuthentication';
 
 const Users = () => {
-  const { setUserItem, getUserItem } = useLocalStorage({});
+  const { getUserItem } = useLocalStorage({});
   const [usersList, setUsersList] = useState();
   const [userId, setUserId] = useState();
   const [user, setUser] = useState();
+  const router = useRouter();
 
   useEffect(() => {
     fetch('/api/users', {
@@ -20,6 +21,10 @@ const Users = () => {
 
   useEffect(() => {
     const loggedInUser = getUserItem({ key: 'user' });
+
+    if (loggedInUser.role !== 'ADMIN') {
+      router.push('/Home');
+    }
 
     if (loggedInUser) {
       setUser(loggedInUser);

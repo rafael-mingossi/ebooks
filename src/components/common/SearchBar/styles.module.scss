@@ -79,9 +79,14 @@
       min-width: calc(33.5rem + 10px);
     }
 
-    .titles {
-      font-size: 1.6rem;
-      margin-top: 1rem;
+    .titleDiv {
+      width: 98%;
+      border-bottom: 1px solid $lightGreen;
+
+      .titles {
+        font-size: 1.6rem;
+        margin: 1rem 0 0.5rem 0;
+      }
     }
   }
 

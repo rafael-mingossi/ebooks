@@ -2,14 +2,20 @@ import { useState } from 'react';
 import styles from './styles.module.scss';
 import { useBreakpoint } from '../../../../hooks/useBreakPoint';
 
-function Search({ placeholder, data }) {
+function Search({ placeholder, data, data2 }) {
   const [filteredData, setFilteredData] = useState([]);
+  const [filteredDataNews, setFilteredDataNews] = useState([]);
   const [filteredIsbn, setFilteredIsbn] = useState([]);
+  const [filteredIsbnNews, setFilteredIsbnNews] = useState([]);
   const [filteredCategory, setFilteredCategory] = useState([]);
   const [enteredValue, setEnteredValue] = useState('');
   const { xsm } = useBreakpoint();
 
-  const res = data;
+  const res = data.books; //cloud
+  const res2 = data2.books; //news
+
+  //console.log('res -->', data);
+  //console.log('res2 -->', data2);
 
   const categories = [
     { id: 1, category: 'Drama' },
@@ -31,14 +37,25 @@ function Search({ placeholder, data }) {
     setEnteredValue(searchWord);
 
     if (searchWord.length >= 3) {
+      //TITLES
       const filterTitle = res.filter((value) => {
         return value.title.toLowerCase().includes(searchWord.toLowerCase());
       });
 
+      const filterTitleNews = res2.filter((value) => {
+        return value.title.toLowerCase().includes(searchWord.toLowerCase());
+      });
+
+      //ISBN
       const filterIsbn = res.filter((value) => {
         return value.isbn13.toLowerCase().includes(searchWord.toLowerCase());
       });
 
+      const filterIsbnNews = res2.filter((value) => {
+        return value.isbn13.toLowerCase().includes(searchWord.toLowerCase());
+      });
+
+      //CATEGORIES
       const filterCategory = categories.filter((value) => {
         return value.category.toLowerCase().includes(searchWord.toLowerCase());
       });
@@ -47,10 +64,14 @@ function Search({ placeholder, data }) {
         setFilteredData([]);
         setFilteredIsbn([]);
         setFilteredCategory([]);
+        setFilteredDataNews([]);
+        setFilteredIsbnNews([]);
       } else {
         setFilteredData(filterTitle);
         setFilteredIsbn(filterIsbn);
         setFilteredCategory(filterCategory);
+        setFilteredDataNews(filterTitleNews);
+        setFilteredIsbnNews(filterIsbnNews);
       }
     }
 
@@ -58,13 +79,17 @@ function Search({ placeholder, data }) {
       setFilteredData([]);
       setFilteredIsbn([]);
       setFilteredCategory([]);
+      setFilteredDataNews([]);
+      setFilteredIsbnNews([]);
     }
   };
 
   const clearInput = () => {
     setFilteredData([]);
+    setFilteredDataNews([]);
     setFilteredIsbn([]);
     setFilteredCategory([]);
+    setFilteredIsbnNews([]);
     setEnteredValue('');
   };
 
@@ -94,9 +119,11 @@ function Search({ placeholder, data }) {
         </div>
       </div>
       <div className={styles.dataResult}>
-        {filteredData.length !== 0 && (
+        {(filteredData.length !== 0 || filteredDataNews.length !== 0) && (
           <>
-            <p className={styles.titles}>TITLES</p>
+            <div className={styles.titleDiv}>
+              <p className={styles.titles}>TITLES</p>
+            </div>
             {filteredData.map((value, index) => {
               return (
                 <a
@@ -114,12 +141,45 @@ function Search({ placeholder, data }) {
                 </a>
               );
             })}
+            {filteredDataNews.map((value, index) => {
+              return (
+                <a
+                  key={value.isbn13}
+                  className={styles.dataItem}
+                  href={`category/newTitles/${value.isbn13}`}
+                >
+                  <p>
+                    {xsm
+                      ? value?.title.length > 44
+                        ? value?.title.substring(0, 43 - 3) + '...'
+                        : value?.title
+                      : value?.title}
+                  </p>
+                </a>
+              );
+            })}
           </>
         )}
-        {filteredIsbn.length !== 0 && (
+        {(filteredIsbn.length !== 0 || filteredIsbnNews.length !== 0) && (
           <>
-            <p className={styles.titles}>ISBN + TITLE</p>
+            <div className={styles.titleDiv}>
+              <p className={styles.titles}>ISBN + TITLE</p>
+            </div>
+
             {filteredIsbn.map((value, index) => {
+              return (
+                <a
+                  key={value.isbn13}
+                  className={styles.dataItem}
+                  href={`category/cloud/${value.isbn13}`}
+                >
+                  <p>
+                    {value.isbn13} - {value.title}
+                  </p>
+                </a>
+              );
+            })}
+            {filteredIsbnNews.map((value, index) => {
               return (
                 <a
                   key={value.isbn13}
@@ -136,7 +196,10 @@ function Search({ placeholder, data }) {
         )}
         {filteredCategory.length !== 0 && (
           <>
-            <p className={styles.titles}>CATEGORY</p>
+            <div className={styles.titleDiv}>
+              <p className={styles.titles}>CATEGORY</p>
+            </div>
+
             {filteredCategory.map((value, index) => {
               return (
                 <a

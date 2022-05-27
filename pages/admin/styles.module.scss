@@ -7,7 +7,7 @@
 
   .favList {
     //@include flex-x-y-d(center, center, column);
-    width: 45%;
+    width: 60%;
     background-color: $middleGreen;
     box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.616);
     padding: 2rem 1rem;
@@ -23,6 +23,22 @@
       width: 98%;
     }
 
+    .spin {
+      position: absolute;
+      right: 75rem;
+      top: 40rem;
+
+      @include sm {
+        right: 48rem;
+        top: 30rem;
+      }
+
+      @include xsm {
+        right: 28rem;
+        top: 30rem;
+      }
+    }
+
     .header {
       width: 100%;
       @include flex-x-y-d(space-evenly, center, column);
@@ -32,6 +48,10 @@
         color: white;
         text-decoration: underline;
         font-weight: bold;
+
+        @include xsm {
+          font-size: 2.4rem;
+        }
       }
 
       .listWrapper {
@@ -64,6 +84,7 @@
             width: 100%;
             height: 50%;
             @include flex-x-y-d(space-evenly, center, row);
+            position: relative;
           }
 
           .bottom {

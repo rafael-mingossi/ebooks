@@ -29,8 +29,13 @@
       cursor: pointer;
       width: fit-content;
       @include hoverUnderline;
-      margin: 0.5rem;
-      padding: 0.5rem 0;
+      margin: 1rem;
+      padding: 0.7rem 0;
+
+      @include xsm {
+        margin: 0.5rem;
+        padding: 0.5rem 0;
+      }
     }
   }
 

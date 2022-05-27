@@ -5,6 +5,7 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useForm } from 'react-hook-form';
 import { Input, Button, Spinner } from '/src/components';
 import { requireAuthentication } from '../../utils/requireAuthentication';
+import { useRouter } from 'next/router';
 
 const Books = () => {
   const [bookId, setBookId] = useState();
@@ -19,6 +20,16 @@ const Books = () => {
   const [imageSrc, setImageSrc] = useState();
   const [uploadData, setUploadData] = useState();
   const { register, handleSubmit, formState } = useForm();
+  const { getUserItem } = useLocalStorage({});
+  const router = useRouter();
+
+  useEffect(() => {
+    const loggedInUser = getUserItem({ key: 'user' });
+
+    if (loggedInUser.role !== 'ADMIN') {
+      router.push('/Home');
+    }
+  }, []);
 
   const submitData = () => {
     setR(true);

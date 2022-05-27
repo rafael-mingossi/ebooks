@@ -7,7 +7,7 @@ import { requireAuthentication } from '../../utils/requireAuthentication';
 import { CatCard, SearchBar, MarqueeWrapper } from '/src/components';
 
 export default function Home({ data, cloud }) {
-  const news = [...data.books, ...cloud.books];
+  //const news = [...data.books, ...cloud.books];
 
   return (
     <div className={styles.main}>
@@ -27,7 +27,11 @@ export default function Home({ data, cloud }) {
         ))}
       </MarqueeWrapper>
 
-      <SearchBar placeholder='Enter a book Title, ISBN, Category' data={news} />
+      <SearchBar
+        placeholder='Enter a book Title, ISBN, Category'
+        data={cloud}
+        data2={data}
+      />
 
       <h1 className={styles.title}>POPULAR TECH CATEGORIES</h1>
       <div className={styles.line} />
