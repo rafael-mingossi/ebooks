@@ -29,7 +29,8 @@
       }
 
       @include xsm {
-        font-size: 3.5rem;
+        font-size: 3rem;
+        letter-spacing: 1.4rem;
       }
 
       @keyframes moveInLeft {
@@ -60,7 +61,8 @@
       }
 
       @include xsm {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+        letter-spacing: 0.4rem;
       }
 
       @keyframes moveInRight {

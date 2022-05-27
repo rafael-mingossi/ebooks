@@ -106,8 +106,8 @@ function Search({ placeholder, data }) {
                 >
                   <p>
                     {xsm
-                      ? value?.title.length > 46
-                        ? value?.title.substring(0, 45 - 3) + '...'
+                      ? value?.title.length > 44
+                        ? value?.title.substring(0, 43 - 3) + '...'
                         : value?.title
                       : value?.title}
                   </p>

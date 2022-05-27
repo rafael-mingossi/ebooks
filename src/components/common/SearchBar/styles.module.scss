@@ -74,8 +74,9 @@
     }
 
     @include xsm {
-      width: 86.5vw;
-      min-width: 86.5vw;
+      width: 87vw;
+      max-width: calc(40.8rem + 10px);
+      min-width: calc(33.5rem + 10px);
     }
 
     .titles {

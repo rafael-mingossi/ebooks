@@ -99,6 +99,8 @@ const Profile = () => {
     reader.readAsDataURL(changeEvent.target.files[0]);
   }
 
+  console.log('img -->', imageSrc);
+
   //handle submit img to Cloudinary
   async function handleOnSubmit(event) {
     event.preventDefault();
@@ -147,22 +149,27 @@ const Profile = () => {
 
     const data = JSON.stringify(bodyData);
 
-    fetch('/api/users/update', {
-      method: 'PUT',
-      body: data,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) {
-          setViewContext({
-            ...viewContext,
-            user: data.newUsers,
-          });
-          setUserItem({ key: 'user', value: data?.newUsers });
-        }
-        setR(false);
+    if (imageSrc === null || imageSrc === undefined) {
+      alert('Select an image and upload it first');
+      setR(false);
+    } else {
+      fetch('/api/users/update', {
+        method: 'PUT',
+        body: data,
       })
-      .catch((error) => console.error(error));
+        .then((res) => res.json())
+        .then((data) => {
+          if (data) {
+            setViewContext({
+              ...viewContext,
+              user: data.newUsers,
+            });
+            setUserItem({ key: 'user', value: data?.newUsers });
+          }
+          setR(false);
+        })
+        .catch((error) => console.error(error));
+    }
   };
 
   //   console.log('file ->>', file);
@@ -277,7 +284,7 @@ const Profile = () => {
             <div className={styles.favList}>
               <div className={styles.header}>
                 <h1>Favourite Books</h1>
-                {favs.length !== 0 ? showFavs() : showNoFavs()}
+                {favs?.length !== 0 ? showFavs() : showNoFavs()}
               </div>
             </div>
           ) : (
