@@ -36,7 +36,7 @@ const Help = () => {
 
   const { register, handleSubmit, formState } = useForm();
 
-  const submitData = () => {
+  const submitData = async () => {
     setR(true);
     const bodyData = {
       firstName,
@@ -49,12 +49,14 @@ const Help = () => {
 
     const data = JSON.stringify(bodyData);
 
-    fetch('/api/feedbacks/create', {
+    await fetch('/api/feedbacks/create', {
       method: 'POST',
       body: data,
     })
       .then((res) => {
-        clearInputs();
+        if (res) {
+          clearInputs();
+        }
         setR(false);
       })
       .catch((error) => console.error(error));

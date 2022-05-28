@@ -18,12 +18,18 @@ const Feedbacks = () => {
     }
   }, []);
 
-  useEffect(() => {
-    fetch('/api/feedbacks', {
+  useEffect(async () => {
+    await fetch('/api/feedbacks', {
       method: 'GET',
     })
       .then((res) => res.json())
-      .then((data) => setFeedbacks(data?.feedb));
+      .then((data) => {
+        if (data) {
+          setFeedbacks(data?.feedb);
+          console.log(data?.feedb);
+        }
+      })
+      .catch((error) => console.error(error));
   }, []);
 
   return (
