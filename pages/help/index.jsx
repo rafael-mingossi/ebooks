@@ -15,19 +15,6 @@ const Help = () => {
 
   const { getUserItem } = useLocalStorage({});
 
-  // const handleSubmit = () => {
-  //   if (firstName !== '' && lastName !== '' && email !== '' && message !== '') {
-  //     alert('Message sent! Thank you!');
-  // setFirstName('');
-  // setLastName('');
-  // setEmail('');
-  // setPhoneNo('');
-  // setMessage('');
-  //   } else {
-  //     alert('Fields cannot be empty!');
-  //   }
-  // };
-
   const clearInputs = () => {
     setFirstName('');
     setLastName('');
@@ -42,6 +29,8 @@ const Help = () => {
 
     if (loggedInUser) {
       setUserId(loggedInUser?.userId);
+    } else {
+      setUserId('');
     }
   }, []);
 
@@ -52,7 +41,7 @@ const Help = () => {
     const bodyData = {
       firstName,
       lastName,
-      email,
+      email: email.toLocaleLowerCase(),
       message,
       userId: userId,
       phoneNo,

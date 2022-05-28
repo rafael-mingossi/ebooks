@@ -57,7 +57,7 @@ const BooksList = ({ allBooks }) => {
         )}
         <div className={styles.header}>
           <h1>List of Books ( {allBooks?.length} in Total )</h1>
-          {allBooks.map((filt) => (
+          {allBooks?.map((filt) => (
             <div key={filt?.bookId} className={styles.listWrapper}>
               <div className={styles.left}>
                 <div className={styles.top}>
@@ -75,7 +75,7 @@ const BooksList = ({ allBooks }) => {
                   </p>
                   <p>Year: {filt?.year}</p>
                 </div>
-                <div className={styles.bottom}>
+                <div className={styles.bottoms}>
                   <p>Category: {filt?.category}</p>
                   <p>Total Pages: {filt?.totalPages}</p>
                 </div>

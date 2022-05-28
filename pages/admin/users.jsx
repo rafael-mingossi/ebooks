@@ -65,7 +65,7 @@ const Users = () => {
                     <p>First Name: {filt?.firstName}</p>
                     <p>Last Name: {filt?.lastName}</p>
                   </div>
-                  <div className={styles.bottom}>
+                  <div className={styles.bottoms}>
                     <p>Email: {filt?.email}</p>
                     <p>Phone: {filt?.phoneNo}</p>
                   </div>
