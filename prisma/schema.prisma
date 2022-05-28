@@ -96,6 +96,7 @@ model Feedback {
   firstName String?
   email String?
   lastName String?
+  message String?
   phoneNo Int?
   userId String?
 }
