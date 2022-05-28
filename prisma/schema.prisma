@@ -92,7 +92,7 @@ model VerificationToken {
 }
 
 model Feedback {
-  fbId      String     @default(cuid()) @id
+  fbId      String     @id @default(uuid())
   firstName String?
   email String?
   lastName String?
