@@ -90,3 +90,12 @@ model VerificationToken {
   @@unique([identifier, token])
   @@map("verificationtokens")
 }
+
+model Feedback {
+  fbId      String     @default(cuid()) @id
+  firstName String?
+  email String?
+  lastName String?
+  phoneNo Int?
+  userId String?
+}
