@@ -49,7 +49,7 @@ const Help = () => {
 
     const data = JSON.stringify(bodyData);
 
-    fetch('/api/feedbacks', {
+    fetch('/api/feedbacks/create', {
       method: 'POST',
       body: data,
     })

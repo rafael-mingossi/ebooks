@@ -5,9 +5,10 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { requireAuthentication } from '../../utils/requireAuthentication';
 import { useRouter } from 'next/router';
 
-const Feedbacks = ({ feedbacks }) => {
+const Feedbacks = () => {
   const router = useRouter();
   const { getUserItem } = useLocalStorage({});
+  const [feedbacks, setFeedbacks] = useState();
 
   useEffect(() => {
     const loggedInUser = getUserItem({ key: 'user' });
@@ -15,6 +16,14 @@ const Feedbacks = ({ feedbacks }) => {
     if (loggedInUser.role !== 'ADMIN') {
       router.push('/Home');
     }
+  }, []);
+
+  useEffect(() => {
+    fetch('/api/feedbacks', {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((data) => setFeedbacks(data?.feedb));
   }, []);
 
   return (
@@ -44,7 +53,8 @@ const Feedbacks = ({ feedbacks }) => {
 export default Feedbacks;
 
 export const getServerSideProps = requireAuthentication(async (context) => {
-  const feedbacks = await prisma.feedback.findMany();
+  // const feedbackss = await prisma.feedback.findMany();
+  // console.log(feedbackss);
 
-  return { props: { feedbacks } };
+  return { props: {} };
 });

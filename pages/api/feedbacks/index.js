@@ -1,32 +1,14 @@
 import prisma from '../../../lib/prisma';
 
-export default async function feedbacks(req, res) {
-  const body = JSON.parse(req.body);
-  const { firstName, lastName, phoneNo, email, message, userId } = body;
-
-  console.log('body1 ->>>', body);
-
+export default async function (req, res) {
   try {
-    const feedback = await prisma.feedback.create({
-      data: {
-        firstName: firstName,
-        lastName: lastName,
-        phoneNo: parseInt(phoneNo),
-        email: email,
-        message: message,
-        userId: userId,
-      },
-    });
-
-    res.status(201);
-    res.json({ feedback });
+    const feedb = await prisma.feedback.findMany();
+    res.status(200);
+    res.json({ feedb });
   } catch (e) {
     res.status(500);
-    res.json({ error: 'Unnable to create feedback' });
-    console.error(e);
+    res.json({ error: 'Unable to fetch users' });
   } finally {
-    prisma.$disconnect;
+    await prisma.$disconnect;
   }
-
-  console.log('body2 ->>>', req.body);
 }
