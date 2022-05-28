@@ -4,6 +4,7 @@
   width: 100%;
   @include flex-x-y-d(space-around, center, column);
   margin-top: 5rem;
+  min-height: 60vh;
 
   .favList {
     //@include flex-x-y-d(center, center, column);
@@ -54,6 +55,46 @@
         }
       }
 
+      .listWrapperFeed {
+        border: 1px solid white;
+        border-radius: 2rem;
+        width: 90%;
+        @include flex-x-y-d(center, center, row);
+        height: fit-content;
+        font-size: 2rem;
+        color: white;
+        margin: 1rem;
+
+        @include xsm {
+          width: 98%;
+          font-size: 1.5rem;
+        }
+
+        .lefts {
+          //@include flex-x-y-d(center, center, column);
+          width: 90%;
+          height: 100%;
+
+          p {
+            margin: 0.5rem;
+            padding: 0.5rem;
+          }
+
+          .tops {
+            border-bottom: 1px solid white;
+            width: 100%;
+            height: 50%;
+            @include flex-x-y-d(space-evenly, center, row);
+            position: relative;
+          }
+
+          .bottomFeed {
+            height: fit-content;
+            text-align: center;
+          }
+        }
+      }
+
       .listWrapper {
         border: 1px solid white;
         border-radius: 2rem;
@@ -87,7 +128,7 @@
             position: relative;
           }
 
-          .bottom {
+          .bottoms {
             @include flex-x-y-d(space-evenly, center, row);
             height: 50%;
             width: 100%;

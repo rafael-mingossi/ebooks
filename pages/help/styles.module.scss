@@ -24,68 +24,91 @@
       margin: 5rem 0;
     }
 
-    .top {
-      @include flex-x-y-d(space-around, center, row);
-      width: 100%;
-
-      @include xsm {
-        @include flex-x-y-d(space-around, center, column);
-      }
-
-      .left {
-        width: 50%;
-        @include flex-x-y-d(space-around, center, column);
-
-        .form {
-          position: relative;
-          width: 30rem;
-          height: 8rem;
-        }
-      }
-
-      .right {
-        width: 50%;
-        @include flex-x-y-d(space-around, center, column);
-
-        .form {
-          position: relative;
-          width: 30rem;
-          height: 8rem;
-        }
-      }
-    }
-
-    .middle {
-      width: 50%;
-      margin-top: 5rem;
+    .formWrappers {
+      width: 80%;
+      @include flex-x-y-d(center, center, column);
 
       @include sm {
-        width: 80%;
+        width: 100%;
       }
 
-      @include xsm {
-        width: 95%;
+      p {
+        color: white;
+        margin: 5rem 0;
       }
 
-      .form {
-        position: relative;
-        width: 50%;
-        height: 8rem;
+      .top {
+        @include flex-x-y-d(space-around, center, row);
+        width: 100%;
 
         @include xsm {
-          width: 15%;
+          @include flex-x-y-d(space-around, center, column);
         }
 
-        .inputs {
-          height: 10vh;
+        .left {
+          width: 50%;
+          @include flex-x-y-d(space-around, center, column);
+
+          .form {
+            position: relative;
+            width: 30rem;
+            height: 8rem;
+          }
+        }
+
+        .right {
+          width: 50%;
+          @include flex-x-y-d(space-around, center, column);
+
+          .form {
+            position: relative;
+            width: 30rem;
+            height: 8rem;
+          }
         }
       }
-    }
 
-    .bottom {
-      @include flex-x-y-d(flex-end, center, row);
-      margin: 5rem 0;
-      width: 80%;
+      .middle {
+        width: 65%;
+        margin-top: 5rem;
+        //@include flex-x-y-d(center, center, column);
+
+        @include sm {
+          width: 80%;
+        }
+
+        @include xsm {
+          width: 95%;
+        }
+
+        .form {
+          position: relative;
+          width: 50%;
+          height: 8rem;
+
+          @include xsm {
+            width: 15%;
+          }
+
+          .inputs {
+            height: 10vh;
+          }
+        }
+      }
+
+      .bottom {
+        @include flex-x-y-d(flex-end, center, row);
+        margin: 5rem 0;
+        width: 80%;
+
+        .spin {
+          margin-right: 37rem;
+
+          @include xsm {
+            margin-right: 22rem;
+          }
+        }
+      }
     }
   }
 }

@@ -309,9 +309,9 @@ const Profile = () => {
                     <a className={styles.learnMoreBtn}>Delete Books</a>
                   </div>
                 </Link>
-                <Link href='/Home'>
+                <Link href='/admin/feedbacks'>
                   <div className={styles.btnWrapper}>
-                    <a className={styles.learnMoreBtn}>Return</a>
+                    <a className={styles.learnMoreBtn}>Feedbacks</a>
                   </div>
                 </Link>
               </div>

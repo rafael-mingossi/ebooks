@@ -6,8 +6,6 @@ export default async function register(req, res) {
   const body = JSON.parse(req.body);
   const { firstName, lastName, phoneNo, email, image, password } = body;
 
-  console.log(body);
-
   try {
     //const user = req.body;
     var salt = bcrypt.genSaltSync(10);
@@ -33,6 +31,4 @@ export default async function register(req, res) {
   } finally {
     prisma.$disconnect;
   }
-
-  console.log('body ->>>', req.body);
 }
