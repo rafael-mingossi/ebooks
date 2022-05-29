@@ -39,6 +39,11 @@ const Help = () => {
 
   const [addFeed, { data, loading, error }] = useMutation(CreateFeed, {
     onCompleted: () => clearInputs(),
+    onQueryUpdated(CreateFeed) {
+      if (!error) {
+        return CreateFeed.refetch();
+      }
+    },
   });
 
   // if (error) return console.log(JSON.stringify(error, null, 2));

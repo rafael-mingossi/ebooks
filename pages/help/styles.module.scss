@@ -119,8 +119,4 @@
   background-color: rgba(0, 0, 0, 0.141);
   @include flex-x-y-d(center, center, row);
   padding-right: 15rem;
-
-  @include xsm {
-    margin-right: 22rem;
-  }
 }
