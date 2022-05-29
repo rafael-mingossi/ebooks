@@ -2,7 +2,7 @@ import prisma from '../../../lib/prisma';
 
 export default async function (req, res) {
   try {
-    const feed = await prisma.feedback.findMany();
+    const feed = await prisma.feed.findMany();
     res.status(200);
     res.json({ feed });
   } catch (e) {

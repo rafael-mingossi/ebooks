@@ -7,7 +7,7 @@ export default async function feedbacks(req, res) {
   console.log('body1 ->>>', body);
 
   try {
-    const feedback = await prisma.feedback.create({
+    const feedback = await prisma.feed.create({
       data: {
         firstName: firstName,
         lastName: lastName,
