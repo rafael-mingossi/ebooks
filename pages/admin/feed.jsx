@@ -5,6 +5,7 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { requireAuthentication } from '../../utils/requireAuthentication';
 import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
+import apolloClient from '../../lib/apollo';
 
 const FeedbacksQuery = gql`
   query {
@@ -17,40 +18,22 @@ const FeedbacksQuery = gql`
   }
 `;
 
-const Feed = () => {
-  const { data, error, loading } = useQuery(FeedbacksQuery);
+const Feed = ({ data }) => {
+  //const { data, error, loading } = useQuery(FeedbacksQuery);
   const router = useRouter();
   const { getUserItem } = useLocalStorage({});
   const [feedbacks, setFeedbacks] = useState();
 
-  if (loading) return <p>Loading....</p>;
-  if (error) return console.log(JSON.stringify(error, null, 2));
+  // if (loading) return <p>Loading....</p>;
+  // if (error) return console.log(JSON.stringify(error, null, 2));
 
-  if (data) {
-    console.log(data);
-  }
+  useEffect(() => {
+    const loggedInUser = getUserItem({ key: 'user' });
 
-  // useEffect(() => {
-  //   const loggedInUser = getUserItem({ key: 'user' });
-
-  //   if (loggedInUser.role !== 'ADMIN') {
-  //     router.push('/Home');
-  //   }
-  // }, []);
-
-  // useEffect(async () => {
-  //   await fetch('/api/feed', {
-  //     method: 'GET',
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       if (data) {
-  //         setFeedbacks(data?.feed);
-  //         console.log(data?.feed);
-  //       }
-  //     })
-  //     .catch((error) => console.error(error));
-  // }, []);
+    if (loggedInUser.role !== 'ADMIN') {
+      router.push('/Home');
+    }
+  }, []);
 
   return (
     <div className={styles.bottom}>
@@ -79,17 +62,10 @@ const Feed = () => {
 export default Feed;
 
 export const getServerSideProps = requireAuthentication(async (context) => {
-  // const feedbackss = await prisma.feed.findMany();
+  const { data } = await apolloClient.query({
+    query: FeedbacksQuery,
+  });
 
-  // const feeds = await feedbackss?.map((feed) => ({
-  //   fbId: feed.fbId,
-  //   firstName: feed.firstName,
-  //   email: feed.email,
-  //   message: feed.message,
-  // }));
-
-  // const res = await apolloClient.query({ query: FeedbacksQuery });
-
-  // console.log(res);
-  return { props: {} };
+  //console.log('->>>', data);
+  return { props: { data } };
 });

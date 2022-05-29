@@ -3,15 +3,45 @@ import { Button, Input, TextArea, PageHeader, Spinner } from '/src/components';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { gql, useMutation } from '@apollo/client';
+
+const CreateFeed = gql`
+  mutation FeedMutation(
+    $firstName: String!
+    $lastName: String!
+    $message: String!
+    $email: String!
+    $phoneNo: Int!
+  ) {
+    feed(
+      firstName: $firstName
+      lastName: $lastName
+      message: $message
+      email: $email
+      phoneNo: $phoneNo
+    ) {
+      firstName
+      lastName
+      email
+      message
+      phoneNo
+    }
+  }
+`;
 
 const Help = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [phoneNo, setPhoneNo] = useState('');
+  const [phoneNo, setPhoneNo] = useState();
   const [message, setMessage] = useState('');
-  //const [userId, setUserId] = useState('');
   const [r, setR] = useState(false);
+
+  const [addFeed, { data, loading, error }] = useMutation(CreateFeed, {
+    onCompleted: () => clearInputs(),
+  });
+
+  // if (error) return console.log(JSON.stringify(error, null, 2));
 
   const { getUserItem } = useLocalStorage({});
 
@@ -21,50 +51,21 @@ const Help = () => {
     setEmail('');
     setPhoneNo('');
     setMessage('');
-    // setUserId('');
   };
-
-  // useEffect(() => {
-  //   const loggedInUser = getUserItem({ key: 'user' });
-
-  //   if (loggedInUser) {
-  //     setUserId(loggedInUser?.userId);
-  //   } else {
-  //     setUserId('');
-  //   }
-  // }, []);
 
   const { register, handleSubmit, formState } = useForm();
 
-  const submitData = async () => {
-    setR(true);
-    const bodyData = {
-      firstName,
-      lastName,
-      email: email.toLocaleLowerCase(),
-      message,
-      //userId: userId,
-      phoneNo,
-    };
-
-    const data = JSON.stringify(bodyData);
-
-    await fetch('/api/feed/create', {
-      method: 'POST',
-      body: data,
-    })
-      .then((res) => {
-        if (res) {
-          clearInputs();
-        }
-        setR(false);
-      })
-      .catch((error) => console.error(error));
-  };
+  if (loading)
+    return (
+      <div className={styles.spin}>
+        <Spinner />
+      </div>
+    );
 
   return (
     <div className={styles.container}>
       <PageHeader title={'Feedback'} />
+      {error && console.log(JSON.stringify(error, null, 2))}
 
       <div className={styles.formContainer}>
         <p>
@@ -72,7 +73,18 @@ const Help = () => {
           email helpall.library@gmail.com
         </p>
         <form
-          onSubmit={handleSubmit(submitData)}
+          onSubmit={(e) => {
+            e.preventDefault();
+            addFeed({
+              variables: {
+                firstName: firstName,
+                lastName: lastName,
+                message: message,
+                email: email,
+                phoneNo: parseInt(phoneNo),
+              },
+            });
+          }}
           // style={{ display: 'flex', flexDirection: 'column' }}
           className={styles.formWrappers}
         >
@@ -119,7 +131,7 @@ const Help = () => {
               <div className={styles.form}>
                 <Input
                   placeholder=' '
-                  type='text'
+                  type='number'
                   label={'Phone No.'}
                   onChange={(e) => setPhoneNo(e.target.value)}
                   ref={register}
@@ -147,13 +159,7 @@ const Help = () => {
             </div>
           </div>
           <div className={styles.bottom}>
-            {!r ? (
-              <Button label={'Send'} disabled={r} />
-            ) : (
-              <div className={styles.spin}>
-                <Spinner />
-              </div>
-            )}
+            <Button label={'Send'} disabled={r} />
           </div>
         </form>
       </div>

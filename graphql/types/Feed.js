@@ -1,4 +1,4 @@
-import { enumType, objectType, extendType } from 'nexus';
+import { objectType, extendType, stringArg, nonNull, intArg } from 'nexus';
 
 export const Feed = objectType({
   name: 'Feed',
@@ -23,3 +23,59 @@ export const FeedQuery = extendType({
     });
   },
 });
+
+// export const createFeed = extendType({
+//   type: 'Mutation',
+//   definition(t) {
+//     t.field('createFeed', {
+//       type: FeedResponse,
+//       args: { credentials: Inputs },
+//     });
+//   },
+// });
+
+export const FeedMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.nonNull.field('feed', {
+      type: 'Feed',
+      args: {
+        firstName: nonNull(stringArg()),
+        lastName: nonNull(stringArg()),
+        message: nonNull(stringArg()),
+        email: nonNull(stringArg()),
+        phoneNo: nonNull(intArg()),
+      },
+      resolve(_root, args, ctx) {
+        const feed = {
+          firstName: args.firstName,
+          lastName: args.lastName,
+          message: args.message,
+          email: args.email,
+          phoneNo: args.phoneNo,
+        };
+        return ctx.prisma.feed.create({ data: feed });
+        // return feed;
+      },
+    });
+  },
+});
+
+// const Inputs = inputObjectType({
+//   name: 'feedInputs',
+//   definition: (t) => {
+//     t.nonNull.string('firstName');
+//     t.nonNull.string('lasttName');
+//     t.nonNull.string('email');
+//     t.nonNull.string('message');
+//     t.nonNull.int('phoneNo');
+//   },
+// });
+
+// const FeedResponse = objectType({
+//   name: 'feedResponse',
+//   definition: (t) => {
+//     t.nonNull.string('message');
+//     t.nonNull.boolean('error');
+//   },
+// });
