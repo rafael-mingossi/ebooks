@@ -309,7 +309,7 @@ const Profile = () => {
                     <a className={styles.learnMoreBtn}>Delete Books</a>
                   </div>
                 </Link>
-                <Link href='/admin/feedbacks'>
+                <Link href='/admin/feed'>
                   <div className={styles.btnWrapper}>
                     <a className={styles.learnMoreBtn}>Feedbacks</a>
                   </div>

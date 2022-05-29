@@ -5,7 +5,7 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { requireAuthentication } from '../../utils/requireAuthentication';
 import { useRouter } from 'next/router';
 
-const Feed = () => {
+const Feed = ({ feeds }) => {
   const router = useRouter();
   const { getUserItem } = useLocalStorage({});
   const [feedbacks, setFeedbacks] = useState();
@@ -18,26 +18,26 @@ const Feed = () => {
     }
   }, []);
 
-  useEffect(async () => {
-    await fetch('/api/feed', {
-      method: 'GET',
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) {
-          setFeedbacks(data?.feed);
-          console.log(data?.feed);
-        }
-      })
-      .catch((error) => console.error(error));
-  }, []);
+  // useEffect(async () => {
+  //   await fetch('/api/feed', {
+  //     method: 'GET',
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data) {
+  //         setFeedbacks(data?.feed);
+  //         console.log(data?.feed);
+  //       }
+  //     })
+  //     .catch((error) => console.error(error));
+  // }, []);
 
   return (
     <div className={styles.bottom}>
       <div className={styles.favList}>
         <div className={styles.header}>
           <h1>Feedbacks</h1>
-          {feedbacks?.map((filt) => (
+          {feeds?.map((filt) => (
             <div key={filt?.fbId} className={styles.listWrapperFeed}>
               <div className={styles.lefts}>
                 <div className={styles.tops}>
@@ -59,8 +59,15 @@ const Feed = () => {
 export default Feed;
 
 export const getServerSideProps = requireAuthentication(async (context) => {
-  // const feedbackss = await prisma.feedback.findMany();
-  // console.log(feedbackss);
+  const feedbackss = await prisma.feed.findMany();
 
-  return { props: {} };
+  const feeds = await feedbackss?.map((feed) => ({
+    fbId: feed.fbId,
+    firstName: feed.firstName,
+    email: feed.email,
+    message: feed.message,
+  }));
+
+  //console.log(feeds);
+  return { props: { feeds } };
 });
