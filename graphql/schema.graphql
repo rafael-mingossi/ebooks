@@ -14,8 +14,18 @@ type Book {
   year: Int
 }
 
+type Feed {
+  email: String
+  fbId: String
+  firstName: String
+  lastName: String
+  message: String
+  phoneNo: Int
+}
+
 type Query {
   books: [Book]!
+  feed: [Feed]!
   users: [User]!
 }
 

@@ -4,19 +4,39 @@ import prisma from '../../lib/prisma';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { requireAuthentication } from '../../utils/requireAuthentication';
 import { useRouter } from 'next/router';
+import { gql, useQuery } from '@apollo/client';
 
-const Feed = ({ feeds }) => {
+const FeedbacksQuery = gql`
+  query {
+    feed {
+      fbId
+      email
+      firstName
+      message
+    }
+  }
+`;
+
+const Feed = () => {
+  const { data, error, loading } = useQuery(FeedbacksQuery);
   const router = useRouter();
   const { getUserItem } = useLocalStorage({});
   const [feedbacks, setFeedbacks] = useState();
 
-  useEffect(() => {
-    const loggedInUser = getUserItem({ key: 'user' });
+  if (loading) return <p>Loading....</p>;
+  if (error) return console.log(JSON.stringify(error, null, 2));
 
-    if (loggedInUser.role !== 'ADMIN') {
-      router.push('/Home');
-    }
-  }, []);
+  if (data) {
+    console.log(data);
+  }
+
+  // useEffect(() => {
+  //   const loggedInUser = getUserItem({ key: 'user' });
+
+  //   if (loggedInUser.role !== 'ADMIN') {
+  //     router.push('/Home');
+  //   }
+  // }, []);
 
   // useEffect(async () => {
   //   await fetch('/api/feed', {
@@ -37,7 +57,7 @@ const Feed = ({ feeds }) => {
       <div className={styles.favList}>
         <div className={styles.header}>
           <h1>Feedbacks</h1>
-          {feeds?.map((filt) => (
+          {data?.feed?.map((filt) => (
             <div key={filt?.fbId} className={styles.listWrapperFeed}>
               <div className={styles.lefts}>
                 <div className={styles.tops}>
@@ -59,15 +79,17 @@ const Feed = ({ feeds }) => {
 export default Feed;
 
 export const getServerSideProps = requireAuthentication(async (context) => {
-  const feedbackss = await prisma.feed.findMany();
+  // const feedbackss = await prisma.feed.findMany();
 
-  const feeds = await feedbackss?.map((feed) => ({
-    fbId: feed.fbId,
-    firstName: feed.firstName,
-    email: feed.email,
-    message: feed.message,
-  }));
+  // const feeds = await feedbackss?.map((feed) => ({
+  //   fbId: feed.fbId,
+  //   firstName: feed.firstName,
+  //   email: feed.email,
+  //   message: feed.message,
+  // }));
 
-  //console.log(feeds);
-  return { props: { feeds } };
+  // const res = await apolloClient.query({ query: FeedbacksQuery });
+
+  // console.log(res);
+  return { props: {} };
 });

@@ -42,19 +42,3 @@ export const UsersQuery = extendType({
     });
   },
 });
-
-export const UserUpdateQuery = extendType({
-  type: 'Query',
-  definition(t) {
-    t.nonNull.list.field('users', {
-      type: 'User',
-      resolve(_parent, _args, ctx) {
-        return ctx.prisma.user.update({
-          where: {
-            email: parent.email,
-          },
-        });
-      },
-    });
-  },
-});

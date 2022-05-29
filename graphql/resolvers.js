@@ -1,7 +1,7 @@
 export const resolvers = {
   Query: {
-    books: async (_parent, _args, context) =>
-      await context.prisma.book.findMany(),
+    feeds: async (_parent, _args, context) =>
+      await context.prisma.feed.findMany(),
   },
 };
 
