@@ -10,7 +10,7 @@ const Help = () => {
   const [email, setEmail] = useState('');
   const [phoneNo, setPhoneNo] = useState('');
   const [message, setMessage] = useState('');
-  const [userId, setUserId] = useState('');
+  //const [userId, setUserId] = useState('');
   const [r, setR] = useState(false);
 
   const { getUserItem } = useLocalStorage({});
@@ -21,18 +21,18 @@ const Help = () => {
     setEmail('');
     setPhoneNo('');
     setMessage('');
-    setUserId('');
+    // setUserId('');
   };
 
-  useEffect(() => {
-    const loggedInUser = getUserItem({ key: 'user' });
+  // useEffect(() => {
+  //   const loggedInUser = getUserItem({ key: 'user' });
 
-    if (loggedInUser) {
-      setUserId(loggedInUser?.userId);
-    } else {
-      setUserId('');
-    }
-  }, []);
+  //   if (loggedInUser) {
+  //     setUserId(loggedInUser?.userId);
+  //   } else {
+  //     setUserId('');
+  //   }
+  // }, []);
 
   const { register, handleSubmit, formState } = useForm();
 
@@ -43,13 +43,13 @@ const Help = () => {
       lastName,
       email: email.toLocaleLowerCase(),
       message,
-      userId: userId,
+      //userId: userId,
       phoneNo,
     };
 
     const data = JSON.stringify(bodyData);
 
-    await fetch('/api/feedbacks/create', {
+    await fetch('/api/feed/create', {
       method: 'POST',
       body: data,
     })
