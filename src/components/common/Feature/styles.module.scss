@@ -49,6 +49,8 @@
       position: absolute;
       backface-visibility: hidden;
       text-align: center;
+      -moz-backface-visibility: hidden;
+      transform: rotateX(0deg);
 
       @include sm {
         display: none;
@@ -79,6 +81,7 @@
       position: absolute;
       text-align: center;
       padding: 3rem;
+      -moz-backface-visibility: hidden;
 
       @include sm {
         display: none;

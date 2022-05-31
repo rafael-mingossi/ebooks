@@ -1,5 +1,6 @@
 import styles from './styles.module.scss';
 import Feature from '../Feature';
+import Link from 'next/link';
 
 const About = () => {
   return (
@@ -27,9 +28,9 @@ const About = () => {
             searchs!
           </p>
           <div className={styles.btnWrapper}>
-            <a href='#' className={styles.learnMoreBtn}>
-              Learn More &rarr;
-            </a>
+            <Link href='/disclaimer'>
+              <a className={styles.learnMoreBtn}>Learn More &rarr;</a>
+            </Link>
           </div>
         </div>
         <div className={styles.imagesWrapper}>
