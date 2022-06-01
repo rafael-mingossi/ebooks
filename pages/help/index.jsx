@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { gql, useMutation } from '@apollo/client';
+import { useRouter } from 'next/router';
 
 const CreateFeed = gql`
   mutation FeedMutation(
@@ -37,6 +38,8 @@ const Help = () => {
   const [message, setMessage] = useState('');
   const [r, setR] = useState(false);
 
+  const router = useRouter();
+
   const [addFeed, { data, loading, error }] = useMutation(CreateFeed, {
     onCompleted: () => clearInputs(),
     onQueryUpdated(CreateFeed) {
@@ -60,12 +63,22 @@ const Help = () => {
 
   const { register, handleSubmit, formState } = useForm();
 
-  if (loading)
-    return (
-      <div className={styles.spin}>
-        <Spinner />
-      </div>
-    );
+  const forceReload = () => {
+    router.reload();
+  };
+
+  const handleFeed = () => {
+    addFeed({
+      variables: {
+        firstName: firstName,
+        lastName: lastName,
+        message: message,
+        email: email,
+        phoneNo: parseInt(phoneNo),
+      },
+    });
+    setTimeout(forceReload, 2500);
+  };
 
   return (
     <div className={styles.container}>
@@ -80,15 +93,7 @@ const Help = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            addFeed({
-              variables: {
-                firstName: firstName,
-                lastName: lastName,
-                message: message,
-                email: email,
-                phoneNo: parseInt(phoneNo),
-              },
-            });
+            handleFeed();
           }}
           // style={{ display: 'flex', flexDirection: 'column' }}
           className={styles.formWrappers}
@@ -164,7 +169,7 @@ const Help = () => {
             </div>
           </div>
           <div className={styles.bottom}>
-            <Button label={'Send'} disabled={r} />
+            {loading ? <Spinner /> : <Button label={'Send'} disabled={r} />}
           </div>
         </form>
       </div>

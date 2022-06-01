@@ -93,13 +93,11 @@ const Login = () => {
           </div>
           <div className={styles.btn}>
             {!r ? (
-              <div className={styles.btnLogin}>
-                <Button
-                  label={'Login'}
-                  onClick={() => console.log('login')}
-                  disabled={r}
-                />
-              </div>
+              <Button
+                label={'Login'}
+                onClick={() => console.log('login')}
+                disabled={r}
+              />
             ) : (
               <Spinner />
             )}

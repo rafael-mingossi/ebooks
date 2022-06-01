@@ -120,7 +120,7 @@ const Profile = () => {
     formData.append('upload_preset', 'my-uploads');
 
     const imgUrl = process.env.CLOUDINARY;
-    console.log(imgUrl);
+    //console.log(imgUrl);
 
     const data = await fetch(
       'https://api.cloudinary.com/v1_1/rafaelmingossi/image/upload',
@@ -274,7 +274,13 @@ const Profile = () => {
                 />
               </div>
               <div className={styles.btn}>
-                {!r ? <Button label={'Update'} disabled={r} /> : <Spinner />}
+                {!r ? (
+                  <Button label={'Update'} disabled={r} />
+                ) : (
+                  <div className={styles.btnUpdate}>
+                    <Spinner />
+                  </div>
+                )}
               </div>
             </form>
           </div>

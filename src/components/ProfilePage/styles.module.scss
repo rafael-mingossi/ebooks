@@ -43,6 +43,7 @@
         .formWrapper {
           @include flex-x-y-d(space-around, center, column);
           width: 100%;
+          min-height: 50rem;
 
           .imgWrapper {
             border-radius: 100rem;
@@ -79,9 +80,11 @@
             }
 
             .spin {
-              // @include flex-x-y-d(flex-start, center, row);
-              margin-right: 8rem;
-              margin-left: -8rem;
+              margin-bottom: 6rem;
+
+              @include sm {
+                margin-right: 6rem;
+              }
             }
 
             .textbox {
@@ -163,6 +166,7 @@
       .contentWrapper {
         border-radius: 2rem;
         height: 100%;
+        min-height: 55rem;
         width: 45%;
         @include flex-x-y-d(center, center, column);
         padding: 2rem;
@@ -180,11 +184,15 @@
           //position: relative;
 
           .btn {
-            @include flex-x-y-d(none, none, column);
+            @include flex-x-y-d(center, center, column);
             width: 50%;
 
             @include xsm {
               //width: 100%;
+            }
+
+            .btnUpdate {
+              margin-right: 5rem;
             }
           }
 

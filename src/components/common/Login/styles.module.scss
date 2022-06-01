@@ -41,22 +41,9 @@
     }
 
     .btn {
-      @include flex-x-y-d(none, none, column);
+      @include flex-x-y-d(center, center, column);
       width: 100%;
       height: 7.5rem;
-
-      @include sm {
-        width: 50%;
-        margin-left: 5.5rem;
-      }
-
-      .btnLogin {
-        margin-left: 8rem;
-
-        @include sm {
-          margin-left: 3rem;
-        }
-      }
     }
 
     .registerMsg {

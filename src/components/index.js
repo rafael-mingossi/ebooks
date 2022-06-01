@@ -13,3 +13,4 @@ export { default as Input } from './common/Input';
 export { default as Spinner } from './common/Spinner';
 export { default as TextArea } from './common/TextArea';
 export { default as PageHeader } from './common/PageHeader';
+export { default as Loading } from './common/Loading';

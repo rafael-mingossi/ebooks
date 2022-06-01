@@ -1,0 +1,7 @@
+@import 'utils/variables';
+
+.container {
+  width: 30rem;
+  @include flex-x-y-d(center, center, row);
+  color: white;
+}
