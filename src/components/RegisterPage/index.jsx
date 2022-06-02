@@ -119,7 +119,13 @@ const Register = () => {
               name='password'
             />
           </div>
-          {!r ? <Button label={'Register'} disabled={r} /> : <Spinner />}
+          {!r ? (
+            <Button label={'Register'} disabled={r} />
+          ) : (
+            <div className={styles.spin}>
+              <Spinner />
+            </div>
+          )}
         </form>
       </div>
     </div>
