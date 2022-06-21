@@ -1,4 +1,3 @@
-import { getSession } from 'next-auth/react';
 const bcrypt = require('bcryptjs');
 import prisma from '../../../lib/prisma';
 
